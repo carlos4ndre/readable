@@ -2,19 +2,23 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCategories } from 'actions/categories'
+import { getPosts } from 'actions/posts'
 import Header from 'components/Header'
+import PostList from 'components/PostList'
 
 class HomePage extends Component {
   componentWillMount() {
     this.props.dispatch(getCategories())
+    this.props.dispatch(getPosts())
   }
 
   render() {
-    const { categories } = this.props
+    const { categories, posts } = this.props
 
     return (
       <div>
         <Header categories={categories}/>
+        <PostList posts={posts}/>
       </div>
     )
   }
@@ -25,11 +29,13 @@ HomePage.PropTypes = {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   const categories = state.categories
+  const posts = state.posts
+  console.log(state)
 
   return {
-    categories
+    categories,
+    posts,
   }
 }
 
