@@ -1,15 +1,13 @@
 import React from 'react'
-import { Search, Menu, Icon } from 'semantic-ui-react'
+import { Search, Menu } from 'semantic-ui-react'
 import StyledLink from 'components/StyledLink'
+import Logo from 'components/Logo'
 
 const Header = () => (
   <div>
     <Menu fixed='top'>
         <Menu.Item>
-          <h2>
-            <Icon name='university' />
-            Readable
-          </h2>
+          <Logo />
         </Menu.Item>
         <Menu.Item>
           <StyledLink to='/'>Top</StyledLink>
