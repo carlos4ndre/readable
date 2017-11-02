@@ -3,18 +3,17 @@ import { Search, Menu } from 'semantic-ui-react'
 import StyledLink from 'components/StyledLink'
 import Logo from 'components/Logo'
 
-const Header = () => (
+const Header = (props) => (
   <div>
     <Menu attached='top'>
       <Menu.Item>
         <Logo />
       </Menu.Item>
-      <Menu.Item>
-        <StyledLink to='/'>Top</StyledLink>
-      </Menu.Item>
-      <Menu.Item>
-        <StyledLink to='/'>Latest</StyledLink>
-      </Menu.Item>
+      {props.categories.map((category, index) => (
+        <Menu.Item key={index}>
+          <StyledLink to={category.path}>{category.name}</StyledLink>
+        </Menu.Item>
+      ))}
       <Menu.Item position='right'>
         <Search
           loading={false}

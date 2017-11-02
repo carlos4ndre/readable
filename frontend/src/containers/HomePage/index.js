@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Divider } from 'semantic-ui-react'
 import { getCategories } from 'actions/categories'
 import Header from 'components/Header'
-import CategoryList from 'components/CategoryList'
 
 class HomePage extends Component {
   componentWillMount() {
@@ -17,8 +15,6 @@ class HomePage extends Component {
     return (
       <div>
         <Header categories={categories}/>
-        <CategoryList categories={categories}/>
-        <Divider fitted/>
       </div>
     )
   }
