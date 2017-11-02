@@ -1,16 +1,40 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Divider } from 'semantic-ui-react'
+import { getCategories } from 'actions/categories'
 import Header from 'components/Header'
 import CategoryList from 'components/CategoryList'
 
 class HomePage extends Component {
+  componentWillMount() {
+    this.props.dispatch(getCategories())
+  }
+
   render() {
+    const { categories } = this.props
+
     return (
       <div>
-        <Header />
-        <CategoryList />
+        <Header categories={categories}/>
+        <CategoryList categories={categories}/>
+        <Divider fitted/>
       </div>
     )
   }
 }
 
-export default HomePage
+HomePage.PropTypes = {
+  dispatch: PropTypes.func,
+}
+
+const mapStateToProps = (state) => {
+  console.log(state)
+  const categories = state.categories
+
+  return {
+    categories
+  }
+}
+
+export default connect(mapStateToProps)(HomePage)
