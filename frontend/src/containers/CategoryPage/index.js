@@ -1,9 +1,33 @@
-import React from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { getCategoryPosts } from 'actions/posts'
+import PostList from 'components/PostList'
 
-const CategoryPage = (props) => (
-  <div>
-    <p>Category #{props.match.params.categoryId}</p>
-  </div>
-)
+class CategoryPage extends Component {
+  componentWillMount() {
+    this.props.dispatch(getCategoryPosts())
+  }
 
-export default CategoryPage
+  render() {
+    const { posts } = this.props
+
+    return (
+      <PostList posts={posts}/>
+    )
+  }
+}
+
+CategoryPage.PropTypes = {
+  dispatch: PropTypes.func,
+}
+
+const mapStateToProps = (state) => {
+  const posts = state.posts
+
+  return {
+    posts,
+  }
+}
+
+export default connect(mapStateToProps)(CategoryPage)

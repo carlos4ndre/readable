@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getPosts } from 'actions/posts'
 import PostList from 'components/PostList'
-import SortBy from 'components/SortBy'
 
 class HomePage extends Component {
   componentWillMount() {
@@ -14,10 +13,7 @@ class HomePage extends Component {
     const { posts } = this.props
 
     return (
-      <div>
-        <SortBy />
-        <PostList posts={posts}/>
-      </div>
+      <PostList posts={posts}/>
     )
   }
 }

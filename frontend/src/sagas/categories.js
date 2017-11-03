@@ -1,7 +1,7 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects';
 import * as api from 'utils/api'
 import {
-  GET_CATEGORIES_REQUESTED,
+  GET_CATEGORIES,
   GET_CATEGORIES_SUCCESS,
   GET_CATEGORIES_FAILED,
 } from 'actions/categories'
@@ -19,7 +19,7 @@ const getCategories = function*(action) {
 
 function* categoriesSagas() {
   yield all([
-    yield takeLatest(GET_CATEGORIES_REQUESTED, getCategories),
+    yield takeLatest(GET_CATEGORIES, getCategories),
   ])
 }
 
