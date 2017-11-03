@@ -11,7 +11,7 @@ const Header = (props) => (
       </Menu.Item>
       {props.categories.map((category, index) => (
         <Menu.Item key={index}>
-          <StyledLink to={category.path}>{category.name}</StyledLink>
+          <StyledLink to={`/categories/${category.path}`}>{category.name}</StyledLink>
         </Menu.Item>
       ))}
       <Menu.Item position='right'>
