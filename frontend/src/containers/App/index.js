@@ -11,7 +11,7 @@ import CategoryPage from 'containers/CategoryPage'
 
 class App extends Component {
   componentWillMount() {
-    this.props.dispatch(getCategories())
+    this.props.getCategories()
   }
 
   render() {
@@ -37,12 +37,15 @@ App.PropTypes = {
   dispatch: PropTypes.func,
 }
 
-const mapStateToProps = (state) => {
-  const categories = state.categories
+const mapStateToProps = (state) => ({
+  categories: state.categories.toArray()
+})
 
-  return {
-    categories,
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  getCategories: (data) => dispatch(getCategories(data)),
+})
 
-export default connect(mapStateToProps)(App)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App)

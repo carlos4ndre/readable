@@ -6,7 +6,7 @@ import PostList from 'components/PostList'
 
 class HomePage extends Component {
   componentWillMount() {
-    this.props.dispatch(getPosts())
+    this.props.getPosts()
   }
 
   render() {
@@ -22,12 +22,15 @@ HomePage.PropTypes = {
   dispatch: PropTypes.func,
 }
 
-const mapStateToProps = (state) => {
-  const posts = state.posts
+const mapStateToProps = (state) => ({
+  posts: state.posts.toArray(),
+})
 
-  return {
-    posts,
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  getPosts: (data) => dispatch(getPosts(data)),
+})
 
-export default connect(mapStateToProps)(HomePage)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(HomePage)

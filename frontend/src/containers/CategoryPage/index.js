@@ -6,7 +6,8 @@ import PostList from 'components/PostList'
 
 class CategoryPage extends Component {
   componentWillMount() {
-    this.props.dispatch(getCategoryPosts())
+    const { getCategoryPosts, match } = this.props
+    getCategoryPosts(match.params.categoryId)
   }
 
   render() {
@@ -22,12 +23,15 @@ CategoryPage.PropTypes = {
   dispatch: PropTypes.func,
 }
 
-const mapStateToProps = (state) => {
-  const posts = state.posts
+const mapStateToProps = (state) => ({
+  posts: state.posts.toArray(),
+})
 
-  return {
-    posts,
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  getCategoryPosts: (data) => dispatch(getCategoryPosts(data)),
+})
 
-export default connect(mapStateToProps)(CategoryPage)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CategoryPage)

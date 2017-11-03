@@ -22,13 +22,14 @@ const getPosts = function*(action) {
 
 const getCategoryPosts = function*(action) {
   try {
-    const response = yield call(api.getCategoryPosts, action.categoryId)
+    const categoryId = action.categoryId
+    const response = yield call(api.getCategoryPosts, categoryId)
     const result = yield response.json();
 
     if (result.error) {
       yield put({ type: GET_CATEGORY_POSTS_FAILED, error: result.error });
     } else {
-      yield put({ type: GET_CATEGORY_POSTS_SUCCESS, posts: result });
+      yield put({ type: GET_CATEGORY_POSTS_SUCCESS, posts: result, categoryId });
     }
   } catch(e) {
     yield put({ type: GET_CATEGORY_POSTS_FAILED, error: e.message });
