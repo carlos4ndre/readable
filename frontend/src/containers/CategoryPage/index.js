@@ -5,16 +5,30 @@ import { getCategoryPosts } from 'actions/posts'
 import PostList from 'components/PostList'
 
 class CategoryPage extends Component {
-  componentWillMount() {
-    const { getCategoryPosts, match } = this.props
-    getCategoryPosts(match.params.categoryId)
+  state = {
+    selectedCategory: null
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { getCategoryPosts, match } = nextProps
+    const { selectedCategory } = this.state
+    const categoryId = match.params.categoryId
+
+    if (categoryId !== selectedCategory) {
+      this.setState({ selectedCategory: categoryId })
+      getCategoryPosts(categoryId)
+    }
   }
 
   render() {
-    const { posts } = this.props
+    const { posts, categories, match } = this.props
+    const categoryId = match.params.categoryId
+    const category = categories.get(categoryId, {})
+    const postIds = category.postIds || []
+    const categoryPosts = postIds.map(postId => posts.get(postId))
 
     return (
-      <PostList posts={posts}/>
+      <PostList posts={categoryPosts}/>
     )
   }
 }
@@ -24,7 +38,8 @@ CategoryPage.PropTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  posts: state.posts.toArray(),
+  categories: state.categories,
+  posts: state.posts,
 })
 
 const mapDispatchToProps = (dispatch) => ({
