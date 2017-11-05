@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Container } from 'semantic-ui-react'
+import { Container, Grid } from 'semantic-ui-react'
+import { CreateButton } from 'components/Button'
 import Post from 'components/Post'
 import SortBy from 'components/SortBy'
 import NoPosts from 'components/NoPosts'
@@ -35,16 +36,31 @@ class PostList extends Component {
     const { posts } = this.props
     const { sortBy } = this.state
 
-    if (posts.length === 0)
-      return <NoPosts />
-
     const sortedPosts = this.sortPosts(posts, sortBy)
     return (
       <Container>
-        <SortBy onChange={this.handleSortByChange}/>
-        {sortedPosts.map((post, index) => (
-          <Post key={index} index={index} {...post}/>
-        ))}
+        {sortedPosts.length === 0 ?
+          (
+            <div>
+              <NoPosts />
+              <Grid padded>
+                <Grid.Row centered>
+                  <CreateButton size='massive' content='Create Post 🎉😸'/>
+                </Grid.Row>
+              </Grid>
+            </div>
+          )
+        :
+          (
+            <div>
+              <SortBy onChange={this.handleSortByChange}/>
+              {sortedPosts.map((post, index) => (
+                <Post key={index} index={index} {...post}/>
+              ))}
+              <CreateButton content='Create Post' floated='right' />
+            </div>
+          )
+        }
       </Container>
     )
   }
