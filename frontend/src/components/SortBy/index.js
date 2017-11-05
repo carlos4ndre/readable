@@ -7,6 +7,7 @@ const SortBy = (props) => (
     <Menu compact>
       <Dropdown
         selection
+        compact
         text='SortBy'
         options={OPTIONS}
         defaultValue={LATEST}
