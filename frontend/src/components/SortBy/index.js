@@ -1,15 +1,17 @@
 import React from 'react'
 import { Menu, Dropdown, Container  } from 'semantic-ui-react'
+import { OPTIONS, LATEST } from 'data/sorting'
 
-export const options = [
-  { key: 1, text: 'Top', value: 'Top'  },
-  { key: 2, text: 'Latest', value: 'Latest' },
-]
-
-const SortBy = () => (
+const SortBy = (props) => (
   <Container>
     <Menu compact>
-      <Dropdown text='SortBy' options={options} defaultValue={options[0].value} simple item />
+      <Dropdown
+        selection
+        text='SortBy'
+        options={OPTIONS}
+        defaultValue={LATEST}
+        onChange={(event, data) => props.onChange(data.value)}
+      />
     </Menu>
   </Container>
 )
