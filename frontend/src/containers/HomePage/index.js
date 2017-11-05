@@ -12,11 +12,11 @@ class HomePage extends Component {
   }
 
   render() {
-    const { posts, isFetchingPosts } = this.props
+    const { posts, categories, isFetchingPosts } = this.props
 
     return (
       <Container>
-        {isFetchingPosts ? <LoadingIcon /> : <PostList posts={posts}/>}
+        {isFetchingPosts ? <LoadingIcon /> : <PostList posts={posts} categories={categories}/>}
       </Container>
     )
   }
@@ -28,6 +28,7 @@ HomePage.PropTypes = {
 
 const mapStateToProps = (state) => ({
   posts: Object.values(state.posts.byId),
+  categories: Object.values(state.categories.byId),
   isFetchingPosts: state.posts.isFetching,
 })
 
