@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   byId: {},
+  allIds: [],
   isFetching: false,
 }
 
@@ -35,7 +36,8 @@ const addPosts = (state, action) => (
     byId: {
       ...obj.byId,
       [post.id]: post,
-    }
+    },
+    allIds: obj.allIds.concat(post.id)
   }), state)
 )
 

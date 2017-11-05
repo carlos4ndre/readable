@@ -2,7 +2,8 @@ import { GET_CATEGORIES_SUCCESS } from 'actions/categories'
 import { GET_CATEGORY_POSTS_SUCCESS } from 'actions/posts'
 
 const initialState = {
-  byId: {}
+  byId: {},
+  allIds: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -21,8 +22,9 @@ const addCategories = (state, action) => (
     ...obj,
     byId: {
       ...obj.byId,
-      [category.name]: category,
-    }
+      [category.name]: category
+    },
+    allIds: obj.allIds.concat(category.name)
   }), state)
 )
 
@@ -39,7 +41,8 @@ const updateCategoryPosts = (state, action) => {
         ...category,
         postIds
       }
-    }
+    },
+    allIds: state.allIds.concat(categoryId)
   }
 }
 
