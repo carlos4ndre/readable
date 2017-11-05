@@ -23,7 +23,7 @@ HomePage.PropTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  posts: state.posts.toArray(),
+  posts: Object.values(state.posts.byId),
 })
 
 const mapDispatchToProps = (dispatch) => ({

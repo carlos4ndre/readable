@@ -38,7 +38,7 @@ App.PropTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  categories: state.categories.toArray()
+  categories: Object.values(state.categories.byId)
 })
 
 const mapDispatchToProps = (dispatch) => ({

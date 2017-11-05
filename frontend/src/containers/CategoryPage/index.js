@@ -21,11 +21,7 @@ class CategoryPage extends Component {
   }
 
   render() {
-    const { posts, categories, match } = this.props
-    const categoryId = match.params.categoryId
-    const category = categories.get(categoryId, {})
-    const postIds = category.postIds || []
-    const categoryPosts = postIds.map(postId => posts.get(postId))
+    const { categoryPosts } = this.props
 
     return (
       <PostList posts={categoryPosts}/>
@@ -37,10 +33,16 @@ CategoryPage.PropTypes = {
   dispatch: PropTypes.func,
 }
 
-const mapStateToProps = (state) => ({
-  categories: state.categories,
-  posts: state.posts,
-})
+const mapStateToProps = (state, props) => {
+  const { posts, categories } = state
+
+  const categoryId = props.match.params.categoryId
+  const category = categories.byId[categoryId]
+  const postIds = category && category.postIds ? category.postIds : []
+  const categoryPosts = postIds.map(postId => posts.byId[postId])
+
+  return { categoryPosts }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   getCategoryPosts: (data) => dispatch(getCategoryPosts(data)),

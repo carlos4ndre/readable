@@ -5,7 +5,7 @@ const NoPosts = () => (
   <Container>
     <Message warning size='large'>
       <Message.Header>No posts found</Message.Header>
-      <span>No worries, Let's create some! 🤘💯</span>
+      <span role="img" aria-label="horns">No worries, Let's create some! 🤘💯</span>
     </Message>
   </Container>
 )

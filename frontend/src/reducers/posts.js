@@ -1,25 +1,30 @@
-import { Map } from 'immutable'
 import {
   GET_POSTS_SUCCESS,
   GET_CATEGORY_POSTS_SUCCESS,
 } from 'actions/posts'
 
-const initialState = Map({})
+const initialState = {
+  byId: {}
+}
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_POSTS_SUCCESS:
     case GET_CATEGORY_POSTS_SUCCESS:
-      return postsMap(state, action)
+      return addPosts(state, action)
     default:
       return state
   }
 }
 
-const postsMap = (state, action) => (
-  Map(action.posts.map(
-    post => [post.id, post]
-  ))
+const addPosts = (state, action) => (
+  action.posts.reduce((obj, post) => ({
+    ...obj,
+    byId: {
+      ...obj.byId,
+      [post.id]: post,
+    }
+  }), state)
 )
 
 export default reducer
