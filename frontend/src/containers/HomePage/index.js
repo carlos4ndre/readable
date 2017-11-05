@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getPosts } from 'actions/posts'
+import { Container } from 'semantic-ui-react'
 import PostList from 'components/PostList'
+import LoadingIcon from 'components/LoadingIcon'
 
 class HomePage extends Component {
   componentWillMount() {
@@ -10,10 +12,12 @@ class HomePage extends Component {
   }
 
   render() {
-    const { posts } = this.props
+    const { posts, isFetchingPosts } = this.props
 
     return (
-      <PostList posts={posts}/>
+      <Container>
+        {isFetchingPosts ? <LoadingIcon /> : <PostList posts={posts}/>}
+      </Container>
     )
   }
 }
@@ -24,6 +28,7 @@ HomePage.PropTypes = {
 
 const mapStateToProps = (state) => ({
   posts: Object.values(state.posts.byId),
+  isFetchingPosts: state.posts.isFetching,
 })
 
 const mapDispatchToProps = (dispatch) => ({

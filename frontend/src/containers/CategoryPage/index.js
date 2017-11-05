@@ -2,11 +2,21 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getCategoryPosts } from 'actions/posts'
+import { Container } from 'semantic-ui-react'
 import PostList from 'components/PostList'
+import LoadingIcon from 'components/LoadingIcon'
 
 class CategoryPage extends Component {
   state = {
     selectedCategory: null
+  }
+
+  componentWillMount() {
+    const { getCategoryPosts, match } = this.props
+    const categoryId = match.params.categoryId
+
+    this.setState({ selectedCategory: categoryId })
+    getCategoryPosts(categoryId)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -21,10 +31,12 @@ class CategoryPage extends Component {
   }
 
   render() {
-    const { categoryPosts } = this.props
+    const { categoryPosts, isFetchingPosts } = this.props
 
     return (
-      <PostList posts={categoryPosts}/>
+      <Container>
+        {isFetchingPosts ? <LoadingIcon /> : <PostList posts={categoryPosts}/>}
+      </Container>
     )
   }
 }
@@ -40,8 +52,9 @@ const mapStateToProps = (state, props) => {
   const category = categories.byId[categoryId]
   const postIds = category && category.postIds ? category.postIds : []
   const categoryPosts = postIds.map(postId => posts.byId[postId])
+  const isFetchingPosts = posts.isFetching
 
-  return { categoryPosts }
+  return { categoryPosts, isFetchingPosts }
 }
 
 const mapDispatchToProps = (dispatch) => ({
