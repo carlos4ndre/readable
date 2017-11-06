@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getCategoryPosts } from 'actions/posts'
-import { Container } from 'semantic-ui-react'
+import { Container, Grid } from 'semantic-ui-react'
+import { CreatePostForm } from 'components/Forms'
 import PostList from 'components/PostList'
 import LoadingIcon from 'components/LoadingIcon'
 
@@ -31,11 +32,23 @@ class CategoryPage extends Component {
   }
 
   render() {
-    const { categoryPosts, isFetchingPosts } = this.props
+    const { categories, categoryPosts, isFetchingPosts } = this.props
+    const hasPosts = categoryPosts.length !== 0
 
     return (
       <Container>
-        {isFetchingPosts ? <LoadingIcon /> : <PostList posts={categoryPosts}/>}
+        {isFetchingPosts ?
+          <LoadingIcon />
+        :
+          <Grid>
+            <Grid.Row>
+              <PostList posts={categoryPosts}/>
+            </Grid.Row>
+            <Grid.Row centered>
+              <CreatePostForm primary={hasPosts} categories={categories} />
+            </Grid.Row>
+          </Grid>
+        }
       </Container>
     )
   }
@@ -54,7 +67,11 @@ const mapStateToProps = (state, props) => {
   const categoryPosts = postIds.map(postId => posts.byId[postId])
   const isFetchingPosts = posts.isFetching
 
-  return { categoryPosts, isFetchingPosts }
+  return {
+    categories: Object.values(state.categories.byId),
+    categoryPosts,
+    isFetchingPosts
+  }
 }
 
 const mapDispatchToProps = (dispatch) => ({

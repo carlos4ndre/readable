@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Grid } from 'semantic-ui-react'
-import { CreateButton } from 'components/Button'
-import { CreatePostForm } from 'components/Forms'
+import { Container } from 'semantic-ui-react'
 import Post from 'components/Post'
 import SortBy from 'components/SortBy'
 import NoPosts from 'components/NoPosts'
@@ -34,52 +32,23 @@ class PostList extends Component {
     return posts.sort(sorting[sortBy])
   }
 
-  openCreatePostForm = () => this.setState({ showCreatePostForm: true })
-  closeCreatePostForm = () => this.setState({ showCreatePostForm: false })
-
   render() {
-    const { posts, categories } = this.props
-    const { sortBy, showCreatePostForm } = this.state
+    const { posts } = this.props
+    const { sortBy } = this.state
     const sortedPosts = this.sortPosts(posts, sortBy)
 
     return (
       <Container>
         {sortedPosts.length === 0 ?
-          (
-            <div>
-              <NoPosts />
-              <Grid padded>
-                <Grid.Row centered>
-                  <CreateButton
-                    content='Create Post 🎉😸'
-                    size='massive'
-                    onClick={this.openCreatePostForm}
-                  />
-                </Grid.Row>
-              </Grid>
-            </div>
-          )
+          <NoPosts />
         :
-          (
-            <div>
-              <SortBy onChange={this.handleSortByChange}/>
-              {sortedPosts.map((post, index) => (
-                <Post key={index} index={index} {...post}/>
-              ))}
-              <CreateButton
-                content='Create Post'
-                floated='right'
-                onClick={this.openCreatePostForm}
-              />
-            </div>
-          )
+          <div>
+            <SortBy onChange={this.handleSortByChange}/>
+            {sortedPosts.map((post, index) => (
+              <Post key={index} index={index} {...post}/>
+            ))}
+          </div>
         }
-
-        <CreatePostForm
-          open={showCreatePostForm}
-          close={this.closeCreatePostForm.bind(this)}
-          categories={categories}
-        />
       </Container>
     )
   }

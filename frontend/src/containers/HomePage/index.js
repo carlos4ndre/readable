@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getPosts } from 'actions/posts'
-import { Container } from 'semantic-ui-react'
+import { Container, Grid } from 'semantic-ui-react'
+import { CreatePostForm } from 'components/Forms'
 import PostList from 'components/PostList'
 import LoadingIcon from 'components/LoadingIcon'
 
@@ -13,10 +14,22 @@ class HomePage extends Component {
 
   render() {
     const { posts, categories, isFetchingPosts } = this.props
+    const hasPosts = posts.length !== 0
 
     return (
       <Container>
-        {isFetchingPosts ? <LoadingIcon /> : <PostList posts={posts} categories={categories}/>}
+        {isFetchingPosts ?
+          <LoadingIcon />
+        :
+          <Grid>
+            <Grid.Row>
+              <PostList posts={posts} categories={categories}/>
+            </Grid.Row>
+            <Grid.Row centered>
+              <CreatePostForm primary={hasPosts} categories={categories} />
+            </Grid.Row>
+          </Grid>
+        }
       </Container>
     )
   }
