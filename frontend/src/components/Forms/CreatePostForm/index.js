@@ -1,11 +1,27 @@
 import React from 'react'
+import uuidv4 from 'uuid/v4'
 import { Field, reduxForm } from 'redux-form'
 import { Modal, Button, Form, Divider } from 'semantic-ui-react'
 import { InputTextField, TextAreaField, SelectField } from 'components/Forms/Fields'
 import { required, maxLength30, maxLength250 } from 'components/Forms/Fields/validators'
+import { getUnixTimeNow } from 'utils/date'
 
-const submit = values => {
-  console.log(values)
+const submit = props => values => {
+  const newPost = {
+    ...values,
+    id: uuidv4(),
+    timestamp: getUnixTimeNow(),
+    author: values.author || 'Anonymous'
+  }
+
+  // dispatch post
+  console.log("Dispatch create post", newPost)
+
+  // clear form
+  props.reset()
+
+  // close modal
+  props.close()
 }
 
 const CreatePostForm = (props) => {
@@ -27,7 +43,7 @@ const CreatePostForm = (props) => {
       <Modal.Header>Create Post</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
-          <Form onSubmit={handleSubmit(submit)}>
+          <Form onSubmit={handleSubmit(submit(props))}>
             <Field
               name='title'
               label='Title'
