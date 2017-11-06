@@ -1,21 +1,16 @@
 import React from 'react'
-import { Form, TextArea, Message } from 'semantic-ui-react'
+import { Form, TextArea } from 'semantic-ui-react'
+import ValidationMessage from 'components/Forms/Fields/ValidationMessage'
 
-const TextAreaField = ({ input, meta, ...options }) => {
-  const { touched, error, warning } = meta
-
-  return (
-    <div>
-      <Form.Field
-        {...input}
-        {...options}
-        control={TextArea}
-      />
-      {touched &&
-        ((error && <Message negative content={error}/>) ||
-         (warning && <Message warning content={warning}/>))}
-    </div>
-  )
-}
+const TextAreaField = ({ input, meta, ...options }) => (
+  <div>
+    <Form.Field
+      {...input}
+      {...options}
+      control={TextArea}
+    />
+    <ValidationMessage {...meta} />
+  </div>
+)
 
 export default TextAreaField

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Form, Select, Message } from 'semantic-ui-react'
+import { Form, Select } from 'semantic-ui-react'
+import ValidationMessage from 'components/Forms/Fields/ValidationMessage'
 
 const SelectField = ({ input, meta, ...options }) => {
-  const { touched, error, warning } = meta
   const handleChange = (event, data) => input.onChange(data.value)
 
   return (
@@ -13,9 +13,7 @@ const SelectField = ({ input, meta, ...options }) => {
         control={Select}
         onChange={handleChange}
       />
-      {touched &&
-        ((error && <Message negative content={error}/>) ||
-         (warning && <Message warning content={warning}/>))}
+      <ValidationMessage {...meta}/>
     </div>
   )
 }

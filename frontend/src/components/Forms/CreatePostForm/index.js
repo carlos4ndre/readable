@@ -2,9 +2,11 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Modal, Button, Form, Divider } from 'semantic-ui-react'
 import { InputTextField, TextAreaField, SelectField } from 'components/Forms/Fields'
-import { required } from 'components/Forms/Fields/validators'
+import { required, maxLength30, maxLength250 } from 'components/Forms/Fields/validators'
 
-const submit = values => console.log(values)
+const submit = values => {
+  console.log(values)
+}
 
 const CreatePostForm = (props) => {
   const {
@@ -31,14 +33,14 @@ const CreatePostForm = (props) => {
               label='Title'
               placeholder='Epic title goes in here'
               component={InputTextField}
-              validate={[required]}
+              validate={[required, maxLength30]}
             />
             <Field
               name='body'
               label='Body'
               placeholder="What's this all about..."
               component={TextAreaField}
-              validate={[required]}
+              validate={[required, maxLength250]}
             />
             <Field
               name='author'
