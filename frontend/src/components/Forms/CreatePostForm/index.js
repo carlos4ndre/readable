@@ -1,95 +1,82 @@
-import React, { Component } from 'react'
-import { Modal, Button, Form, TextArea, Input, Select } from 'semantic-ui-react'
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
+import { Modal, Button, Form, Divider } from 'semantic-ui-react'
+import { InputTextField, TextAreaField, SelectField } from 'components/Forms/Fields'
+import { required } from 'components/Forms/Fields/validators'
 
-class CreatePostForm extends Component {
-  state = {
-    title: '',
-    body: '',
-    author: '',
-    category: ''
-  }
+const submit = values => console.log(values)
 
-  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+const CreatePostForm = (props) => {
+  const {
+    open,
+    close,
+    categories,
+    handleSubmit,
+    submitting
+  } = props
+  const categoryOptions = categories.map(category => ({
+    key: category.name,
+    text: category.name,
+    value: category.name
+  }))
 
-  handleSubmit = () => {
-    console.log({
-      ...this.state,
-      category: this.state.category || 'anonymous'
-    })
-
-    // dispatch action
-    // close form
-    this.props.close()
-  }
-
-  render() {
-    const { open, close, categories } = this.props
-    const { title, body, author, category } = this.state
-    const categoryOptions = categories.map(c => ({
-      key: c.name,
-      text: c.name,
-      value: c.name
-    }))
-
-    return (
-      <Modal dimmer='blurring' size='tiny' open={open} onClose={close}>
-        <Modal.Header>Create Post</Modal.Header>
-        <Modal.Content image>
-          <Modal.Description>
-            <Form onSubmit={this.handleSubmit}>
-              <Form.Field
-                required
-                control={Input}
-                label='Title'
-                name='title'
-                value={title}
-                placeholder='Epic title goes in here'
-                onChange={this.handleChange}
+  return (
+    <Modal dimmer='blurring' size='tiny' open={open} onClose={close}>
+      <Modal.Header>Create Post</Modal.Header>
+      <Modal.Content image>
+        <Modal.Description>
+          <Form onSubmit={handleSubmit(submit)}>
+            <Field
+              name='title'
+              label='Title'
+              placeholder='Epic title goes in here'
+              component={InputTextField}
+              validate={[required]}
+            />
+            <Field
+              name='body'
+              label='Body'
+              placeholder="What's this all about..."
+              component={TextAreaField}
+              validate={[required]}
+            />
+            <Field
+              name='author'
+              label='Author'
+              placeholder='Who should be credited for this post'
+              component={InputTextField}
+            />
+            <Field
+              name='category'
+              label='Category'
+              options={categoryOptions}
+              placeholder='- Select -'
+              component={SelectField}
+              validate={[required]}
+            />
+            <Divider hidden />
+            <Button.Group floated='right'>
+              <Button
+                type='submit'
+                content='Cancel'
+                disabled={submitting}
+                onClick={close}
               />
-              <Form.Field
-                required
-                control={TextArea}
-                label='Body'
-                name='body'
-                value={body}
-                placeholder="What's this all about..."
-                onChange={this.handleChange}
+              <Button.Or />
+              <Button
+                positive
+                type='submit'
+                content='Create'
+                disabled={submitting}
               />
-              <Form.Field
-                control={Input}
-                label='Author'
-                name='author'
-                value={author}
-                placeholder='Who should be credited for this post'
-                onChange={this.handleChange}
-              />
-              <Form.Field
-                required
-                control={Select}
-                label='Category'
-                name='category'
-                value={category}
-                options={categoryOptions}
-                placeholder='- Select -'
-                onChange={this.handleChange}
-              />
-              <Button.Group floated='right'>
-                <Button
-                  content='Cancel'
-                  onClick={close}
-                />
-                <Button.Or />
-                <Button
-                  positive
-                  content='Create'
-                />
-              </Button.Group>
-            </Form>
-          </Modal.Description>
-        </Modal.Content>
-      </Modal>
-    )
-  }
+            </Button.Group>
+          </Form>
+        </Modal.Description>
+      </Modal.Content>
+    </Modal>
+  )
 }
 
-export default CreatePostForm
+export default reduxForm({
+  form: 'createPosts'
+})(CreatePostForm)
