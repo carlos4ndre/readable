@@ -8,7 +8,7 @@ import {
 const initialState = {
   byId: {},
   allIds: [],
-  isFetching: false,
+  isFetching: false
 }
 
 const reducer = (state = initialState, action) => {

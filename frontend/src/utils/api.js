@@ -17,3 +17,13 @@ export const getPosts = () =>
 
 export const getCategoryPosts = (categoryId) =>
   fetch(`${api}/${categoryId}/posts`, { headers })
+
+export const createPost = (data) =>
+  fetch(`${api}/posts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })

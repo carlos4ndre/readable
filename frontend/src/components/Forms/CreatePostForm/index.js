@@ -1,38 +1,40 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import uuidv4 from 'uuid/v4'
+import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { Modal, Button, Form, Divider } from 'semantic-ui-react'
 import { InputTextField, TextAreaField, SelectField } from 'components/Forms/Fields'
 import { CreateButton } from 'components/Button'
 import { required, maxLength30, maxLength250 } from 'components/Forms/Fields/validators'
+import { createPost } from 'actions/posts'
 import { getUnixTimeNow } from 'utils/date'
 
-const submit = props => values => {
-  const newPost = {
-    ...values,
-    id: uuidv4(),
-    timestamp: getUnixTimeNow(),
-    author: values.author || 'Anonymous'
-  }
-
-  // dispatch post
-  console.log("Dispatch create post", newPost)
-
-  // clear form
-  this.props.reset()
-
-  // close modal
-  this.handleClose()
-}
 
 class CreatePostForm extends Component {
   state = {
     modalOpen: false
   }
 
+  submit = values => {
+    const data = {
+      ...values,
+      id: uuidv4(),
+      timestamp: getUnixTimeNow(),
+      author: values.author || 'Anonymous'
+    }
+
+    // dispatch post
+    this.props.createPost(data)
+  }
+
   handleOpen = () => this.setState({ modalOpen: true })
-  handleClose = () => this.setState({ modalOpen: false })
+  handleClose = () => {
+    this.setState({ modalOpen: false })
+
+    // clear form
+    this.props.reset()
+  }
 
   render() {
     const {
@@ -60,7 +62,7 @@ class CreatePostForm extends Component {
         <Modal.Header>Create Post</Modal.Header>
         <Modal.Content image>
           <Modal.Description>
-            <Form onSubmit={handleSubmit(submit).bind(this)}>
+            <Form onSubmit={handleSubmit(this.submit.bind(this))}>
               <Field
                 name='title'
                 label='Title'
@@ -117,6 +119,17 @@ CreatePostForm.PropTypes = {
   primary: PropTypes.bool,
   categories: PropTypes.array.required
 }
+
+const mapStateToProps = (state) => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+  createPost: (data) => dispatch(createPost(data)),
+})
+
+CreatePostForm = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreatePostForm)
 
 export default reduxForm({
   form: 'createPosts'
