@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import uuidv4 from 'uuid/v4'
 import { Field, reduxForm } from 'redux-form'
 import { Modal, Button, Form, Divider } from 'semantic-ui-react'
@@ -110,6 +111,11 @@ class CreatePostForm extends Component {
       </Modal>
     )
   }
+}
+
+CreatePostForm.PropTypes = {
+  primary: PropTypes.bool,
+  categories: PropTypes.array.required
 }
 
 export default reduxForm({

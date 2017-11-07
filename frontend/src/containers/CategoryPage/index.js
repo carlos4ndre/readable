@@ -55,7 +55,9 @@ class CategoryPage extends Component {
 }
 
 CategoryPage.PropTypes = {
-  dispatch: PropTypes.func,
+  categories: PropTypes.array.required,
+  categoryPosts: PropTypes.array.required,
+  isFetchingPosts: PropTypes.bool.required
 }
 
 const mapStateToProps = (state, props) => {

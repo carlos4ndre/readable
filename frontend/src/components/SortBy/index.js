@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Menu, Dropdown, Container  } from 'semantic-ui-react'
 import { OPTIONS, LATEST } from 'data/sorting'
 
@@ -16,5 +17,9 @@ const SortBy = (props) => (
     </Menu>
   </Container>
 )
+
+SortBy.PropTypes = {
+  onChange: PropTypes.func.required
+}
 
 export default SortBy

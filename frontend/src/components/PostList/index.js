@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Container } from 'semantic-ui-react'
 import Post from 'components/Post'
 import SortBy from 'components/SortBy'
@@ -52,6 +53,10 @@ class PostList extends Component {
       </Container>
     )
   }
+}
+
+PostList.PropTypes = {
+  posts: PropTypes.array.required
 }
 
 export default PostList

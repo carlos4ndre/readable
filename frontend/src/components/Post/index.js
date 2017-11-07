@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Grid, Label, List } from 'semantic-ui-react'
 import StyledLink from 'components/StyledLink'
 import Moment from 'react-moment'
@@ -33,6 +34,16 @@ const Post = (props) => {
       </Grid.Row>
     </Grid>
   )
+}
+
+Post.PropTypes = {
+  id: PropTypes.string.required,
+  index: PropTypes.number.required,
+  title: PropTypes.string.required,
+  voteScore: PropTypes.number.required,
+  timestamp: PropTypes.number.required,
+  commentCount: PropTypes.number.required,
+  author: PropTypes.string.required,
 }
 
 export default Post

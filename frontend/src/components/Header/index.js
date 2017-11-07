@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Search, Menu } from 'semantic-ui-react'
 import StyledLink from 'components/StyledLink'
 import Logo from 'components/Logo'
@@ -22,5 +23,9 @@ const Header = (props) => (
     </Menu>
   </div>
 )
+
+Header.PropTypes = {
+  categories: PropTypes.array.required
+}
 
 export default Header

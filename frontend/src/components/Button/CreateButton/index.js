@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Button } from 'semantic-ui-react'
 
 const CreateButton = (props) => (
@@ -9,5 +10,9 @@ const CreateButton = (props) => (
     {...props}
   />
 )
+
+CreateButton.PropTypes = {
+  content: PropTypes.string
+}
 
 export default CreateButton

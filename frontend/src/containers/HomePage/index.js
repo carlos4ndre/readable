@@ -36,7 +36,9 @@ class HomePage extends Component {
 }
 
 HomePage.PropTypes = {
-  dispatch: PropTypes.func,
+  posts: PropTypes.array.required,
+  categories: PropTypes.array.required,
+  isFetching: PropTypes.bool.required
 }
 
 const mapStateToProps = (state) => ({

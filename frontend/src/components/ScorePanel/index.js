@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { List, Icon } from 'semantic-ui-react'
 
 const ScorePanel = (props) => (
@@ -14,5 +15,9 @@ const ScorePanel = (props) => (
     </List.Item>
   </List>
 )
+
+ScorePanel.PropTypes = {
+  value: PropTypes.number.required
+}
 
 export default ScorePanel

@@ -34,7 +34,7 @@ class App extends Component {
 }
 
 App.PropTypes = {
-  dispatch: PropTypes.func,
+  categories: PropTypes.array.required
 }
 
 const mapStateToProps = (state) => ({
