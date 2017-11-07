@@ -1,9 +1,9 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects';
 import * as api from 'utils/api'
 import {
-  GET_CATEGORIES,
+  GET_CATEGORIES_REQUEST,
   GET_CATEGORIES_SUCCESS,
-  GET_CATEGORIES_FAILED,
+  GET_CATEGORIES_FAILURE,
 } from 'actions/categories'
 
 const getCategories = function*(action) {
@@ -11,7 +11,7 @@ const getCategories = function*(action) {
   const result = yield response.json();
 
   if (result.error) {
-    yield put({ type: GET_CATEGORIES_FAILED, error: result.error });
+    yield put({ type: GET_CATEGORIES_FAILURE, error: result.error });
   } else {
     yield put({ type: GET_CATEGORIES_SUCCESS, categories: result.categories });
   }
@@ -19,7 +19,7 @@ const getCategories = function*(action) {
 
 function* categoriesSagas() {
   yield all([
-    yield takeLatest(GET_CATEGORIES, getCategories),
+    yield takeLatest(GET_CATEGORIES_REQUEST, getCategories),
   ])
 }
 

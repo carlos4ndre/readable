@@ -1,7 +1,7 @@
 import {
-  GET_POSTS,
+  GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,
-  GET_CATEGORY_POSTS,
+  GET_CATEGORY_POSTS_REQUEST,
   GET_CATEGORY_POSTS_SUCCESS,
 } from 'actions/posts'
 
@@ -13,8 +13,8 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_POSTS:
-    case GET_CATEGORY_POSTS:
+    case GET_POSTS_REQUEST:
+    case GET_CATEGORY_POSTS_REQUEST:
       return {
         ...state,
         isFetching: true,

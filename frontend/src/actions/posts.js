@@ -1,25 +1,25 @@
-export const GET_POSTS = 'GET_POSTS'
+export const GET_POSTS_REQUEST = 'GET_POSTS_REQUEST'
 export const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS'
-export const GET_POSTS_FAILED = 'GET_POSTS_FAILED'
+export const GET_POSTS_FAILURE = 'GET_POSTS_FAILURE'
 
-export const GET_CATEGORY_POSTS = 'GET_CATEGORY_POSTS'
+export const GET_CATEGORY_POSTS_REQUEST = 'GET_CATEGORY_POSTS_REQUEST'
 export const GET_CATEGORY_POSTS_SUCCESS = 'GET_CATEGORY_POSTS_SUCCESS'
-export const GET_CATEGORY_POSTS_FAILED = 'GET_CATEGORY_POSTS_FAILED'
+export const GET_CATEGORY_POSTS_FAILURE = 'GET_CATEGORY_POSTS_FAILURE'
 
-export const CREATE_POST = 'CREATE_POST'
+export const CREATE_POST_REQUEST = 'CREATE_POST_REQUEST'
 export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS'
-export const CREATE_POST_FAILED = 'CREATE_POST_FAILED'
+export const CREATE_POST_FAILURE = 'CREATE_POST_FAILURE'
 
 export const getPosts = () => ({
-  type: GET_POSTS,
+  type: GET_POSTS_REQUEST
 })
 
 export const getCategoryPosts = (categoryId) => ({
-  type: GET_CATEGORY_POSTS,
+  type: GET_CATEGORY_POSTS_REQUEST,
   categoryId
 })
 
 export const createPost = (data) => ({
-  type: CREATE_POST,
+  type: CREATE_POST_REQUEST,
   data
 })

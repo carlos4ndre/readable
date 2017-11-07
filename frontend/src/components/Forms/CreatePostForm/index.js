@@ -123,7 +123,7 @@ CreatePostForm.PropTypes = {
 const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = (dispatch) => ({
-  createPost: (data) => dispatch(createPost(data)),
+  createPost: (data) => dispatch(createPost(data))
 })
 
 CreatePostForm = connect(
