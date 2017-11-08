@@ -43,7 +43,7 @@ const createPost = function*(action) {
   const { data, callbacks } = action
 
   try {
-    const response = yield call(api.createPost, ...data)
+    const response = yield call(api.createPost, data)
     const result = yield response.json()
 
     if (result.error) {
