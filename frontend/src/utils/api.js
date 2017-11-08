@@ -27,3 +27,13 @@ export const createPost = (data) =>
     },
     body: JSON.stringify(data)
   })
+
+export const votePost = (postId, option) =>
+  fetch(`${api}/posts/${postId}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ option })
+  })

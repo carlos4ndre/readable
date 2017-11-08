@@ -10,6 +10,10 @@ export const CREATE_POST_REQUEST = 'CREATE_POST_REQUEST'
 export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS'
 export const CREATE_POST_FAILURE = 'CREATE_POST_FAILURE'
 
+export const VOTE_POST_REQUEST = 'VOTE_POST_REQUEST'
+export const VOTE_POST_SUCCESS = 'VOTE_POST_SUCCESS'
+export const VOTE_POST_FAILURE = 'VOTE_POST_FAILURE'
+
 export const getPosts = () => ({
   type: GET_POSTS_REQUEST
 })
@@ -23,4 +27,10 @@ export const createPost = (data, callbacks) => ({
   type: CREATE_POST_REQUEST,
   data,
   callbacks
+})
+
+export const votePost = (postId, value) => ({
+  type: VOTE_POST_REQUEST,
+  postId,
+  value
 })

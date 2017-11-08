@@ -1,12 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Grid, Label, List } from 'semantic-ui-react'
 import StyledLink from 'components/StyledLink'
 import Moment from 'react-moment'
 import ScorePanel from 'components/ScorePanel'
+import { votePost } from 'actions/posts'
+import { UP_VOTE, DOWN_VOTE } from 'data/vote'
 
 const Post = (props) => {
-  const { id, index, title, voteScore = 0, timestamp, commentCount = 0, author } = props
+  const {
+    id,
+    index,
+    title,
+    voteScore = 0,
+    timestamp,
+    commentCount = 0,
+    author,
+    votePost
+  } = props
+
   const postNumber = index + 1
   const postDate = <Moment format="DD/MM/YYYY" unix>{timestamp/1000}</Moment>
   const postAuthor = <Label color='teal' content={author || 'Anonymous'} icon='user'/>
@@ -20,7 +33,10 @@ const Post = (props) => {
           {postNumber}
         </Grid.Column>
         <Grid.Column width={1} textAlign='center'>
-          <ScorePanel value={voteScore}/>
+          <ScorePanel
+            onUpVoteClick={() => votePost(id, UP_VOTE)}
+            onDownVoteClick={() => votePost(id, DOWN_VOTE)}
+            value={voteScore}/>
         </Grid.Column>
         <Grid.Column width={14}>
           <List>
@@ -46,4 +62,13 @@ Post.PropTypes = {
   author: PropTypes.string.required,
 }
 
-export default Post
+const mapStateToProps = (state) => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+  votePost: (postId, value) => dispatch(votePost(postId, value)),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Post)

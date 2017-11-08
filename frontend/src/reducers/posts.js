@@ -1,9 +1,11 @@
+import { UP_VOTE } from 'data/vote'
 import {
   GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,
   GET_CATEGORY_POSTS_REQUEST,
   GET_CATEGORY_POSTS_SUCCESS,
-  CREATE_POST_SUCCESS
+  CREATE_POST_SUCCESS,
+  VOTE_POST_SUCCESS
 } from 'actions/posts'
 
 const initialState = {
@@ -28,6 +30,8 @@ const reducer = (state = initialState, action) => {
       }
     case CREATE_POST_SUCCESS:
       return addPost(state, action.post)
+    case VOTE_POST_SUCCESS:
+      return updatePostScore(state, action.postId, action.value)
     default:
       return state
   }
@@ -45,5 +49,21 @@ const addPost = (state, post) => ({
   },
   allIds: state.allIds.concat(post.id)
 })
+
+const updatePostScore = (state, postId, value) => {
+  const post = state.byId[postId]
+  const points = value === UP_VOTE ? 1 : -1
+
+  return {
+    ...state,
+    byId :{
+      ...state.byId,
+      [postId]: {
+        ...post,
+        voteScore: post.voteScore + points
+      }
+    }
+  }
+}
 
 export default reducer

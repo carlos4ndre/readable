@@ -9,6 +9,9 @@ import {
   GET_CATEGORY_POSTS_FAILURE,
   CREATE_POST_REQUEST,
   CREATE_POST_SUCCESS,
+  VOTE_POST_REQUEST,
+  VOTE_POST_SUCCESS,
+  VOTE_POST_FAILURE
 } from 'actions/posts'
 
 const getPosts = function*(action) {
@@ -56,11 +59,28 @@ const createPost = function*(action) {
   }
 }
 
+const votePost = function*(action) {
+  try {
+    const { postId, value } = action
+    const response = yield call(api.votePost, postId, value)
+    const result = yield response.json()
+
+    if (result.error) {
+      yield put({ type: VOTE_POST_FAILURE, error: result.error })
+    } else {
+      yield put({ type: VOTE_POST_SUCCESS, postId, value })
+    }
+  } catch(e) {
+    yield put({ type: VOTE_POST_FAILURE, error: e.message })
+  }
+}
+
 function* postsSagas() {
   yield all([
     yield takeLatest(GET_POSTS_REQUEST, getPosts),
     yield takeLatest(GET_CATEGORY_POSTS_REQUEST, getCategoryPosts),
-    yield takeEvery(CREATE_POST_REQUEST, createPost)
+    yield takeEvery(CREATE_POST_REQUEST, createPost),
+    yield takeEvery(VOTE_POST_REQUEST, votePost)
   ])
 }
 
