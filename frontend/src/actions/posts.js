@@ -19,7 +19,8 @@ export const getCategoryPosts = (categoryId) => ({
   categoryId
 })
 
-export const createPost = (data) => ({
+export const createPost = (data, callbacks) => ({
   type: CREATE_POST_REQUEST,
-  data
+  data,
+  callbacks
 })

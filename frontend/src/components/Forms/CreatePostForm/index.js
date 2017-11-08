@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import uuidv4 from 'uuid/v4'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
-import { Modal, Button, Form, Divider } from 'semantic-ui-react'
+import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-form'
+import { Modal, Button, Form, Divider, Message } from 'semantic-ui-react'
 import { InputTextField, TextAreaField, SelectField } from 'components/Forms/Fields'
 import { CreateButton } from 'components/Button'
 import { required, maxLength30, maxLength250 } from 'components/Forms/Fields/validators'
@@ -16,17 +16,28 @@ class CreatePostForm extends Component {
     modalOpen: false
   }
 
-  submit = values => {
+  submit = values => new Promise((resolve, reject) => {
     const data = {
       ...values,
       id: uuidv4(),
       timestamp: getUnixTimeNow(),
       author: values.author || 'Anonymous'
     }
+    const callbacks = { resolve, reject }
 
     // dispatch post
-    this.props.createPost(data)
-  }
+    this.props.createPost(data, callbacks)
+  })
+
+  asyncSubmit = values => this.submit(values)
+    .then(response => {
+      console.log("OK", response)
+      this.handleClose()
+    })
+    .catch(error => {
+      console.log("ERROR", error)
+      throw new SubmissionError(error)
+    })
 
   handleOpen = () => this.setState({ modalOpen: true })
   handleClose = () => {
@@ -41,9 +52,11 @@ class CreatePostForm extends Component {
       primary = true,
       categories,
       handleSubmit,
-      submitting
+      submitting,
+      submitErrors
     } = this.props
     const { modalOpen } = this.state
+    console.log(this.props)
 
     const categoryOptions = categories.map(category => ({
       key: category.name,
@@ -62,7 +75,7 @@ class CreatePostForm extends Component {
         <Modal.Header>Create Post</Modal.Header>
         <Modal.Content image>
           <Modal.Description>
-            <Form onSubmit={handleSubmit(this.submit.bind(this))}>
+            <Form onSubmit={handleSubmit(this.asyncSubmit.bind(this))}>
               <Field
                 name='title'
                 label='Title'
@@ -91,6 +104,14 @@ class CreatePostForm extends Component {
                 component={SelectField}
                 validate={[required]}
               />
+              { submitErrors && submitErrors.error &&
+                <Message
+                  icon='warning'
+                  color='red'
+                  header='Ups... Kittens have taken our servers!'
+                  content={submitErrors.error}
+                />
+              }
               <Divider hidden />
               <Button.Group floated='right'>
                 <Button
@@ -120,10 +141,12 @@ CreatePostForm.PropTypes = {
   categories: PropTypes.array.required
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  submitErrors: getFormSubmitErrors('createPost')(state)
+})
 
 const mapDispatchToProps = (dispatch) => ({
-  createPost: (data) => dispatch(createPost(data))
+  createPost: (data, callbacks) => dispatch(createPost(data, callbacks))
 })
 
 CreatePostForm = connect(
@@ -132,5 +155,5 @@ CreatePostForm = connect(
 )(CreatePostForm)
 
 export default reduxForm({
-  form: 'createPosts'
+  form: 'createPost'
 })(CreatePostForm)

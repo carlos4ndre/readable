@@ -40,16 +40,21 @@ const getCategoryPosts = function*(action) {
 }
 
 const createPost = function*(action) {
+  const { data, callbacks } = action
+
   try {
-    const response = yield call(api.createPost, ...action.data.data)
+    const response = yield call(api.createPost, ...data)
     const result = yield response.json()
 
     if (result.error) {
+      yield callbacks.reject({ error: result.error })
       yield put({ type: CREATE_POST_FAILURE, error: result.error })
     } else {
+      yield callbacks.resolve({ response: result })
       yield put({ type: CREATE_POST_SUCCESS })
     }
   } catch(e) {
+    yield callbacks.reject({ error: e.message })
     yield put({ type: CREATE_POST_FAILURE, error: e.message })
   }
 }
