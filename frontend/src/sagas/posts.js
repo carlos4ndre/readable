@@ -9,7 +9,6 @@ import {
   GET_CATEGORY_POSTS_FAILURE,
   CREATE_POST_REQUEST,
   CREATE_POST_SUCCESS,
-  CREATE_POST_FAILURE
 } from 'actions/posts'
 
 const getPosts = function*(action) {
@@ -48,14 +47,12 @@ const createPost = function*(action) {
 
     if (result.error) {
       yield callbacks.reject({ error: result.error })
-      yield put({ type: CREATE_POST_FAILURE, error: result.error })
     } else {
-      yield callbacks.resolve({ response: result })
-      yield put({ type: CREATE_POST_SUCCESS })
+      yield callbacks.resolve()
+      yield put({ type: CREATE_POST_SUCCESS, post: data })
     }
   } catch(e) {
     yield callbacks.reject({ error: e.message })
-    yield put({ type: CREATE_POST_FAILURE, error: e.message })
   }
 }
 

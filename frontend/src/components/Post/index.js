@@ -6,7 +6,7 @@ import Moment from 'react-moment'
 import ScorePanel from 'components/ScorePanel'
 
 const Post = (props) => {
-  const { id, index, title, voteScore, timestamp, commentCount, author } = props
+  const { id, index, title, voteScore = 0, timestamp, commentCount = 0, author } = props
   const postNumber = index + 1
   const postDate = <Moment format="DD/MM/YYYY" unix>{timestamp/1000}</Moment>
   const postAuthor = <Label color='teal' content={author || 'Anonymous'} icon='user'/>

@@ -3,6 +3,7 @@ import {
   GET_POSTS_SUCCESS,
   GET_CATEGORY_POSTS_REQUEST,
   GET_CATEGORY_POSTS_SUCCESS,
+  CREATE_POST_SUCCESS
 } from 'actions/posts'
 
 const initialState = {
@@ -17,28 +18,32 @@ const reducer = (state = initialState, action) => {
     case GET_CATEGORY_POSTS_REQUEST:
       return {
         ...state,
-        isFetching: true,
+        isFetching: true
       }
     case GET_POSTS_SUCCESS:
     case GET_CATEGORY_POSTS_SUCCESS:
       return {
-        ...addPosts(state, action),
-        isFetching: false,
+        ...addPosts(state, action.posts),
+        isFetching: false
       }
+    case CREATE_POST_SUCCESS:
+      return addPost(state, action.post)
     default:
       return state
   }
 }
 
-const addPosts = (state, action) => (
-  action.posts.reduce((obj, post) => ({
-    ...obj,
-    byId: {
-      ...obj.byId,
-      [post.id]: post,
-    },
-    allIds: obj.allIds.concat(post.id)
-  }), state)
+const addPosts = (state, posts = []) => (
+  posts.reduce((obj, post) => addPost(obj, post), state)
 )
+
+const addPost = (state, post) => ({
+  ...state,
+  byId: {
+    ...state.byId,
+    [post.id]: post,
+  },
+  allIds: state.allIds.concat(post.id)
+})
 
 export default reducer
