@@ -6,6 +6,7 @@ import { Container, Grid } from 'semantic-ui-react'
 import { CreatePostForm } from 'components/Forms'
 import PostList from 'components/PostList'
 import LoadingIcon from 'components/LoadingIcon'
+import * as selectors from 'selectors'
 
 class HomePage extends Component {
   componentWillMount() {
@@ -42,9 +43,9 @@ HomePage.PropTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  posts: Object.values(state.posts.byId),
-  categories: Object.values(state.categories.byId),
-  isFetchingPosts: state.posts.isFetching,
+  posts: selectors.getPosts(state),
+  categories: selectors.getCategories(state),
+  isFetchingPosts: selectors.isFetchingPosts(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({

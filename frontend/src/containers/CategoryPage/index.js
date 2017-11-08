@@ -6,6 +6,7 @@ import { Container, Grid } from 'semantic-ui-react'
 import { CreatePostForm } from 'components/Forms'
 import PostList from 'components/PostList'
 import LoadingIcon from 'components/LoadingIcon'
+import * as selectors from 'selectors'
 
 class CategoryPage extends Component {
   state = {
@@ -60,21 +61,11 @@ CategoryPage.PropTypes = {
   isFetchingPosts: PropTypes.bool.required
 }
 
-const mapStateToProps = (state, props) => {
-  const { posts, categories } = state
-
-  const categoryId = props.match.params.categoryId
-  const category = categories.byId[categoryId]
-  const postIds = category && category.postIds ? category.postIds : []
-  const categoryPosts = postIds.map(postId => posts.byId[postId])
-  const isFetchingPosts = posts.isFetching
-
-  return {
-    categories: Object.values(state.categories.byId),
-    categoryPosts,
-    isFetchingPosts
-  }
-}
+const mapStateToProps = (state, props) => ({
+  categories: selectors.getCategories(state),
+  categoryPosts: selectors.getPostsByCategoryId(state, props.match.params.categoryId),
+  isFetchingPosts: selectors.isFetchingPosts(state)
+})
 
 const mapDispatchToProps = (dispatch) => ({
   getCategoryPosts: (data) => dispatch(getCategoryPosts(data)),

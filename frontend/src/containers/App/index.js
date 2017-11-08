@@ -8,6 +8,7 @@ import Header from 'components/Header'
 import HomePage from 'containers/HomePage'
 import PostPage from 'containers/PostPage'
 import CategoryPage from 'containers/CategoryPage'
+import * as selectors from 'selectors'
 
 class App extends Component {
   componentWillMount() {
@@ -38,7 +39,7 @@ App.PropTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  categories: Object.values(state.categories.byId),
+  categories: selectors.getCategories(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
