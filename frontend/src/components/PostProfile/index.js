@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Header, Segment, Label, Statistic, Divider } from 'semantic-ui-react'
+import { Grid, Header, Segment, Label, Statistic, Divider, Button } from 'semantic-ui-react'
 import StyledLink from 'components/StyledLink'
 import CommentList from 'components/CommentList'
 import DateFormat from 'components/DateFormat'
@@ -42,15 +42,19 @@ const PostProfile = (props) => {
           <Header as='h1'>{title}</Header>
           <Segment.Group>
             <Segment>
-                <StyledLink hoverhighlight='false' to={`/categories/${category}`}>
-                  <Label color='blue' content={category} ribbon/>
-                </StyledLink>
+              <StyledLink hoverhighlight='false' to={`/categories/${category}`}>
+                <Label color='blue' content={category} ribbon/>
+              </StyledLink>
               <span>{body}</span>
               <Divider hidden/>
             </Segment>
-            <Segment>
-              Posted on {postDate} by {postAuthor}
-            </Segment>
+            <Segment.Group basic horizontal>
+              <Segment clearing>
+                <span>Posted on {postDate} by {postAuthor}</span>
+                <Button circular color='red' icon='trash' floated='right'/>
+                <Button circular color='olive' icon='pencil' floated='right'/>
+              </Segment>
+            </Segment.Group>
           </Segment.Group>
         </Grid.Column>
       </Grid.Row>
