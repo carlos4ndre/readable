@@ -5,6 +5,7 @@ import StyledLink from 'components/StyledLink'
 import CommentList from 'components/CommentList'
 import DateFormat from 'components/DateFormat'
 import NoComments from 'components/NoComments'
+import { DeletePostForm } from 'components/Forms'
 
 const PostProfile = (props) => {
   const { post, comments } = props
@@ -51,7 +52,9 @@ const PostProfile = (props) => {
             <Segment.Group basic horizontal>
               <Segment clearing>
                 <span>Posted on {postDate} by {postAuthor}</span>
-                <Button circular color='red' icon='trash' floated='right'/>
+                <DeletePostForm>
+                  <Button circular color='red' icon='trash' floated='right'/>
+                </DeletePostForm>
                 <Button circular color='olive' icon='pencil' floated='right'/>
               </Segment>
             </Segment.Group>

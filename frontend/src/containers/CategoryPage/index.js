@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getCategoryPosts } from 'actions/posts'
 import { Container, Grid } from 'semantic-ui-react'
 import { CreatePostForm } from 'components/Forms'
+import { CreateButton } from 'components/Button'
 import PostList from 'components/PostList'
 import LoadingIcon from 'components/LoadingIcon'
 import * as selectors from 'selectors'
@@ -46,7 +47,12 @@ class CategoryPage extends Component {
               <PostList posts={categoryPosts}/>
             </Grid.Row>
             <Grid.Row centered>
-              <CreatePostForm primary={hasPosts} categories={categories} />
+              <CreatePostForm categories={categories}>
+                <CreateButton
+                  content={hasPosts ? 'Create Post' : 'Be the first! 🎉💈🔮✨'}
+                  size={hasPosts ? 'medium' : 'massive'}
+                />
+              </CreatePostForm>
             </Grid.Row>
           </Grid>
         }

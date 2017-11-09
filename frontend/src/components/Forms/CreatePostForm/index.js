@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-form'
 import { Modal, Button, Form, Divider, Message } from 'semantic-ui-react'
 import { InputTextField, TextAreaField, SelectField } from 'components/Forms/Fields'
-import { CreateButton } from 'components/Button'
 import { required, maxLength30, maxLength250 } from 'components/Forms/Fields/validators'
 import { createPost } from 'actions/posts'
 import { getUnixTimeNow } from 'utils/date'
@@ -47,7 +46,7 @@ class CreatePostForm extends Component {
 
   render() {
     const {
-      primary = true,
+      children,
       categories,
       handleSubmit,
       submitting,
@@ -61,14 +60,8 @@ class CreatePostForm extends Component {
       value: category.name
     }))
 
-    const trigger = <CreateButton
-      content={primary ? 'Create Post' : 'Be the first! 🎉💈🔮✨'}
-      size={primary ? 'medium' : 'massive'}
-      onClick={this.handleOpen}
-    />
-
     return (
-      <Modal trigger={trigger} dimmer='blurring' size='tiny' open={modalOpen} onClose={this.handleClose}>
+      <Modal trigger={children} dimmer='blurring' size='tiny' open={modalOpen} onOpen={this.handleOpen} onClose={this.handleClose}>
         <Modal.Header>Create Post</Modal.Header>
         <Modal.Content image>
           <Modal.Description>
