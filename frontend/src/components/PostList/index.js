@@ -8,7 +8,7 @@ import { TOP, LATEST } from 'data/sorting'
 
 class PostList extends Component {
   state = {
-    sortBy: LATEST,
+    sortBy: TOP,
     showCreatePostForm: false
   }
 

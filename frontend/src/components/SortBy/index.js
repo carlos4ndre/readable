@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Menu, Dropdown, Container  } from 'semantic-ui-react'
-import { OPTIONS, LATEST } from 'data/sorting'
+import { OPTIONS, TOP } from 'data/sorting'
 
 const SortBy = (props) => (
   <Container>
@@ -11,7 +11,7 @@ const SortBy = (props) => (
         compact
         text='SortBy'
         options={OPTIONS}
-        defaultValue={LATEST}
+        defaultValue={TOP}
         onChange={(event, data) => props.onChange(data.value)}
       />
     </Menu>
