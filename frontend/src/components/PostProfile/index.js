@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Header, Segment, Label, Statistic, Divider } from 'semantic-ui-react'
 import DateFormat from 'components/DateFormat'
+import StyledLink from 'components/StyledLink'
 
 const PostProfile = (props) => {
   const {
@@ -38,7 +39,9 @@ const PostProfile = (props) => {
           <Header as='h1'>{title}</Header>
           <Segment.Group>
             <Segment>
-              <Label color='blue' ribbon>{category}</Label>
+                <StyledLink onHoverHighlight={false} to={`/categories/${category}`}>
+                  <Label color='blue' content={category} ribbon/>
+                </StyledLink>
               <span>{body}</span>
               <Divider hidden/>
             </Segment>

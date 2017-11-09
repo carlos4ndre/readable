@@ -5,11 +5,11 @@ const StyledLink = styled(Link)`
   color: black;
   opacity: 1;
   text-decoration: none;
-  font-size: 18px;
+  font-size: ${props => props.fontSize ? props.fontSize : '18px'};
 
   &:hover {
     color: black;
-    opacity: 0.7;
+    opacity: ${({ onHoverHighlight = true }) => onHoverHighlight ? '0.7' : '1'}
   };
   &.selected {
     color: black;
