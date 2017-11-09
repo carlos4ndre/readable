@@ -15,10 +15,13 @@ export const getCategories = () =>
 export const getPosts = () =>
   fetch(`${api}/posts`, { headers })
 
-export const getCategoryPosts = (categoryId) =>
+export const getPost = postId =>
+  fetch(`${api}/posts/${postId}`, { headers })
+
+export const getCategoryPosts = categoryId =>
   fetch(`${api}/${categoryId}/posts`, { headers })
 
-export const createPost = (data) =>
+export const createPost = data =>
   fetch(`${api}/posts`, {
     method: 'POST',
     headers: {

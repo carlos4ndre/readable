@@ -31,11 +31,9 @@ class CreatePostForm extends Component {
 
   asyncSubmit = values => this.submit(values)
     .then(response => {
-      console.log("OK", response)
       this.handleClose()
     })
     .catch(error => {
-      console.log("ERROR", error)
       throw new SubmissionError(error)
     })
 
@@ -56,7 +54,6 @@ class CreatePostForm extends Component {
       submitErrors
     } = this.props
     const { modalOpen } = this.state
-    console.log(this.props)
 
     const categoryOptions = categories.map(category => ({
       key: category.name,

@@ -49,7 +49,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getPosts: (data) => dispatch(getPosts(data)),
+  getPosts: (data) => dispatch(getPosts(data))
 })
 
 export default connect(

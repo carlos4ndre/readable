@@ -2,8 +2,13 @@ import { UP_VOTE } from 'data/vote'
 import {
   GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,
+  GET_POSTS_FAILURE,
+  GET_POST_REQUEST,
+  GET_POST_SUCCESS,
+  GET_POST_FAILURE,
   GET_CATEGORY_POSTS_REQUEST,
   GET_CATEGORY_POSTS_SUCCESS,
+  GET_CATEGORY_POSTS_FAILURE,
   CREATE_POST_SUCCESS,
   VOTE_POST_SUCCESS
 } from 'actions/posts'
@@ -11,23 +16,36 @@ import {
 const initialState = {
   byId: {},
   allIds: [],
-  isFetching: false
+  isFetchingPosts: false,
+  isFetchingPost: false
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    // manage posts and category posts
     case GET_POSTS_REQUEST:
     case GET_CATEGORY_POSTS_REQUEST:
-      return {
-        ...state,
-        isFetching: true
-      }
+      return { ...state, isFetchingPosts: true }
     case GET_POSTS_SUCCESS:
     case GET_CATEGORY_POSTS_SUCCESS:
       return {
         ...addPosts(state, action.posts),
-        isFetching: false
+        isFetchingPosts: false
       }
+    case GET_POSTS_FAILURE:
+    case GET_CATEGORY_POSTS_FAILURE:
+      return { ...state, isFetchingPosts: false }
+
+    // manage single post
+    case GET_POST_REQUEST:
+      return { ...state, isFetchingPost: true }
+    case GET_POST_SUCCESS:
+      return {
+        ...addPost(state, action.post),
+        isFetchingPost: false
+      }
+    case GET_POST_FAILURE:
+      return { ...state, isFetchingPost: false }
     case CREATE_POST_SUCCESS:
       return addPost(state, action.post)
     case VOTE_POST_SUCCESS:
