@@ -21,7 +21,7 @@ const PostItem = (props) => {
   } = props
 
   const postNumber = index + 1
-  const postDate = <DateFormat timestamp={timestamp}/>
+  const postDate = <b><DateFormat timestamp={timestamp}/></b>
   const postAuthor = <Label color='teal' content={author || 'Anonymous'} icon='user'/>
   const postTotalComments = <Label color='teal' circular>{commentCount}</Label>
   const postUrl = `/posts/${id}`

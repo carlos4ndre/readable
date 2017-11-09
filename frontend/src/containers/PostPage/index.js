@@ -14,21 +14,26 @@ class PostPage extends Component {
     const { post, match } = this.props
     const postId = match.params.postId
 
+    // check data has already been fetched
     if (!post) {
       this.props.getPost(postId)
+      this.props.getComments(postId)
+    }
+
+    if (post && !post.comments) {
       this.props.getComments(postId)
     }
   }
 
   render() {
-    const { post, isFetchingPost } = this.props
+    const { post, comments, isFetchingPost } = this.props
 
     return (
       <Container text>
         {isFetchingPost ?
           <LoadingIcon />
         :
-          post && <PostProfile {...post} />
+          post && <PostProfile post={post} comments={comments} />
         }
       </Container>
     )
@@ -45,6 +50,7 @@ const mapStateToProps = (state, props) => {
 
   return {
     post: selectors.getPostById(state, postId),
+    comments: selectors.getPostComments(state, postId),
     isFetchingPost: selectors.isFetchingPost(state, postId)
   }
 }
@@ -56,5 +62,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(PostPage)

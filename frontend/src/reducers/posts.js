@@ -66,7 +66,10 @@ const addPost = (state, post) => ({
   ...state,
   byId: {
     ...state.byId,
-    [post.id]: post,
+    [post.id]: {
+      ...post,
+      commentIds: post.commentIds || []
+    }
   },
   allIds: state.allIds.concat(post.id)
 })
@@ -97,10 +100,7 @@ const updatePostComments = (state, postId, comments) => {
       ...state.byId,
       [postId]: {
         ...post,
-        commentsIds: {
-          ...post.commentsIds,
-          ...commentIds
-        }
+        commentIds
       }
     }
   }

@@ -5,6 +5,7 @@ import {
 import {
   getPosts,
   getPostById,
+  getPostComments,
   isFetchingPosts,
   isFetchingPost
 } from 'selectors/posts'
@@ -14,6 +15,7 @@ export {
   getPosts,
   getPostById,
   getPostsByCategoryId,
+  getPostComments,
   isFetchingPosts,
   isFetchingPost
 }

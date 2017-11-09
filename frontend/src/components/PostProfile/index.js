@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Header, Segment, Label, Statistic, Divider } from 'semantic-ui-react'
-import DateFormat from 'components/DateFormat'
 import StyledLink from 'components/StyledLink'
+import CommentList from 'components/CommentList'
+import DateFormat from 'components/DateFormat'
+import NoComments from 'components/NoComments'
 
 const PostProfile = (props) => {
+  const { post, comments } = props
   const {
     title,
     body,
@@ -13,9 +16,9 @@ const PostProfile = (props) => {
     timestamp,
     voteScore,
     commentCount
-  } = props
+  } = post
 
-  const postDate = <DateFormat timestamp={timestamp}/>
+  const postDate = <b><DateFormat timestamp={timestamp}/></b>
   const postAuthor = <Label color='teal' content={author || 'Anonymous'} icon='user'/>
   const items = [
     {
@@ -53,7 +56,16 @@ const PostProfile = (props) => {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>
-          <Statistic.Group items={items} />
+          <Statistic.Group items={items}/>
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column>
+          { commentCount > 0 ?
+            <CommentList comments={comments}/>
+          :
+            <NoComments />
+          }
         </Grid.Column>
       </Grid.Row>
     </Grid>
