@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Grid, Header, Container } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 import LoadingIcon from 'components/LoadingIcon'
 import { getPost } from 'actions/posts'
 import * as selectors from 'selectors'
+import PostProfile from 'components/PostProfile'
 
 class PostPage extends Component {
 
@@ -21,24 +22,11 @@ class PostPage extends Component {
     const { post, isFetchingPost } = this.props
 
     return (
-      <Container>
+      <Container text>
         {isFetchingPost ?
           <LoadingIcon />
         :
-          post &&
-            <Grid>
-              <Grid.Row>
-                <Grid.Column>
-                  <Header as='h1' dividing>{post.title}</Header>
-                  <p>body: {post.body}</p>
-                  <p>category: {post.category}</p>
-                  <p>timestamp: {post.timestamp}</p>
-                  <p>author: {post.author}</p>
-                  <p>comment count: {post.commentCount}</p>
-                  <p>vote score: {post.voteScore}</p>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
+          post && <PostProfile {...post} />
         }
       </Container>
     )

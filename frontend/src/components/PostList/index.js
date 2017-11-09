@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Container } from 'semantic-ui-react'
-import Post from 'components/Post'
+import PostItem from 'components/PostItem'
 import SortBy from 'components/SortBy'
 import NoPosts from 'components/NoPosts'
 import { TOP, LATEST } from 'data/sorting'
@@ -46,7 +46,7 @@ class PostList extends Component {
           <div>
             <SortBy onChange={this.handleSortByChange}/>
             {sortedPosts.map((post, index) => (
-              <Post key={index} index={index} {...post}/>
+              <PostItem key={index} index={index} {...post}/>
             ))}
           </div>
         }

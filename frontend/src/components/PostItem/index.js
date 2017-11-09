@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Grid, Label, List } from 'semantic-ui-react'
 import StyledLink from 'components/StyledLink'
-import Moment from 'react-moment'
 import ScorePanel from 'components/ScorePanel'
+import DateFormat from 'components/DateFormat'
 import { votePost } from 'actions/posts'
 import { UP_VOTE, DOWN_VOTE } from 'data/vote'
 
-const Post = (props) => {
+const PostItem = (props) => {
   const {
     id,
     index,
@@ -21,7 +21,7 @@ const Post = (props) => {
   } = props
 
   const postNumber = index + 1
-  const postDate = <Moment format="DD/MM/YYYY" unix>{timestamp/1000}</Moment>
+  const postDate = <DateFormat timestamp={timestamp}/>
   const postAuthor = <Label color='teal' content={author || 'Anonymous'} icon='user'/>
   const postTotalComments = <Label color='teal' circular>{commentCount}</Label>
   const postUrl = `/posts/${id}`
@@ -52,7 +52,7 @@ const Post = (props) => {
   )
 }
 
-Post.PropTypes = {
+PostItem.PropTypes = {
   id: PropTypes.string.required,
   index: PropTypes.number.required,
   title: PropTypes.string.required,
@@ -71,4 +71,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Post)
+)(PostItem)
