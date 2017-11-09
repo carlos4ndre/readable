@@ -4,7 +4,7 @@ import {
 } from 'selectors/categories'
 import {
   getPosts,
-  getPostbyId,
+  getPostById,
   isFetchingPosts,
   isFetchingPost
 } from 'selectors/posts'
@@ -12,7 +12,7 @@ import {
 export {
   getCategories,
   getPosts,
-  getPostbyId,
+  getPostById,
   getPostsByCategoryId,
   isFetchingPosts,
   isFetchingPost

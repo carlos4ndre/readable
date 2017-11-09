@@ -7,13 +7,17 @@ import {
 } from 'actions/categories'
 
 const getCategories = function*(action) {
-  const response = yield call(api.getCategories)
-  const result = yield response.json();
+  try {
+    const response = yield call(api.getCategories)
+    const result = yield response.json();
 
-  if (result.error) {
-    yield put({ type: GET_CATEGORIES_FAILURE, error: result.error });
-  } else {
-    yield put({ type: GET_CATEGORIES_SUCCESS, categories: result.categories });
+    if (result.error) {
+      yield put({ type: GET_CATEGORIES_FAILURE, error: result.error });
+    } else {
+      yield put({ type: GET_CATEGORIES_SUCCESS, categories: result.categories });
+    }
+  } catch(e) {
+    yield put({ type: GET_CATEGORIES_FAILURE, error: e.message })
   }
 }
 

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Container } from 'semantic-ui-react'
 import LoadingIcon from 'components/LoadingIcon'
 import { getPost } from 'actions/posts'
+import { getComments } from 'actions/comments'
 import * as selectors from 'selectors'
 import PostProfile from 'components/PostProfile'
 
@@ -15,6 +16,7 @@ class PostPage extends Component {
 
     if (!post) {
       this.props.getPost(postId)
+      this.props.getComments(postId)
     }
   }
 
@@ -42,13 +44,14 @@ const mapStateToProps = (state, props) => {
   const postId = props.match.params.postId
 
   return {
-    post: selectors.getPostbyId(state, postId),
+    post: selectors.getPostById(state, postId),
     isFetchingPost: selectors.isFetchingPost(state, postId)
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getPost: (postId) => dispatch(getPost(postId))
+  getPost: (postId) => dispatch(getPost(postId)),
+  getComments: (postId) => dispatch(getComments(postId))
 })
 
 export default connect(

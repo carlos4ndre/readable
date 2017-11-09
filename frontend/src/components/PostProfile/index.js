@@ -39,7 +39,7 @@ const PostProfile = (props) => {
           <Header as='h1'>{title}</Header>
           <Segment.Group>
             <Segment>
-                <StyledLink onHoverHighlight={false} to={`/categories/${category}`}>
+                <StyledLink hoverhighlight='false' to={`/categories/${category}`}>
                   <Label color='blue' content={category} ribbon/>
                 </StyledLink>
               <span>{body}</span>

@@ -9,7 +9,7 @@ const StyledLink = styled(Link)`
 
   &:hover {
     color: black;
-    opacity: ${({ onHoverHighlight = true }) => onHoverHighlight ? '0.7' : '1'}
+    opacity: ${({ hoverhighlight = 'true' }) => hoverhighlight === 'true' ? '0.7' : '1'}
   };
   &.selected {
     color: black;

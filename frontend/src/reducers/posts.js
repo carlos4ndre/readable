@@ -12,6 +12,7 @@ import {
   CREATE_POST_SUCCESS,
   VOTE_POST_SUCCESS
 } from 'actions/posts'
+import { GET_COMMENTS_SUCCESS } from 'actions/comments'
 
 const initialState = {
   byId: {},
@@ -50,6 +51,8 @@ const reducer = (state = initialState, action) => {
       return addPost(state, action.post)
     case VOTE_POST_SUCCESS:
       return updatePostScore(state, action.postId, action.value)
+    case GET_COMMENTS_SUCCESS:
+      return updatePostComments(state, action.postId, action.comments)
     default:
       return state
   }
@@ -79,6 +82,25 @@ const updatePostScore = (state, postId, value) => {
       [postId]: {
         ...post,
         voteScore: post.voteScore + points
+      }
+    }
+  }
+}
+
+const updatePostComments = (state, postId, comments) => {
+  const post = state.byId[postId]
+  const commentIds = comments.map(comment => comment.id)
+
+  return {
+    ...state,
+    byId : {
+      ...state.byId,
+      [postId]: {
+        ...post,
+        commentsIds: {
+          ...post.commentsIds,
+          ...commentIds
+        }
       }
     }
   }
