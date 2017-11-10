@@ -48,7 +48,7 @@ export const votePost = (postId, value) => ({
   value
 })
 
-export const deletePost = postId => ({
+export const deletePost = post => ({
   type: DELETE_POST_REQUEST,
-  postId
+  post
 })

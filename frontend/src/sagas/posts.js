@@ -99,14 +99,14 @@ const votePost = function*(action) {
 
 const deletePost = function*(action) {
   try {
-    const postId = action.postId
-    const response = yield call(api.deletePost, postId)
+    const post = action.post
+    const response = yield call(api.deletePost, post.id)
     const result = yield response.json()
 
     if (result.error) {
       yield put({ type: DELETE_POST_FAILURE, error: result.error })
     } else {
-      yield put({ type: DELETE_POST_SUCCESS, postId })
+      yield put({ type: DELETE_POST_SUCCESS, post })
     }
   } catch(e) {
     yield put({ type: DELETE_POST_FAILURE, error: e.message })

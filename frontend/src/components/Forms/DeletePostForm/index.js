@@ -15,13 +15,13 @@ class DeletePostForm extends Component {
     this.setState({ modalOpen: false })
   }
 
-  handleSubmit = (postId) => {
-    this.props.deletePost(postId)
+  handleSubmit = (post) => {
+    this.props.deletePost(post)
     this.props.history.push('/')
   }
 
   render() {
-    const { children, postId } = this.props
+    const { children, post } = this.props
     const { modalOpen } = this.state
 
     return (
@@ -43,7 +43,7 @@ class DeletePostForm extends Component {
             icon='checkmark'
             color='green'
             content='yes'
-            onClick={() => this.handleSubmit(postId)}
+            onClick={() => this.handleSubmit(post)}
           />
         </Modal.Actions>
       </Modal>
@@ -54,7 +54,7 @@ class DeletePostForm extends Component {
 const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = (dispatch) => ({
-  deletePost: (postId) => dispatch(deletePost(postId))
+  deletePost: (post) => dispatch(deletePost(post))
 })
 
 

@@ -10,7 +10,6 @@ import { DeletePostForm } from 'components/Forms'
 const PostProfile = (props) => {
   const { post, comments } = props
   const {
-    id,
     title,
     body,
     author,
@@ -53,7 +52,7 @@ const PostProfile = (props) => {
             <Segment.Group basic='true' horizontal>
               <Segment clearing>
                 <span>Posted on {postDate} by {postAuthor}</span>
-                <DeletePostForm postId={id}>
+                <DeletePostForm post={post}>
                   <Button circular color='red' icon='trash' floated='right'/>
                 </DeletePostForm>
                 <Button circular color='olive' icon='pencil' floated='right'/>

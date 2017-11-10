@@ -53,9 +53,9 @@ const reducer = (state = initialState, action) => {
     case VOTE_POST_SUCCESS:
       return updatePostScore(state, action.postId, action.value)
     case DELETE_POST_SUCCESS:
-      return deletePost(state, action.postId)
+      return deletePost(state, action.post)
     case GET_COMMENTS_SUCCESS:
-      return updatePostComments(state, action.postId, action.comments)
+      return addPostComments(state, action.postId, action.comments)
     default:
       return state
   }
@@ -93,7 +93,7 @@ const updatePostScore = (state, postId, value) => {
   }
 }
 
-const updatePostComments = (state, postId, comments) => {
+const addPostComments = (state, postId, comments) => {
   const post = state.byId[postId]
   const commentIds = comments.map(comment => comment.id)
 
@@ -109,7 +109,8 @@ const updatePostComments = (state, postId, comments) => {
   }
 }
 
-const deletePost = (state, postId) => {
+const deletePost = (state, post) => {
+  const postId = post.id
   const oldById = state.byId
   const newById = Object.keys(oldById).reduce((obj, key) => {
     if (key !== postId) {
