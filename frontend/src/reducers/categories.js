@@ -12,9 +12,9 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_CATEGORIES_SUCCESS:
-      return addCategories(state, action)
+      return addCategories(state, action.categories)
     case GET_CATEGORY_POSTS_SUCCESS:
-      return addCategoryPostIds(state, action)
+      return addCategoryPostIds(state, action.categoryId, action.posts)
     case DELETE_POST_SUCCESS:
       return deleteCategoryPostIds(state, action.post)
     default:
@@ -22,8 +22,8 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-const addCategories = (state, action) => (
-  action.categories.reduce((obj, category) => ({
+const addCategories = (state, categories) => (
+  categories.reduce((obj, category) => ({
     ...obj,
     byId: {
       ...obj.byId,
@@ -36,10 +36,9 @@ const addCategories = (state, action) => (
   }), state)
 )
 
-const addCategoryPostIds = (state, action) => {
-  const categoryId = action.categoryId
+const addCategoryPostIds = (state, categoryId, posts) => {
   const category = state.byId[categoryId]
-  const postIds = action.posts.map(post => post.id)
+  const postIds = posts.map(post => post.id)
 
   return {
     ...state,
