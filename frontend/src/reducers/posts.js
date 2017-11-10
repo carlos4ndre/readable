@@ -10,7 +10,8 @@ import {
   GET_CATEGORY_POSTS_SUCCESS,
   GET_CATEGORY_POSTS_FAILURE,
   CREATE_POST_SUCCESS,
-  VOTE_POST_SUCCESS
+  VOTE_POST_SUCCESS,
+  DELETE_POST_SUCCESS
 } from 'actions/posts'
 import { GET_COMMENTS_SUCCESS } from 'actions/comments'
 
@@ -51,6 +52,8 @@ const reducer = (state = initialState, action) => {
       return addPost(state, action.post)
     case VOTE_POST_SUCCESS:
       return updatePostScore(state, action.postId, action.value)
+    case DELETE_POST_SUCCESS:
+      return deletePost(state, action.postId)
     case GET_COMMENTS_SUCCESS:
       return updatePostComments(state, action.postId, action.comments)
     default:
@@ -103,6 +106,21 @@ const updatePostComments = (state, postId, comments) => {
         commentIds
       }
     }
+  }
+}
+
+const deletePost = (state, postId) => {
+  const oldById = state.byId
+  const newById = Object.keys(oldById).reduce((obj, key) => {
+    if (key !== postId) {
+      return { ...obj, [key]: oldById[key] }
+    }
+    return obj
+  }, {})
+
+  return {
+    ...state,
+    byId: newById
   }
 }
 

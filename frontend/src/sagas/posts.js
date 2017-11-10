@@ -14,7 +14,10 @@ import {
   CREATE_POST_SUCCESS,
   VOTE_POST_REQUEST,
   VOTE_POST_SUCCESS,
-  VOTE_POST_FAILURE
+  VOTE_POST_FAILURE,
+  DELETE_POST_REQUEST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_FAILURE
 } from 'actions/posts'
 
 const getPosts = function*(action) {
@@ -94,13 +97,30 @@ const votePost = function*(action) {
   }
 }
 
+const deletePost = function*(action) {
+  try {
+    const postId = action.postId
+    const response = yield call(api.deletePost, postId)
+    const result = yield response.json()
+
+    if (result.error) {
+      yield put({ type: DELETE_POST_FAILURE, error: result.error })
+    } else {
+      yield put({ type: DELETE_POST_SUCCESS, postId })
+    }
+  } catch(e) {
+    yield put({ type: DELETE_POST_FAILURE, error: e.message })
+  }
+}
+
 function* postsSagas() {
   yield all([
     yield takeLatest(GET_POSTS_REQUEST, getPosts),
     yield takeLatest(GET_POST_REQUEST, getPost),
     yield takeLatest(GET_CATEGORY_POSTS_REQUEST, getCategoryPosts),
     yield takeEvery(CREATE_POST_REQUEST, createPost),
-    yield takeEvery(VOTE_POST_REQUEST, votePost)
+    yield takeEvery(VOTE_POST_REQUEST, votePost),
+    yield takeEvery(DELETE_POST_REQUEST, deletePost)
   ])
 }
 

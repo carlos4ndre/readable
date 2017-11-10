@@ -18,16 +18,20 @@ export const VOTE_POST_REQUEST = 'VOTE_POST_REQUEST'
 export const VOTE_POST_SUCCESS = 'VOTE_POST_SUCCESS'
 export const VOTE_POST_FAILURE = 'VOTE_POST_FAILURE'
 
+export const DELETE_POST_REQUEST = 'DELETE_POST_REQUEST'
+export const DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS'
+export const DELETE_POST_FAILURE = 'DELETE_POST_FAILURE'
+
 export const getPosts = () => ({
   type: GET_POSTS_REQUEST
 })
 
-export const getPost = (postId) => ({
+export const getPost = postId => ({
   type: GET_POST_REQUEST,
   postId
 })
 
-export const getCategoryPosts = (categoryId) => ({
+export const getCategoryPosts = categoryId => ({
   type: GET_CATEGORY_POSTS_REQUEST,
   categoryId
 })
@@ -42,4 +46,9 @@ export const votePost = (postId, value) => ({
   type: VOTE_POST_REQUEST,
   postId,
   value
+})
+
+export const deletePost = postId => ({
+  type: DELETE_POST_REQUEST,
+  postId
 })
