@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { Button, Header, Modal } from 'semantic-ui-react'
 import { deletePost } from 'actions/posts'
 
@@ -16,6 +17,7 @@ class DeletePostForm extends Component {
 
   handleSubmit = (postId) => {
     this.props.deletePost(postId)
+    this.props.history.push('/')
   }
 
   render() {
@@ -56,7 +58,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(DeletePostForm)
+)(DeletePostForm))

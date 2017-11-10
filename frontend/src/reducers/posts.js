@@ -120,7 +120,8 @@ const deletePost = (state, postId) => {
 
   return {
     ...state,
-    byId: newById
+    byId: newById,
+    allIds: state.allIds.filter(id => id !== postId)
   }
 }
 
