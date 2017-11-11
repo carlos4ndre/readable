@@ -1,8 +1,10 @@
 import {
   GET_COMMENTS_REQUEST,
   GET_COMMENTS_SUCCESS,
-  GET_COMMENTS_FAILURE
+  GET_COMMENTS_FAILURE,
+  VOTE_COMMENT_SUCCESS
 } from 'actions/comments'
+import { UP_VOTE } from 'data/vote'
 
 const initialState = {
   byId: {},
@@ -21,6 +23,8 @@ const reducer = (state = initialState, action) => {
       }
     case GET_COMMENTS_FAILURE:
       return { ...state, isFetchingComments: false }
+    case VOTE_COMMENT_SUCCESS:
+      return updateCommentScore(state, action.commentId, action.value)
     default:
       return state
   }
@@ -38,5 +42,21 @@ const addComment = (state, comment) => ({
   },
   allIds: state.allIds.concat(comment.id)
 })
+
+const updateCommentScore = (state, commentId, value) => {
+  const comment = state.byId[commentId]
+  const points = value === UP_VOTE ? 1 : -1
+
+  return {
+    ...state,
+    byId :{
+      ...state.byId,
+      [commentId]: {
+        ...comment,
+        voteScore: comment.voteScore + points
+      }
+    }
+  }
+}
 
 export default reducer

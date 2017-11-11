@@ -1,7 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Feed, Label } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { Feed, Label, Icon, List } from 'semantic-ui-react'
 import DateFormat from 'components/DateFormat'
+import { UP_VOTE, DOWN_VOTE } from 'data/vote'
+import { voteComment } from 'actions/comments'
 
 const CommentList = (props) => (
   <Feed>
@@ -13,6 +16,22 @@ const CommentList = (props) => (
         color={comment.voteScore > 0 ? 'green' : 'red'}
         content={comment.voteScore}
         icon='star'
+      />
+    )
+    const thumbsUp = (
+      <Icon
+        link
+        name='thumbs outline up'
+        size='large'
+        onClick={() => props.voteComment(comment.id, UP_VOTE)}
+      />
+    )
+    const thumbsDown = (
+      <Icon
+        link
+        name='thumbs outline down'
+        size='large'
+        onClick={() => props.voteComment(comment.id, DOWN_VOTE)}
       />
     )
 
@@ -28,7 +47,17 @@ const CommentList = (props) => (
              {comment.body}
            </Feed.Extra>
            <Feed.Meta>
-             {commentScore}
+             <List horizontal>
+               <List.Item>
+                 {commentScore}
+               </List.Item>
+               <List.Item>
+                 {thumbsUp}
+               </List.Item>
+               <List.Item>
+                 {thumbsDown}
+               </List.Item>
+             </List>
            </Feed.Meta>
          </Feed.Content>
       </Feed.Event>
@@ -41,4 +70,13 @@ CommentList.PropTypes = {
   comments: PropTypes.array.required
 }
 
-export default CommentList
+const mapStateToProps = (state) => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+  voteComment: (commentId, value) => dispatch(voteComment(commentId, value))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CommentList)
