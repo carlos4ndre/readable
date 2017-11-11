@@ -14,7 +14,12 @@ class EditPostForm extends Component {
 
   submit = values => new Promise((resolve, reject) => {
     const callbacks = { resolve, reject }
-    const post = { ...values }
+    const oldPost = this.props.initialValues
+    const post = {
+      ...oldPost,
+      title: values.title,
+      body: values.body
+    }
 
     this.props.updatePost(post, callbacks)
   })

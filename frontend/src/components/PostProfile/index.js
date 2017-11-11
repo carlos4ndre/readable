@@ -39,10 +39,10 @@ const PostProfile = (props) => {
                   <Label color='blue' content={category} ribbon/>
                 </StyledLink>
               </Segment>
-              <Segment>
+              <Segment textAlign='left'>
                 {body}
               </Segment>
-              <Segment>
+              <Segment compact>
                 <ScorePanel
                   onUpVoteClick={() => votePost(id, UP_VOTE)}
                   onDownVoteClick={() => votePost(id, DOWN_VOTE)}
