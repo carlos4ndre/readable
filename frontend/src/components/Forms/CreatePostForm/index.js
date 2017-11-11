@@ -25,7 +25,6 @@ class CreatePostForm extends Component {
     }
     const callbacks = { resolve, reject }
 
-    // dispatch post
     this.props.createPost(post, callbacks)
   })
 

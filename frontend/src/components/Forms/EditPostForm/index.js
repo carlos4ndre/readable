@@ -5,7 +5,7 @@ import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-fo
 import { Modal, Button, Form, Divider, Message } from 'semantic-ui-react'
 import { InputTextField, TextAreaField } from 'components/Forms/Fields'
 import { required, maxLength50, maxLength250 } from 'components/Forms/Fields/validators'
-import { editPost } from 'actions/posts'
+import { updatePost } from 'actions/posts'
 
 class EditPostForm extends Component {
   state = {
@@ -16,8 +16,7 @@ class EditPostForm extends Component {
     const callbacks = { resolve, reject }
     const post = { ...values }
 
-    // dispatch post
-    this.props.editPost(post, callbacks)
+    this.props.updatePost(post, callbacks)
   })
 
   asyncSubmit = values => this.submit(values)
@@ -98,7 +97,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  editPost: (data, callbacks) => dispatch(editPost(data, callbacks))
+  updatePost: (post, callbacks) => dispatch(updatePost(post, callbacks))
 })
 
 EditPostForm = connect(

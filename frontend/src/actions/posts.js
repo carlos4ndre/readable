@@ -14,9 +14,9 @@ export const CREATE_POST_REQUEST = 'CREATE_POST_REQUEST'
 export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS'
 export const CREATE_POST_FAILURE = 'CREATE_POST_FAILURE'
 
-export const EDIT_POST_REQUEST = 'EDIT_POST_REQUEST'
-export const EDIT_POST_SUCCESS = 'EDIT_POST_SUCCESS'
-export const EDIT_POST_FAILURE = 'EDIT_POST_FAILURE'
+export const UPDATE_POST_REQUEST = 'UPDATE_POST_REQUEST'
+export const UPDATE_POST_SUCCESS = 'UPDATE_POST_SUCCESS'
+export const UPDATE_POST_FAILURE = 'UPDATE_POST_FAILURE'
 
 export const VOTE_POST_REQUEST = 'VOTE_POST_REQUEST'
 export const VOTE_POST_SUCCESS = 'VOTE_POST_SUCCESS'
@@ -52,8 +52,8 @@ export const votePost = (postId, value) => ({
   value
 })
 
-export const editPost = (post, callbacks) => ({
-  type: EDIT_POST_REQUEST,
+export const updatePost = (post, callbacks) => ({
+  type: UPDATE_POST_REQUEST,
   callbacks,
   post
 })
