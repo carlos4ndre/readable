@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Header, Segment, Label, Statistic, Divider, Button } from 'semantic-ui-react'
 import StyledLink from 'components/StyledLink'
+import { Grid, Header, Segment, Label, Statistic, Divider, Button } from 'semantic-ui-react'
+import { EditPostForm, DeletePostForm } from 'components/Forms'
 import CommentList from 'components/CommentList'
 import DateFormat from 'components/DateFormat'
 import NoComments from 'components/NoComments'
-import { DeletePostForm } from 'components/Forms'
 
 const PostProfile = (props) => {
   const { post, comments } = props
@@ -55,7 +55,9 @@ const PostProfile = (props) => {
                 <DeletePostForm post={post}>
                   <Button circular color='red' icon='trash' floated='right'/>
                 </DeletePostForm>
-                <Button circular color='olive' icon='pencil' floated='right'/>
+                <EditPostForm initialValues={post}>
+                  <Button circular color='olive' icon='pencil' floated='right'/>
+                </EditPostForm>
               </Segment>
             </Segment.Group>
           </Segment.Group>

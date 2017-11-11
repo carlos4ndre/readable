@@ -15,6 +15,8 @@ import {
   VOTE_POST_REQUEST,
   VOTE_POST_SUCCESS,
   VOTE_POST_FAILURE,
+  EDIT_POST_REQUEST,
+  EDIT_POST_SUCCESS,
   DELETE_POST_REQUEST,
   DELETE_POST_SUCCESS,
   DELETE_POST_FAILURE
@@ -64,17 +66,17 @@ const getCategoryPosts = function*(action) {
 }
 
 const createPost = function*(action) {
-  const { data, callbacks } = action
+  const { post, callbacks } = action
 
   try {
-    const response = yield call(api.createPost, data)
+    const response = yield call(api.createPost, post)
     const result = yield response.json()
 
     if (result.error) {
       yield callbacks.reject({ error: result.error })
     } else {
       yield callbacks.resolve()
-      yield put({ type: CREATE_POST_SUCCESS, post: data })
+      yield put({ type: CREATE_POST_SUCCESS, post })
     }
   } catch(e) {
     yield callbacks.reject({ error: e.message })
@@ -94,6 +96,24 @@ const votePost = function*(action) {
     }
   } catch(e) {
     yield put({ type: VOTE_POST_FAILURE, error: e.message })
+  }
+}
+
+const editPost = function*(action) {
+  const { post, callbacks } = action
+
+  try {
+    const response = yield call(api.editPost, post)
+    const result = yield response.json()
+
+    if (result.error) {
+      yield callbacks.reject({ error: result.error })
+    } else {
+      yield callbacks.resolve()
+      yield put({ type: EDIT_POST_SUCCESS, post })
+    }
+  } catch(e) {
+    yield callbacks.reject({ error: e.message })
   }
 }
 
@@ -120,6 +140,7 @@ function* postsSagas() {
     yield takeLatest(GET_CATEGORY_POSTS_REQUEST, getCategoryPosts),
     yield takeEvery(CREATE_POST_REQUEST, createPost),
     yield takeEvery(VOTE_POST_REQUEST, votePost),
+    yield takeEvery(EDIT_POST_REQUEST, editPost),
     yield takeEvery(DELETE_POST_REQUEST, deletePost)
   ])
 }

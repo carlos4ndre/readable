@@ -21,14 +21,14 @@ export const getPost = postId =>
 export const getCategoryPosts = categoryId =>
   fetch(`${api}/${categoryId}/posts`, { headers })
 
-export const createPost = data =>
+export const createPost = post =>
   fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(post)
   })
 
 export const votePost = (postId, option) =>
@@ -39,6 +39,16 @@ export const votePost = (postId, option) =>
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ option })
+  })
+
+export const editPost = post =>
+  fetch(`${api}/posts/${post.id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(post)
   })
 
 export const deletePost = postId =>

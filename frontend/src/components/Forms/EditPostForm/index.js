@@ -1,32 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import uuidv4 from 'uuid/v4'
 import { connect } from 'react-redux'
 import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-form'
 import { Modal, Button, Form, Divider, Message } from 'semantic-ui-react'
-import { InputTextField, TextAreaField, SelectField } from 'components/Forms/Fields'
+import { InputTextField, TextAreaField } from 'components/Forms/Fields'
 import { required, maxLength30, maxLength250 } from 'components/Forms/Fields/validators'
-import { createPost } from 'actions/posts'
-import { getUnixTimeNow } from 'utils/date'
+import { editPost } from 'actions/posts'
 
-
-class CreatePostForm extends Component {
+class EditPostForm extends Component {
   state = {
     modalOpen: false
   }
 
   submit = values => new Promise((resolve, reject) => {
-    const post = {
-      ...values,
-      id: uuidv4(),
-      timestamp: getUnixTimeNow(),
-      author: values.author || 'Anonymous',
-      voteScore: 1
-    }
     const callbacks = { resolve, reject }
+    const post = { ...values }
 
     // dispatch post
-    this.props.createPost(post, callbacks)
+    this.props.editPost(post, callbacks)
   })
 
   asyncSubmit = values => this.submit(values)
@@ -48,52 +39,29 @@ class CreatePostForm extends Component {
   render() {
     const {
       children,
-      categories,
       handleSubmit,
       submitting,
       submitErrors
     } = this.props
     const { modalOpen } = this.state
 
-    const categoryOptions = categories.map(category => ({
-      key: category.name,
-      text: category.name,
-      value: category.name
-    }))
-
     return (
       <Modal trigger={children} dimmer='blurring' size='tiny' open={modalOpen} onOpen={this.handleOpen} onClose={this.handleClose}>
-        <Modal.Header>Create Post</Modal.Header>
+        <Modal.Header>Edit Post</Modal.Header>
         <Modal.Content image>
           <Modal.Description>
             <Form onSubmit={handleSubmit(this.asyncSubmit.bind(this))}>
               <Field
                 name='title'
                 label='Title'
-                placeholder='Epic title goes in here'
                 component={InputTextField}
                 validate={[required, maxLength30]}
               />
               <Field
                 name='body'
                 label='Body'
-                placeholder="What's this all about..."
                 component={TextAreaField}
                 validate={[required, maxLength250]}
-              />
-              <Field
-                name='author'
-                label='Author'
-                placeholder='Who should be credited for this post'
-                component={InputTextField}
-              />
-              <Field
-                name='category'
-                label='Category'
-                options={categoryOptions}
-                placeholder='- Select -'
-                component={SelectField}
-                validate={[required]}
               />
               { submitErrors && submitErrors.error &&
                 <Message
@@ -115,7 +83,7 @@ class CreatePostForm extends Component {
                 <Button
                   positive
                   type='submit'
-                  content='Create'
+                  content='Save'
                   disabled={submitting}
                 />
               </Button.Group>
@@ -127,23 +95,23 @@ class CreatePostForm extends Component {
   }
 }
 
-CreatePostForm.PropTypes = {
-  categories: PropTypes.array.required
-}
 
-const mapStateToProps = (state) => ({
-  submitErrors: getFormSubmitErrors('createPost')(state)
+const mapStateToProps = (state, ownProps) => ({
+  submitErrors: getFormSubmitErrors('editPost')(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  createPost: (data, callbacks) => dispatch(createPost(data, callbacks))
+  editPost: (data, callbacks) => dispatch(editPost(data, callbacks))
 })
 
-CreatePostForm = connect(
+EditPostForm = connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreatePostForm)
+)(EditPostForm)
 
+EditPostForm.PropTypes = {
+  post: PropTypes.array.required
+}
 export default reduxForm({
-  form: 'createPost'
-})(CreatePostForm)
+  form: 'editPost'
+})(EditPostForm)

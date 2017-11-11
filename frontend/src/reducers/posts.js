@@ -11,6 +11,7 @@ import {
   GET_CATEGORY_POSTS_FAILURE,
   CREATE_POST_SUCCESS,
   VOTE_POST_SUCCESS,
+  EDIT_POST_SUCCESS,
   DELETE_POST_SUCCESS
 } from 'actions/posts'
 import { GET_COMMENTS_SUCCESS } from 'actions/comments'
@@ -52,6 +53,8 @@ const reducer = (state = initialState, action) => {
       return addPost(state, action.post)
     case VOTE_POST_SUCCESS:
       return updatePostScore(state, action.postId, action.value)
+    case EDIT_POST_SUCCESS:
+      return updatePost(state, action.post)
     case DELETE_POST_SUCCESS:
       return deletePost(state, action.post)
     case GET_COMMENTS_SUCCESS:
@@ -92,6 +95,16 @@ const updatePostScore = (state, postId, value) => {
     }
   }
 }
+
+const updatePost = (state, post) => ({
+  ...state,
+  byId :{
+    ...state.byId,
+    [post.id]: {
+      ...post,
+    }
+  }
+})
 
 const addPostComments = (state, postId, comments) => {
   const post = state.byId[postId]
