@@ -27,7 +27,7 @@ const ScorePanel = (props) => (
 )
 
 ScorePanel.PropTypes = {
-  value: PropTypes.number.required
+  value: PropTypes.number
 }
 
 export default ScorePanel
