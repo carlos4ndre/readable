@@ -2,7 +2,8 @@ import {
   GET_COMMENTS_REQUEST,
   GET_COMMENTS_SUCCESS,
   GET_COMMENTS_FAILURE,
-  VOTE_COMMENT_SUCCESS
+  VOTE_COMMENT_SUCCESS,
+  DELETE_COMMENT_SUCCESS
 } from 'actions/comments'
 import { UP_VOTE } from 'data/vote'
 
@@ -25,6 +26,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, isFetchingComments: false }
     case VOTE_COMMENT_SUCCESS:
       return updateCommentScore(state, action.commentId, action.value)
+    case DELETE_COMMENT_SUCCESS:
+      return deleteComment(state, action.comment)
     default:
       return state
   }
@@ -56,6 +59,23 @@ const updateCommentScore = (state, commentId, value) => {
         voteScore: comment.voteScore + points
       }
     }
+  }
+}
+
+const deleteComment = (state, comment) => {
+  const commentId = comment.id
+  const oldById = state.byId
+  const newById = Object.keys(oldById).reduce((obj, key) => {
+    if (key !== commentId) {
+      return { ...obj, [key]: oldById[key] }
+    }
+    return obj
+  }, {})
+
+  return {
+    ...state,
+    byId: newById,
+    allIds: state.allIds.filter(id => id !== commentId)
   }
 }
 

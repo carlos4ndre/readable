@@ -14,7 +14,7 @@ import {
   UPDATE_POST_SUCCESS,
   DELETE_POST_SUCCESS
 } from 'actions/posts'
-import { GET_COMMENTS_SUCCESS } from 'actions/comments'
+import { GET_COMMENTS_SUCCESS, DELETE_COMMENT_SUCCESS } from 'actions/comments'
 
 const initialState = {
   byId: {},
@@ -59,6 +59,8 @@ const reducer = (state = initialState, action) => {
       return deletePost(state, action.post)
     case GET_COMMENTS_SUCCESS:
       return addPostComments(state, action.postId, action.comments)
+    case DELETE_COMMENT_SUCCESS:
+      return deletePostCommentIds(state, action.comment)
     default:
       return state
   }
@@ -136,6 +138,25 @@ const deletePost = (state, post) => {
     ...state,
     byId: newById,
     allIds: state.allIds.filter(id => id !== postId)
+  }
+}
+
+const deletePostCommentIds = (state, comment) => {
+  const commentId = comment.id
+  const postId = comment.parentId
+  const post = state.byId[postId]
+  const updatedCommentIds = post.commentIds.filter(id => id !== commentId)
+
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [postId]: {
+        ...post,
+        commentCount: updatedCommentIds.length,
+        commentIds: updatedCommentIds
+      }
+    }
   }
 }
 

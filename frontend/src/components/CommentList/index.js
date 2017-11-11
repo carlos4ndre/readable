@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Feed, Label, Icon, List } from 'semantic-ui-react'
 import DateFormat from 'components/DateFormat'
 import { UP_VOTE, DOWN_VOTE } from 'data/vote'
-import { voteComment } from 'actions/comments'
+import { voteComment, deleteComment } from 'actions/comments'
 
 const CommentList = (props) => (
   <Feed>
@@ -34,6 +34,14 @@ const CommentList = (props) => (
         onClick={() => props.voteComment(comment.id, DOWN_VOTE)}
       />
     )
+    const deleteButton = (
+      <Icon
+        link
+        name='trash'
+        size='large'
+        onClick={() => props.deleteComment(comment)}
+      />
+    )
 
     return (
       <Feed.Event key={comment.id}>
@@ -57,6 +65,9 @@ const CommentList = (props) => (
                <List.Item>
                  {thumbsDown}
                </List.Item>
+               <List.Item>
+                 {deleteButton}
+               </List.Item>
              </List>
            </Feed.Meta>
          </Feed.Content>
@@ -73,7 +84,8 @@ CommentList.PropTypes = {
 const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = (dispatch) => ({
-  voteComment: (commentId, value) => dispatch(voteComment(commentId, value))
+  voteComment: (commentId, value) => dispatch(voteComment(commentId, value)),
+  deleteComment: (comment) => dispatch(deleteComment(comment))
 })
 
 export default connect(
