@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import uuidv4 from 'uuid/v4'
 import { connect } from 'react-redux'
 import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-form'
-import { Modal, Button, Form, Divider, Message } from 'semantic-ui-react'
+import { Modal, Button, Form, Divider, Message, Header } from 'semantic-ui-react'
 import { InputTextField, TextAreaField, SelectField } from 'components/Forms/Fields'
 import { required, maxLength50, maxLength250 } from 'components/Forms/Fields/validators'
 import { createPost } from 'actions/posts'
@@ -61,8 +61,17 @@ class CreatePostForm extends Component {
     }))
 
     return (
-      <Modal trigger={children} dimmer='blurring' size='tiny' open={modalOpen} onOpen={this.handleOpen} onClose={this.handleClose}>
-        <Modal.Header>Create Post</Modal.Header>
+      <Modal
+        trigger={children}
+        dimmer='blurring'
+        size='tiny'
+        open={modalOpen}
+        onOpen={this.handleOpen}
+        onClose={this.handleClose}
+        closeOnEscape={false}
+        closeOnRootNodeClick={false}
+      >
+        <Header icon='add square' content='Create Post'/>
         <Modal.Content image>
           <Modal.Description>
             <Form onSubmit={handleSubmit(this.asyncSubmit.bind(this))}>

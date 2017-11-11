@@ -25,7 +25,16 @@ class DeletePostForm extends Component {
     const { modalOpen } = this.state
 
     return (
-      <Modal trigger={children} dimmer='blurring' size='tiny' open={modalOpen} onOpen={this.handleOpen} onClose={this.handleClose}>
+      <Modal
+        trigger={children}
+        dimmer='blurring'
+        size='tiny'
+        open={modalOpen}
+        onOpen={this.handleOpen}
+        onClose={this.handleClose}
+        closeOnEscape={false}
+        closeOnRootNodeClick={false}
+      >
         <Header icon='trash' content='Delete Post' />
         <Modal.Content>
           <p>Are you sure you want to delete this post?</p>

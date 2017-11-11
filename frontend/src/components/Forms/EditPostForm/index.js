@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-form'
-import { Modal, Button, Form, Divider, Message } from 'semantic-ui-react'
+import { Modal, Button, Form, Divider, Message, Header } from 'semantic-ui-react'
 import { InputTextField, TextAreaField } from 'components/Forms/Fields'
 import { required, maxLength50, maxLength250 } from 'components/Forms/Fields/validators'
 import { updatePost } from 'actions/posts'
@@ -47,8 +47,17 @@ class EditPostForm extends Component {
     const { modalOpen } = this.state
 
     return (
-      <Modal trigger={children} dimmer='blurring' size='tiny' open={modalOpen} onOpen={this.handleOpen} onClose={this.handleClose}>
-        <Modal.Header>Edit Post</Modal.Header>
+      <Modal
+        trigger={children}
+        dimmer='blurring'
+        size='tiny'
+        open={modalOpen}
+        onOpen={this.handleOpen}
+        onClose={this.handleClose}
+        closeOnEscape={false}
+        closeOnRootNodeClick={false}
+      >
+        <Header icon='pencil' content='Edit Post'/>
         <Modal.Content image>
           <Modal.Description>
             <Form onSubmit={handleSubmit(this.asyncSubmit.bind(this))}>
