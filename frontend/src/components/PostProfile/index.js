@@ -10,9 +10,11 @@ import NoComments from 'components/NoComments'
 import ScorePanel from 'components/ScorePanel'
 import { votePost } from 'actions/posts'
 import { UP_VOTE, DOWN_VOTE } from 'data/vote'
+import * as selectors from 'selectors'
+import LoadingIcon from 'components/LoadingIcon'
 
 const PostProfile = (props) => {
-  const { post, comments, votePost } = props
+  const { post, comments, votePost, isFetchingComments } = props
   const {
     id,
     title,
@@ -33,22 +35,16 @@ const PostProfile = (props) => {
         <Grid.Column>
           <Header as='h1'>{title}</Header>
           <Segment.Group>
-            <Segment.Group horizontal>
-              <Segment>
+            <Segment>
                 <StyledLink hoverhighlight='false' to={`/categories/${category}`}>
                   <Label color='blue' content={category} ribbon/>
                 </StyledLink>
-              </Segment>
-              <Segment textAlign='left'>
                 {body}
-              </Segment>
-              <Segment compact>
                 <ScorePanel
                   onUpVoteClick={() => votePost(id, UP_VOTE)}
                   onDownVoteClick={() => votePost(id, DOWN_VOTE)}
                 />
-              </Segment>
-            </Segment.Group>
+            </Segment>
             <Segment.Group basic='true' horizontal>
               <Segment clearing>
                 <span>Posted on {postDate} by {postAuthor}</span>
@@ -77,10 +73,15 @@ const PostProfile = (props) => {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>
-          { commentCount > 0 ?
-            <CommentList comments={comments}/>
-          :
-            <NoComments />
+          { isFetchingComments ?
+              <LoadingIcon />
+            :
+              (
+                commentCount > 0 ?
+                  <CommentList comments={comments}/>
+                :
+                  <NoComments />
+              )
           }
         </Grid.Column>
       </Grid.Row>
@@ -98,7 +99,9 @@ PostProfile.PropTypes = {
   author: PropTypes.string.required,
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  isFetchingComments: selectors.isFetchingComments(state)
+})
 
 const mapDispatchToProps = (dispatch) => ({
   votePost: (postId, value) => dispatch(votePost(postId, value)),

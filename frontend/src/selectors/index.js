@@ -2,6 +2,7 @@ import {
   getCategories,
   getPostsByCategoryId
 } from 'selectors/categories'
+
 import {
   getPosts,
   getPostById,
@@ -10,6 +11,10 @@ import {
   isFetchingPost
 } from 'selectors/posts'
 
+import {
+  isFetchingComments
+} from 'selectors/comments'
+
 export {
   getCategories,
   getPosts,
@@ -17,5 +22,6 @@ export {
   getPostsByCategoryId,
   getPostComments,
   isFetchingPosts,
-  isFetchingPost
+  isFetchingPost,
+  isFetchingComments
 }
