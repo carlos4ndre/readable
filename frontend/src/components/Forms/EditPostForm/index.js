@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-form'
 import { Modal, Button, Form, Divider, Message } from 'semantic-ui-react'
 import { InputTextField, TextAreaField } from 'components/Forms/Fields'
-import { required, maxLength30, maxLength250 } from 'components/Forms/Fields/validators'
+import { required, maxLength50, maxLength250 } from 'components/Forms/Fields/validators'
 import { editPost } from 'actions/posts'
 
 class EditPostForm extends Component {
@@ -55,7 +55,7 @@ class EditPostForm extends Component {
                 name='title'
                 label='Title'
                 component={InputTextField}
-                validate={[required, maxLength30]}
+                validate={[required, maxLength50]}
               />
               <Field
                 name='body'

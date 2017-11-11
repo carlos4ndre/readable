@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-form'
 import { Modal, Button, Form, Divider, Message } from 'semantic-ui-react'
 import { InputTextField, TextAreaField, SelectField } from 'components/Forms/Fields'
-import { required, maxLength30, maxLength250 } from 'components/Forms/Fields/validators'
+import { required, maxLength50, maxLength250 } from 'components/Forms/Fields/validators'
 import { createPost } from 'actions/posts'
 import { getUnixTimeNow } from 'utils/date'
 
@@ -72,7 +72,7 @@ class CreatePostForm extends Component {
                 label='Title'
                 placeholder='Epic title goes in here'
                 component={InputTextField}
-                validate={[required, maxLength30]}
+                validate={[required, maxLength50]}
               />
               <Field
                 name='body'

@@ -3,7 +3,7 @@ export const required = value => (value ? undefined : 'Required')
 export const maxLength = max => value =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined
 
-export const maxLength30 = maxLength(30)
+export const maxLength50 = maxLength(50)
 
 export const maxLength250 = maxLength(250)
 
