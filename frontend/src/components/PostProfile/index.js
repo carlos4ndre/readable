@@ -36,14 +36,22 @@ const PostProfile = (props) => {
           <Header as='h1'>{title}</Header>
           <Segment.Group>
             <Segment>
-                <StyledLink hoverhighlight='false' to={`/categories/${category}`}>
-                  <Label color='blue' content={category} ribbon/>
-                </StyledLink>
-                {body}
-                <ScorePanel
-                  onUpVoteClick={() => votePost(id, UP_VOTE)}
-                  onDownVoteClick={() => votePost(id, DOWN_VOTE)}
-                />
+              <Grid>
+                <Grid.Column width={2}>
+                  <StyledLink hoverhighlight='false' to={`/categories/${category}`}>
+                    <Label color='blue' content={category} ribbon/>
+                  </StyledLink>
+                </Grid.Column>
+                <Grid.Column width={12}>
+                  {body}
+                </Grid.Column>
+                <Grid.Column textAlign='right' width={2}>
+                  <ScorePanel
+                    onUpVoteClick={() => votePost(id, UP_VOTE)}
+                    onDownVoteClick={() => votePost(id, DOWN_VOTE)}
+                  />
+                </Grid.Column>
+              </Grid>
             </Segment>
             <Segment.Group basic='true' horizontal>
               <Segment clearing>
@@ -76,12 +84,8 @@ const PostProfile = (props) => {
           { isFetchingComments ?
               <LoadingIcon />
             :
-              (
-                commentCount > 0 ?
-                  <CommentList comments={comments}/>
-                :
-                  <NoComments />
-              )
+              commentCount > 0 ?
+                <CommentList comments={comments}/> : <NoComments />
           }
         </Grid.Column>
       </Grid.Row>
