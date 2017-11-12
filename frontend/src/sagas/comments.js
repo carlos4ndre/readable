@@ -9,6 +9,8 @@ import {
   VOTE_COMMENT_REQUEST,
   VOTE_COMMENT_SUCCESS,
   VOTE_COMMENT_FAILURE,
+  UPDATE_COMMENT_REQUEST,
+  UPDATE_COMMENT_SUCCESS,
   DELETE_COMMENT_REQUEST,
   DELETE_COMMENT_SUCCESS,
   DELETE_COMMENT_FAILURE
@@ -64,6 +66,24 @@ const voteComment = function*(action) {
   }
 }
 
+const updateComment = function*(action) {
+  const { comment, callbacks } = action
+
+  try {
+    const response = yield call(api.updateComment, comment)
+    const result = yield response.json()
+
+    if (result.error) {
+      yield callbacks.reject({ error: result.error })
+    } else {
+      yield callbacks.resolve()
+      yield put({ type: UPDATE_COMMENT_SUCCESS, comment })
+    }
+  } catch(e) {
+    yield callbacks.reject({ error: e.message })
+  }
+}
+
 const deleteComment = function*(action) {
   try {
     const comment = action.comment
@@ -85,6 +105,7 @@ function* commentsSagas() {
     yield takeLatest(GET_COMMENTS_REQUEST, getComments),
     yield takeLatest(CREATE_COMMENT_REQUEST, createComment),
     yield takeLatest(VOTE_COMMENT_REQUEST, voteComment),
+    yield takeLatest(UPDATE_COMMENT_REQUEST, updateComment),
     yield takeLatest(DELETE_COMMENT_REQUEST, deleteComment)
   ])
 }

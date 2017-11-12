@@ -1,27 +1,25 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-form'
 import { Modal, Button, Form, Divider, Message, Header } from 'semantic-ui-react'
-import { InputTextField, TextAreaField } from 'components/Forms/Fields'
-import { required, maxLength50, maxLength250 } from 'components/Forms/Fields/validators'
-import { updatePost } from 'actions/posts'
+import { TextAreaField } from 'components/Forms/Fields'
+import { required, maxLength250 } from 'components/Forms/Fields/validators'
+import { updateComment } from 'actions/comments'
 
-class EditPostForm extends Component {
+class EditCommentForm extends Component {
   state = {
     modalOpen: false
   }
 
   submit = values => new Promise((resolve, reject) => {
     const callbacks = { resolve, reject }
-    const oldPost = this.props.initialValues
-    const post = {
-      ...oldPost,
-      title: values.title,
+    const oldComment = this.props.initialValues
+    const comment = {
+      ...oldComment,
       body: values.body
     }
 
-    this.props.updatePost(post, callbacks)
+    this.props.updateComment(comment, callbacks)
   })
 
   asyncSubmit = values => this.submit(values)
@@ -61,12 +59,6 @@ class EditPostForm extends Component {
         <Modal.Content image>
           <Modal.Description>
             <Form onSubmit={handleSubmit(this.asyncSubmit.bind(this))}>
-              <Field
-                name='title'
-                label='Title'
-                component={InputTextField}
-                validate={[required, maxLength50]}
-              />
               <Field
                 name='body'
                 label='Body'
@@ -111,17 +103,14 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  updatePost: (post, callbacks) => dispatch(updatePost(post, callbacks))
+  updateComment: (comment, callbacks) => dispatch(updateComment(comment, callbacks))
 })
 
-EditPostForm = connect(
+EditCommentForm = connect(
   mapStateToProps,
   mapDispatchToProps
-)(EditPostForm)
+)(EditCommentForm)
 
-EditPostForm.PropTypes = {
-  post: PropTypes.object.required
-}
 export default reduxForm({
-  form: 'editPost'
-})(EditPostForm)
+  form: 'editComment'
+})(EditCommentForm)

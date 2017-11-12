@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import DateFormat from 'components/DateFormat'
 import { Feed, Label, Icon, List } from 'semantic-ui-react'
 import { UP_VOTE, DOWN_VOTE } from 'data/vote'
+import { EditCommentForm } from 'components/Forms'
 
 const Comment = ({ comment, voteComment, deleteComment }) => {
   const createdOn = <DateFormat fromNow={true} timestamp={comment.timestamp}/>
@@ -38,6 +39,13 @@ const Comment = ({ comment, voteComment, deleteComment }) => {
       onClick={() => deleteComment(comment)}
     />
   )
+  const editButton = (
+    <Icon
+      link
+      name='pencil'
+      size='large'
+    />
+  )
 
   return (
     <Feed.Event key={comment.id}>
@@ -60,6 +68,11 @@ const Comment = ({ comment, voteComment, deleteComment }) => {
              </List.Item>
              <List.Item>
                {thumbsDown}
+             </List.Item>
+             <List.Item>
+               <EditCommentForm initialValues={comment}>
+                 {editButton}
+               </EditCommentForm>
              </List.Item>
              <List.Item>
                {deleteButton}

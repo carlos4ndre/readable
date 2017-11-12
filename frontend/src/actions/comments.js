@@ -10,6 +10,10 @@ export const VOTE_COMMENT_REQUEST = 'VOTE_COMMENT_REQUEST'
 export const VOTE_COMMENT_SUCCESS = 'VOTE_COMMENT_SUCCESS'
 export const VOTE_COMMENT_FAILURE = 'VOTE_COMMENT_FAILURE'
 
+export const UPDATE_COMMENT_REQUEST = 'UPDATE_COMMENT_REQUEST'
+export const UPDATE_COMMENT_SUCCESS = 'UPDATE_COMMENT_SUCCESS'
+export const UPDATE_COMMENT_FAILURE = 'UPDATE_COMMENT_FAILURE'
+
 export const DELETE_COMMENT_REQUEST = 'DELETE_COMMENT_REQUEST'
 export const DELETE_COMMENT_SUCCESS = 'DELETE_COMMENT_SUCCESS'
 export const DELETE_COMMENT_FAILURE = 'DELETE_COMMENT_FAILURE'
@@ -29,6 +33,12 @@ export const voteComment = (commentId, value) => ({
   type: VOTE_COMMENT_REQUEST,
   commentId,
   value
+})
+
+export const updateComment = (comment, callbacks) => ({
+  type: UPDATE_COMMENT_REQUEST,
+  callbacks,
+  comment
 })
 
 export const deleteComment = comment => ({
