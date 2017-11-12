@@ -4,11 +4,12 @@ import { connect } from 'react-redux'
 import { Feed } from 'semantic-ui-react'
 import { voteComment, deleteComment } from 'actions/comments'
 import Comment from 'components/Comment'
+import { sortByScore } from 'utils/sorting'
 
 const CommentList = ({comments, voteComment, deleteComment}) => (
   <Feed>
   {
-    comments.map(comment =>
+    comments.sort(sortByScore).map(comment =>
       <Comment
         key={comment.id}
         voteComment={voteComment}

@@ -5,6 +5,7 @@ import PostItem from 'components/PostItem'
 import SortBy from 'components/SortBy'
 import NoPosts from 'components/NoPosts'
 import { TOP, LATEST } from 'data/sorting'
+import { sortByScore, sortByTimestamp } from 'utils/sorting'
 
 class PostList extends Component {
   state = {
@@ -16,18 +17,10 @@ class PostList extends Component {
     this.setState({ sortBy: value })
   }
 
-  sortPostsByLatest = (postA, postB) => (
-     postB.timestamp - postA.timestamp
-  )
-
-  sortPostsByScore = (postA, postB) => (
-     postB.voteScore - postA.voteScore
-  )
-
   sortPosts = (posts, sortBy) => {
     const sorting = {
-      [TOP]: this.sortPostsByScore,
-      [LATEST]: this.sortPostsByLatest
+      [TOP]: sortByScore,
+      [LATEST]: sortByTimestamp
     }
 
     return posts.sort(sorting[sortBy])
