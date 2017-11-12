@@ -70,7 +70,7 @@ const Comment = ({ comment, voteComment, deleteComment }) => {
                {thumbsDown}
              </List.Item>
              <List.Item>
-               <EditCommentForm initialValues={comment}>
+               <EditCommentForm form={comment.id} initialValues={comment}>
                  {editButton}
                </EditCommentForm>
              </List.Item>

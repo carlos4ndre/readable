@@ -30,9 +30,13 @@ class EditCommentForm extends Component {
       throw new SubmissionError(error)
     })
 
-  handleOpen = () => this.setState({ modalOpen: true })
+  handleOpen = () => {
+    this.setState({ modalOpen: true })
+  }
+
   handleClose = () => {
     this.setState({ modalOpen: false })
+    this.props.reset('editComment')
   }
 
   render() {
@@ -112,5 +116,6 @@ EditCommentForm = connect(
 )(EditCommentForm)
 
 export default reduxForm({
-  form: 'editComment'
+  form: 'editComment',
+  enableReinitialize: true
 })(EditCommentForm)

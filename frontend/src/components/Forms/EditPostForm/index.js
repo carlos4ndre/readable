@@ -35,6 +35,7 @@ class EditPostForm extends Component {
   handleOpen = () => this.setState({ modalOpen: true })
   handleClose = () => {
     this.setState({ modalOpen: false })
+    this.props.reset('editPost')
   }
 
   render() {
