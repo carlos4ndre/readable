@@ -45,7 +45,7 @@ const CommentList = (props) => (
 
     return (
       <Feed.Event key={comment.id}>
-         <Feed.Label icon='pencil' />
+         <Feed.Label icon='comment outline' />
          <Feed.Content>
            <Feed.Summary>
              {commentAuthor} submitted a comment

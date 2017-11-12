@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import StyledLink from 'components/StyledLink'
 import { Grid, Header, Segment, Label, Statistic, Button } from 'semantic-ui-react'
-import { EditPostForm, DeletePostForm } from 'components/Forms'
+import { EditPostForm, DeletePostForm, CreateCommentForm } from 'components/Forms'
 import CommentList from 'components/CommentList'
 import DateFormat from 'components/DateFormat'
 import NoComments from 'components/NoComments'
@@ -87,6 +87,11 @@ const PostProfile = (props) => {
               commentCount > 0 ?
                 <CommentList comments={comments}/> : <NoComments />
           }
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column>
+          <CreateCommentForm post={post}/>
         </Grid.Column>
       </Grid.Row>
     </Grid>

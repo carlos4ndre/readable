@@ -4,6 +4,8 @@ import {
   GET_COMMENTS_REQUEST,
   GET_COMMENTS_SUCCESS,
   GET_COMMENTS_FAILURE,
+  CREATE_COMMENT_REQUEST,
+  CREATE_COMMENT_SUCCESS,
   VOTE_COMMENT_REQUEST,
   VOTE_COMMENT_SUCCESS,
   VOTE_COMMENT_FAILURE,
@@ -25,6 +27,24 @@ const getComments = function*(action) {
     }
   } catch(e) {
     yield put({ type: GET_COMMENTS_FAILURE, error: e.message })
+  }
+}
+
+const createComment = function*(action) {
+  const { comment, callbacks } = action
+
+  try {
+    const response = yield call(api.createComment, comment)
+    const result = yield response.json()
+
+    if (result.error) {
+      yield callbacks.reject({ error: result.error })
+    } else {
+      yield callbacks.resolve()
+      yield put({ type: CREATE_COMMENT_SUCCESS, comment })
+    }
+  } catch(e) {
+    yield callbacks.reject({ error: e.message })
   }
 }
 
@@ -63,6 +83,7 @@ const deleteComment = function*(action) {
 function* commentsSagas() {
   yield all([
     yield takeLatest(GET_COMMENTS_REQUEST, getComments),
+    yield takeLatest(CREATE_COMMENT_REQUEST, createComment),
     yield takeLatest(VOTE_COMMENT_REQUEST, voteComment),
     yield takeLatest(DELETE_COMMENT_REQUEST, deleteComment)
   ])

@@ -2,6 +2,7 @@ import {
   GET_COMMENTS_REQUEST,
   GET_COMMENTS_SUCCESS,
   GET_COMMENTS_FAILURE,
+  CREATE_COMMENT_SUCCESS,
   VOTE_COMMENT_SUCCESS,
   DELETE_COMMENT_SUCCESS
 } from 'actions/comments'
@@ -24,6 +25,8 @@ const reducer = (state = initialState, action) => {
       }
     case GET_COMMENTS_FAILURE:
       return { ...state, isFetchingComments: false }
+    case CREATE_COMMENT_SUCCESS:
+      return addComment(state, action.comment)
     case VOTE_COMMENT_SUCCESS:
       return updateCommentScore(state, action.commentId, action.value)
     case DELETE_COMMENT_SUCCESS:

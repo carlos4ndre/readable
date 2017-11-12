@@ -93,6 +93,7 @@ class CreatePostForm extends Component {
                 name='author'
                 label='Author'
                 placeholder='Who should be credited for this post'
+                validate={[maxLength50]}
                 component={InputTextField}
               />
               <Field
@@ -144,7 +145,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  createPost: (data, callbacks) => dispatch(createPost(data, callbacks))
+  createPost: (post, callbacks) => dispatch(createPost(post, callbacks))
 })
 
 CreatePostForm = connect(
