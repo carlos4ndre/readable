@@ -47,7 +47,7 @@ const addComment = (state, comment) => ({
   ...state,
   byId: {
     ...state.byId,
-    [comment.id]: comment,
+    [comment.id]: comment
   },
   allIds: state.allIds.concat(comment.id)
 })
@@ -73,7 +73,7 @@ const updateComment = (state, comment) => ({
   byId :{
     ...state.byId,
     [comment.id]: {
-      ...comment,
+      ...comment
     }
   }
 })

@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Container } from 'semantic-ui-react'
-import LoadingIcon from 'components/LoadingIcon'
+import * as selectors from 'selectors'
 import { getPost } from 'actions/posts'
 import { getComments } from 'actions/comments'
-import * as selectors from 'selectors'
+import LoadingIcon from 'components/LoadingIcon'
 import PostProfile from 'components/PostProfile'
 
 class PostPage extends Component {

@@ -54,8 +54,8 @@ export const votePost = (postId, value) => ({
 
 export const updatePost = (post, callbacks) => ({
   type: UPDATE_POST_REQUEST,
-  callbacks,
-  post
+  post,
+  callbacks
 })
 
 export const deletePost = post => ({

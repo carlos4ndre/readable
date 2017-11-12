@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getPosts } from 'actions/posts'
 import { Container, Grid } from 'semantic-ui-react'
+import * as selectors from 'selectors'
+import { getPosts } from 'actions/posts'
 import { CreatePostForm } from 'components/Forms'
 import { CreateButton } from 'components/Button'
 import PostList from 'components/PostList'
 import LoadingIcon from 'components/LoadingIcon'
-import * as selectors from 'selectors'
 
 class HomePage extends Component {
   componentWillMount() {
@@ -60,5 +60,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(HomePage)

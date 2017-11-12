@@ -95,7 +95,6 @@ class EditCommentForm extends Component {
   }
 }
 
-
 const mapStateToProps = (state, ownProps) => ({
   submitErrors: getFormSubmitErrors('editPost')(state)
 })

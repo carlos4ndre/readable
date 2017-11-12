@@ -1,4 +1,4 @@
-import { all, takeLatest, call, put } from 'redux-saga/effects';
+import { all, takeLatest, call, put } from 'redux-saga/effects'
 import * as api from 'utils/api'
 import {
   GET_COMMENTS_REQUEST,

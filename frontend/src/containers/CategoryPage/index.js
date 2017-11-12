@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getCategoryPosts } from 'actions/posts'
 import { Container, Grid } from 'semantic-ui-react'
+import * as selectors from 'selectors'
+import { getCategoryPosts } from 'actions/posts'
 import { CreatePostForm } from 'components/Forms'
 import { CreateButton } from 'components/Button'
 import PostList from 'components/PostList'
 import LoadingIcon from 'components/LoadingIcon'
-import * as selectors from 'selectors'
 
 class CategoryPage extends Component {
   state = {
@@ -74,10 +74,10 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getCategoryPosts: (data) => dispatch(getCategoryPosts(data)),
+  getCategoryPosts: (data) => dispatch(getCategoryPosts(data))
 })
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(CategoryPage)

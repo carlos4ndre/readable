@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Grid, Label, List } from 'semantic-ui-react'
+import { votePost } from 'actions/posts'
+import { UP_VOTE, DOWN_VOTE } from 'data/vote'
 import StyledLink from 'components/StyledLink'
 import ScorePanel from 'components/ScorePanel'
 import DateFormat from 'components/DateFormat'
-import { votePost } from 'actions/posts'
-import { UP_VOTE, DOWN_VOTE } from 'data/vote'
 
 const PostItem = (props) => {
   const {
@@ -65,10 +65,10 @@ PostItem.PropTypes = {
 const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = (dispatch) => ({
-  votePost: (postId, value) => dispatch(votePost(postId, value)),
+  votePost: (postId, value) => dispatch(votePost(postId, value))
 })
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(PostItem)

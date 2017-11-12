@@ -1,4 +1,4 @@
-import { all, takeLatest, takeEvery, call, put } from 'redux-saga/effects';
+import { all, takeLatest, takeEvery, call, put } from 'redux-saga/effects'
 import * as api from 'utils/api'
 import {
   GET_POSTS_REQUEST,

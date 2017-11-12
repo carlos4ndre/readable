@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Switch, BrowserRouter, Route } from 'react-router-dom'
-import { getCategories } from 'actions/categories'
 import { Divider } from 'semantic-ui-react'
-import Header from 'components/Header'
+import * as selectors from 'selectors'
+import { getCategories } from 'actions/categories'
 import HomePage from 'containers/HomePage'
 import PostPage from 'containers/PostPage'
+import Header from 'components/Header'
 import CategoryPage from 'containers/CategoryPage'
-import * as selectors from 'selectors'
 
 class App extends Component {
   componentWillMount() {
@@ -24,9 +24,9 @@ class App extends Component {
           <Header categories={categories}/>
           <Divider hidden/>
           <Switch>
-            <Route exact path="/" component={HomePage}/>
-            <Route path="/categories/:categoryId" component={CategoryPage}/>
-            <Route path="/posts/:postId" component={PostPage}/>
+            <Route exact path='/' component={HomePage}/>
+            <Route path='/categories/:categoryId' component={CategoryPage}/>
+            <Route path='/posts/:postId' component={PostPage}/>
           </Switch>
         </div>
       </BrowserRouter>
@@ -43,10 +43,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getCategories: (data) => dispatch(getCategories(data)),
+  getCategories: (data) => dispatch(getCategories(data))
 })
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(App)

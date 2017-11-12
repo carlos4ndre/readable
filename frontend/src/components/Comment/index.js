@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import DateFormat from 'components/DateFormat'
 import { Feed, Label, Icon, List } from 'semantic-ui-react'
 import { UP_VOTE, DOWN_VOTE } from 'data/vote'
 import { EditCommentForm, DeleteCommentForm } from 'components/Forms'
+import DateFormat from 'components/DateFormat'
 
 const Comment = ({ comment, voteComment, deleteComment }) => {
   const createdOn = <DateFormat fromNow={true} timestamp={comment.timestamp}/>

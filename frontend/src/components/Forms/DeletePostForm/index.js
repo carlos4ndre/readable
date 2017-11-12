@@ -35,7 +35,7 @@ class DeletePostForm extends Component {
         closeOnEscape={false}
         closeOnRootNodeClick={false}
       >
-        <Header icon='trash' content='Delete Post' />
+        <Header icon='trash' content='Delete Post'/>
         <Modal.Content>
           <p>Are you sure you want to delete this post?</p>
         </Modal.Content>
@@ -66,8 +66,7 @@ const mapDispatchToProps = (dispatch) => ({
   deletePost: (post) => dispatch(deletePost(post))
 })
 
-
 export default withRouter(connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(DeletePostForm))

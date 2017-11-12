@@ -16,9 +16,7 @@ const Header = (props) => (
         </Menu.Item>
       ))}
       <Menu.Item position='right'>
-        <Search
-          loading={false}
-        />
+        <Search loading={false}/>
       </Menu.Item>
     </Menu>
   </div>

@@ -4,10 +4,10 @@ import uuidv4 from 'uuid/v4'
 import { connect } from 'react-redux'
 import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-form'
 import { Modal, Button, Form, Divider, Header } from 'semantic-ui-react'
-import { InputTextField, TextAreaField, SelectField } from 'components/Forms/Fields'
-import { required, maxLength50, maxLength250 } from 'components/Forms/Fields/validators'
 import { createPost } from 'actions/posts'
 import { getUnixTimeNow } from 'utils/date'
+import { InputTextField, TextAreaField, SelectField } from 'components/Forms/Fields'
+import { required, maxLength50, maxLength250 } from 'components/Forms/Fields/validators'
 import SubmitErrorMessage from 'components/Forms/SubmitErrorMessage'
 
 class CreatePostForm extends Component {

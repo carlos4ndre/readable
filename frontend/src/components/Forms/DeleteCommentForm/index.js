@@ -34,7 +34,7 @@ class DeleteCommentForm extends Component {
         closeOnEscape={false}
         closeOnRootNodeClick={false}
       >
-        <Header icon='trash' content='Delete Comment' />
+        <Header icon='trash' content='Delete Comment'/>
         <Modal.Content>
           <p>Are you sure you want to delete this comment?</p>
         </Modal.Content>
@@ -65,8 +65,7 @@ const mapDispatchToProps = (dispatch) => ({
   deleteComment: (post) => dispatch(deleteComment(post))
 })
 
-
 export default withRouter(connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(DeleteCommentForm))

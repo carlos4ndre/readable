@@ -1,16 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import StyledLink from 'components/StyledLink'
 import { Grid, Header, Segment, Label, Statistic, Button } from 'semantic-ui-react'
+import * as selectors from 'selectors'
+import { votePost } from 'actions/posts'
+import { UP_VOTE, DOWN_VOTE } from 'data/vote'
 import { EditPostForm, DeletePostForm, CreateCommentForm } from 'components/Forms'
+import StyledLink from 'components/StyledLink'
 import CommentList from 'components/CommentList'
 import DateFormat from 'components/DateFormat'
 import NoComments from 'components/NoComments'
 import ScorePanel from 'components/ScorePanel'
-import { votePost } from 'actions/posts'
-import { UP_VOTE, DOWN_VOTE } from 'data/vote'
-import * as selectors from 'selectors'
 import LoadingIcon from 'components/LoadingIcon'
 
 const PostProfile = (props) => {
@@ -105,7 +105,7 @@ PostProfile.PropTypes = {
   voteScore: PropTypes.number.required,
   timestamp: PropTypes.number.required,
   commentCount: PropTypes.number.required,
-  author: PropTypes.string.required,
+  author: PropTypes.string.required
 }
 
 const mapStateToProps = (state) => ({
@@ -113,10 +113,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  votePost: (postId, value) => dispatch(votePost(postId, value)),
+  votePost: (postId, value) => dispatch(votePost(postId, value))
 })
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(PostProfile)

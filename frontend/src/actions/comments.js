@@ -37,8 +37,8 @@ export const voteComment = (commentId, value) => ({
 
 export const updateComment = (comment, callbacks) => ({
   type: UPDATE_COMMENT_REQUEST,
-  callbacks,
-  comment
+  comment,
+  callbacks
 })
 
 export const deleteComment = comment => ({

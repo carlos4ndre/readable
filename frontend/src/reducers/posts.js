@@ -109,7 +109,7 @@ const updatePost = (state, post) => ({
   byId :{
     ...state.byId,
     [post.id]: {
-      ...post,
+      ...post
     }
   }
 })

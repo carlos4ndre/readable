@@ -4,7 +4,7 @@ import Moment from 'react-moment'
 
 const DATE_FORMAT = 'DD/MM/YYYY'
 
-const DateFormat = ({ timestamp, fromNow = false}) => (
+const DateFormat = ({ timestamp, fromNow = false }) => (
   <Moment format={fromNow ? '' : DATE_FORMAT} fromNow={fromNow}>
     <Moment unix>{timestamp/1000}</Moment>
   </Moment>
