@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 import uuidv4 from 'uuid/v4'
 import { connect } from 'react-redux'
 import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-form'
-import { Container, Header, Form, Message, Button, Divider } from 'semantic-ui-react'
+import { Container, Header, Form, Button, Divider } from 'semantic-ui-react'
 import { InputTextField, TextAreaField } from 'components/Forms/Fields'
 import { required, maxLength50, maxLength250 } from 'components/Forms/Fields/validators'
 import { getUnixTimeNow } from 'utils/date'
 import { createComment } from 'actions/comments'
+import SubmitErrorMessage from 'components/Forms/SubmitErrorMessage'
 
 class CreateCommentForm extends Component {
 
@@ -62,14 +63,7 @@ class CreateCommentForm extends Component {
             validate={[maxLength50]}
             component={InputTextField}
           />
-          { submitErrors && submitErrors.error &&
-            <Message
-              icon='warning'
-              color='red'
-              header='Ups... Kittens have taken our servers!'
-              content={submitErrors.error}
-            />
-          }
+          <SubmitErrorMessage submitErrors={submitErrors}/>
           <Divider hidden />
           <Button
             type='submit'

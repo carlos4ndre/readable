@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import uuidv4 from 'uuid/v4'
 import { connect } from 'react-redux'
 import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-form'
-import { Modal, Button, Form, Divider, Message, Header } from 'semantic-ui-react'
+import { Modal, Button, Form, Divider, Header } from 'semantic-ui-react'
 import { InputTextField, TextAreaField, SelectField } from 'components/Forms/Fields'
 import { required, maxLength50, maxLength250 } from 'components/Forms/Fields/validators'
 import { createPost } from 'actions/posts'
 import { getUnixTimeNow } from 'utils/date'
-
+import SubmitErrorMessage from 'components/Forms/SubmitErrorMessage'
 
 class CreatePostForm extends Component {
   state = {
@@ -39,8 +39,6 @@ class CreatePostForm extends Component {
   handleOpen = () => this.setState({ modalOpen: true })
   handleClose = () => {
     this.setState({ modalOpen: false })
-
-    // clear form
     this.props.reset()
   }
 
@@ -104,14 +102,7 @@ class CreatePostForm extends Component {
                 component={SelectField}
                 validate={[required]}
               />
-              { submitErrors && submitErrors.error &&
-                <Message
-                  icon='warning'
-                  color='red'
-                  header='Ups... Kittens have taken our servers!'
-                  content={submitErrors.error}
-                />
-              }
+              <SubmitErrorMessage submitErrors={submitErrors}/>
               <Divider hidden />
               <Button.Group floated='right'>
                 <Button

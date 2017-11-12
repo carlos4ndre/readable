@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-form'
-import { Modal, Button, Form, Divider, Message, Header } from 'semantic-ui-react'
+import { Modal, Button, Form, Divider, Header } from 'semantic-ui-react'
 import { TextAreaField } from 'components/Forms/Fields'
 import { required, maxLength250 } from 'components/Forms/Fields/validators'
 import { updateComment } from 'actions/comments'
+import SubmitErrorMessage from 'components/Forms/SubmitErrorMessage'
 
 class EditCommentForm extends Component {
   state = {
@@ -69,14 +70,7 @@ class EditCommentForm extends Component {
                 component={TextAreaField}
                 validate={[required, maxLength250]}
               />
-              { submitErrors && submitErrors.error &&
-                <Message
-                  icon='warning'
-                  color='red'
-                  header='Ups... Kittens have taken our servers!'
-                  content={submitErrors.error}
-                />
-              }
+              <SubmitErrorMessage submitErrors={submitErrors}/>
               <Divider hidden />
               <Button.Group floated='right'>
                 <Button
