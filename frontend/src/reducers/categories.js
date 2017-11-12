@@ -1,6 +1,7 @@
 import { GET_CATEGORIES_SUCCESS } from 'actions/categories'
 import {
   GET_CATEGORY_POSTS_SUCCESS,
+  CREATE_POST_SUCCESS,
   DELETE_POST_SUCCESS
 } from 'actions/posts'
 
@@ -15,6 +16,8 @@ const reducer = (state = initialState, action) => {
       return addCategories(state, action.categories)
     case GET_CATEGORY_POSTS_SUCCESS:
       return addCategoryPostIds(state, action.categoryId, action.posts)
+    case CREATE_POST_SUCCESS:
+      return addCategoryPostId(state, action.post.category, action.post.id)
     case DELETE_POST_SUCCESS:
       return deleteCategoryPostIds(state, action.post)
     default:
@@ -50,6 +53,21 @@ const addCategoryPostIds = (state, categoryId, posts) => {
       }
     },
     allIds: state.allIds.concat(categoryId)
+  }
+}
+
+const addCategoryPostId = (state, categoryId, postId) => {
+  const category = state.byId[categoryId]
+
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [categoryId]: {
+        ...category,
+        postIds: category.postIds.concat(postId)
+      }
+    }
   }
 }
 
