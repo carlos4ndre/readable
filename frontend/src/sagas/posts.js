@@ -41,6 +41,9 @@ const getPost = function*(action) {
 
     if (result.error) {
       yield put({ type: GET_POST_FAILURE, error: result.error })
+    }
+    else if (!result.id) {
+      yield put({ type: GET_POST_FAILURE, error: 'Post was deleted' })
     } else {
       yield put({ type: GET_POST_SUCCESS, post: result })
     }
