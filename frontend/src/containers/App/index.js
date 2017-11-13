@@ -26,8 +26,8 @@ class App extends Component {
           <Divider hidden/>
           <Switch>
             <Route exact path='/' component={HomePage}/>
-            <Route path='/categories/:categoryId' component={CategoryPage}/>
             <Route path='/posts/:postId' component={PostPage}/>
+            <Route path='/:categoryId' component={CategoryPage}/>
             <Route component={NotFound}/>
           </Switch>
         </div>

@@ -12,7 +12,7 @@ const Header = (props) => (
       </Menu.Item>
       {props.categories.map((category, index) => (
         <Menu.Item key={index}>
-          <StyledLink to={`/categories/${category.path}`}>{category.name}</StyledLink>
+          <StyledLink to={`/${category.path}`}>{category.name}</StyledLink>
         </Menu.Item>
       ))}
       {/* NOTE: search button left here just for reference, it would be nice to index posts on the back-end

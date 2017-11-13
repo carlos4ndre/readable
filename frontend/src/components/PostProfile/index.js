@@ -48,7 +48,7 @@ class PostProfile extends Component {
               <Segment>
                 <Grid>
                   <Grid.Column width={2}>
-                    <StyledLink hoverhighlight='false' to={`/categories/${category}`}>
+                    <StyledLink hoverhighlight='false' to={`/${category}`}>
                       <Label color='blue' content={category} ribbon/>
                     </StyledLink>
                   </Grid.Column>
