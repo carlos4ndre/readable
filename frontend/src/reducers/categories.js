@@ -1,9 +1,9 @@
-import { GET_CATEGORIES_SUCCESS } from 'actions/categories'
 import {
+  GET_CATEGORIES_SUCCESS,
   GET_CATEGORY_POSTS_SUCCESS,
   CREATE_POST_SUCCESS,
   DELETE_POST_SUCCESS
-} from 'actions/posts'
+} from 'actionTypes'
 
 const initialState = {
   byId: {},

@@ -1,6 +1,4 @@
-export const GET_CATEGORIES_REQUEST = 'GET_CATEGORIES_REQUEST'
-export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS'
-export const GET_CATEGORIES_FAILURE = 'GET_CATEGORIES_FAILURE'
+import { GET_CATEGORIES_REQUEST } from 'actionTypes'
 
 export const getCategories = () => ({
   type: GET_CATEGORIES_REQUEST

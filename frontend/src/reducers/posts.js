@@ -12,13 +12,11 @@ import {
   CREATE_POST_SUCCESS,
   VOTE_POST_SUCCESS,
   UPDATE_POST_SUCCESS,
-  DELETE_POST_SUCCESS
-} from 'actions/posts'
-import {
+  DELETE_POST_SUCCESS,
   GET_COMMENTS_SUCCESS,
   CREATE_COMMENT_SUCCESS,
   DELETE_COMMENT_SUCCESS
-} from 'actions/comments'
+} from 'actionTypes'
 
 const initialState = {
   byId: {},

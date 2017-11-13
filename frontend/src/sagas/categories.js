@@ -4,7 +4,7 @@ import {
   GET_CATEGORIES_REQUEST,
   GET_CATEGORIES_SUCCESS,
   GET_CATEGORIES_FAILURE
-} from 'actions/categories'
+} from 'actionTypes'
 
 const getCategories = function*(action) {
   try {

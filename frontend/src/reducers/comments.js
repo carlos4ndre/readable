@@ -6,7 +6,7 @@ import {
   VOTE_COMMENT_SUCCESS,
   UPDATE_COMMENT_SUCCESS,
   DELETE_COMMENT_SUCCESS
-} from 'actions/comments'
+} from 'actionTypes'
 import { UP_VOTE } from 'utils/vote'
 
 const initialState = {

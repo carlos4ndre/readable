@@ -20,7 +20,7 @@ import {
   DELETE_POST_REQUEST,
   DELETE_POST_SUCCESS,
   DELETE_POST_FAILURE
-} from 'actions/posts'
+} from 'actionTypes'
 
 const getPosts = function*(action) {
   const response = yield call(api.getPosts)

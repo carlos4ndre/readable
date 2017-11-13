@@ -14,7 +14,7 @@ import {
   DELETE_COMMENT_REQUEST,
   DELETE_COMMENT_SUCCESS,
   DELETE_COMMENT_FAILURE
-} from 'actions/comments'
+} from 'actionTypes'
 
 const getComments = function*(action) {
   try {
