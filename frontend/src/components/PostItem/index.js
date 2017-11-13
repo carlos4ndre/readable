@@ -13,6 +13,7 @@ const PostItem = (props) => {
     id,
     index,
     title,
+    category,
     voteScore = 0,
     timestamp,
     commentCount = 0,
@@ -24,7 +25,7 @@ const PostItem = (props) => {
   const postDate = <b><DateFormat timestamp={timestamp}/></b>
   const postAuthor = <Label color='teal' content={author || 'Anonymous'} icon='user'/>
   const postTotalComments = <Label color='teal' circular>{commentCount}</Label>
-  const postUrl = `/posts/${id}`
+  const postUrl = `/${category}/${id}`
 
   return (
     <Grid celled>
