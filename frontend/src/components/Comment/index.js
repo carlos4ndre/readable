@@ -56,7 +56,7 @@ const Comment = ({ comment, voteComment, deleteComment }) => {
            <Feed.Date>{createdOn}</Feed.Date>
          </Feed.Summary>
          <Feed.Extra text>
-           <Text>{comment.body}</Text>
+           <Text value={comment.body}/>
          </Feed.Extra>
          <Feed.Meta>
            <List horizontal>

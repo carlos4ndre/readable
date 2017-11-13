@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const Text = (props) => (
   <div style={{whiteSpace: 'pre-wrap'}}>
-      {props.children.trim()}
+      {props.value.trim()}
   </div>
 )
 

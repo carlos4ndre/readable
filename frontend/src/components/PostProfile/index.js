@@ -53,7 +53,7 @@ class PostProfile extends Component {
                     </StyledLink>
                   </Grid.Column>
                   <Grid.Column width={12}>
-                    <Text>{body}</Text>
+                    <Text value={body}/>
                   </Grid.Column>
                   <Grid.Column textAlign='right' width={2}>
                     <ScorePanel
