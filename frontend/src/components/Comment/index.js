@@ -4,6 +4,7 @@ import { Feed, Label, Icon, List } from 'semantic-ui-react'
 import { UP_VOTE, DOWN_VOTE } from 'data/vote'
 import { EditCommentForm, DeleteCommentForm } from 'components/Forms'
 import DateFormat from 'components/DateFormat'
+import Text from 'components/Text'
 
 const Comment = ({ comment, voteComment, deleteComment }) => {
   const createdOn = <DateFormat fromNow={true} timestamp={comment.timestamp}/>
@@ -55,7 +56,7 @@ const Comment = ({ comment, voteComment, deleteComment }) => {
            <Feed.Date>{createdOn}</Feed.Date>
          </Feed.Summary>
          <Feed.Extra text>
-           {comment.body}
+           <Text>{comment.body}</Text>
          </Feed.Extra>
          <Feed.Meta>
            <List horizontal>

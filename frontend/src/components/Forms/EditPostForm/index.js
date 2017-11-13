@@ -118,5 +118,6 @@ EditPostForm.PropTypes = {
   post: PropTypes.object.required
 }
 export default reduxForm({
-  form: 'editPost'
+  form: 'editPost',
+  enableReinitialize: true
 })(EditPostForm)

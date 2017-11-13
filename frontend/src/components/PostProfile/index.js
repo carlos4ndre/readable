@@ -12,6 +12,7 @@ import DateFormat from 'components/DateFormat'
 import NoComments from 'components/NoComments'
 import ScorePanel from 'components/ScorePanel'
 import LoadingIcon from 'components/LoadingIcon'
+import Text from 'components/Text'
 
 const PostProfile = (props) => {
   const { post, comments, votePost, isFetchingComments } = props
@@ -43,7 +44,7 @@ const PostProfile = (props) => {
                   </StyledLink>
                 </Grid.Column>
                 <Grid.Column width={12}>
-                  {body}
+                  <Text>{body}</Text>
                 </Grid.Column>
                 <Grid.Column textAlign='right' width={2}>
                   <ScorePanel
