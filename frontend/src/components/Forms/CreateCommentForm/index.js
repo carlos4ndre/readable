@@ -6,6 +6,7 @@ import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-fo
 import { Container, Header, Form, Button, Divider } from 'semantic-ui-react'
 import { createComment } from 'actions/comments'
 import { getUnixTimeNow } from 'utils/date'
+import { CREATE_COMMENT_FORM } from 'components/Forms/names'
 import { InputTextField, TextAreaField } from 'components/Forms/Fields'
 import { required, maxLength50, maxLength250 } from 'components/Forms/Fields/validators'
 import SubmitErrorMessage from 'components/Forms/SubmitErrorMessage'
@@ -35,7 +36,7 @@ class CreateCommentForm extends Component {
     })
 
   handleClose = () => {
-    this.props.reset()
+    this.props.reset(CREATE_COMMENT_FORM)
   }
 
   render() {
@@ -77,7 +78,7 @@ class CreateCommentForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  submitErrors: getFormSubmitErrors('createComment')(state)
+  submitErrors: getFormSubmitErrors(CREATE_COMMENT_FORM)(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -94,5 +95,5 @@ CreateCommentForm = connect(
 )(CreateCommentForm)
 
 export default reduxForm({
-  form: 'createComment'
+  form: CREATE_COMMENT_FORM
 })(CreateCommentForm)

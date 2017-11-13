@@ -1,4 +1,4 @@
-import { UP_VOTE } from 'data/vote'
+import { UP_VOTE } from 'utils/vote'
 import {
   GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,

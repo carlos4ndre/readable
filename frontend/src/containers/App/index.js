@@ -5,9 +5,9 @@ import { Switch, BrowserRouter, Route } from 'react-router-dom'
 import { Divider } from 'semantic-ui-react'
 import * as selectors from 'selectors'
 import { getCategories } from 'actions/categories'
+import Header from 'components/Header'
 import HomePage from 'containers/HomePage'
 import PostPage from 'containers/PostPage'
-import Header from 'components/Header'
 import CategoryPage from 'containers/CategoryPage'
 
 class App extends Component {

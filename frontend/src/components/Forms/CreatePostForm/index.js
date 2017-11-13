@@ -6,6 +6,7 @@ import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-fo
 import { Modal, Button, Form, Divider, Header } from 'semantic-ui-react'
 import { createPost } from 'actions/posts'
 import { getUnixTimeNow } from 'utils/date'
+import { CREATE_POST_FORM } from 'components/Forms/names'
 import { InputTextField, TextAreaField, SelectField } from 'components/Forms/Fields'
 import { required, maxLength50, maxLength250 } from 'components/Forms/Fields/validators'
 import SubmitErrorMessage from 'components/Forms/SubmitErrorMessage'
@@ -40,7 +41,7 @@ class CreatePostForm extends Component {
   handleOpen = () => this.setState({ modalOpen: true })
   handleClose = () => {
     this.setState({ modalOpen: false })
-    this.props.reset()
+    this.props.reset(CREATE_POST_FORM)
   }
 
   render() {
@@ -133,7 +134,7 @@ CreatePostForm.PropTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  submitErrors: getFormSubmitErrors('createPost')(state)
+  submitErrors: getFormSubmitErrors(CREATE_POST_FORM)(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -146,5 +147,5 @@ CreatePostForm = connect(
 )(CreatePostForm)
 
 export default reduxForm({
-  form: 'createPost'
+  form: CREATE_POST_FORM
 })(CreatePostForm)

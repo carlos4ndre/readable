@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Feed, Label, Icon, List } from 'semantic-ui-react'
-import { UP_VOTE, DOWN_VOTE } from 'data/vote'
+import { UP_VOTE, DOWN_VOTE } from 'utils/vote'
 import { EditCommentForm, DeleteCommentForm } from 'components/Forms'
 import DateFormat from 'components/DateFormat'
 import Text from 'components/Text'

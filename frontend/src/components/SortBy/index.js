@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Menu, Dropdown, Container  } from 'semantic-ui-react'
-import { OPTIONS, TOP } from 'data/sorting'
+import { OPTIONS, TOP } from 'utils/sorting'
 
 const SortBy = (props) => (
   <Container>

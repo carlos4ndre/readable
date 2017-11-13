@@ -7,7 +7,7 @@ import {
   UPDATE_COMMENT_SUCCESS,
   DELETE_COMMENT_SUCCESS
 } from 'actions/comments'
-import { UP_VOTE } from 'data/vote'
+import { UP_VOTE } from 'utils/vote'
 
 const initialState = {
   byId: {},

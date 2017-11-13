@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Container } from 'semantic-ui-react'
-import { TOP, LATEST } from 'data/sorting'
-import { sortByScore, sortByTimestamp } from 'utils/sorting'
+import {
+  TOP,
+  LATEST,
+  COMMENTS,
+  sortByScore,
+  sortByTimestamp,
+  sortByComments
+} from 'utils/sorting'
 import PostItem from 'components/PostItem'
 import SortBy from 'components/SortBy'
 import NoPosts from 'components/NoPosts'
@@ -20,7 +26,8 @@ class PostList extends Component {
   sortPosts = (posts, sortBy) => {
     const sorting = {
       [TOP]: sortByScore,
-      [LATEST]: sortByTimestamp
+      [LATEST]: sortByTimestamp,
+      [COMMENTS]: sortByComments
     }
 
     return posts.sort(sorting[sortBy])

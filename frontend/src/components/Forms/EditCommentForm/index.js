@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-form'
 import { Modal, Button, Form, Divider, Header } from 'semantic-ui-react'
+import { updateComment } from 'actions/comments'
+import { EDIT_COMMENT_FORM } from 'components/Forms/names'
 import { TextAreaField } from 'components/Forms/Fields'
 import { required, maxLength250 } from 'components/Forms/Fields/validators'
-import { updateComment } from 'actions/comments'
 import SubmitErrorMessage from 'components/Forms/SubmitErrorMessage'
 
 class EditCommentForm extends Component {
@@ -37,7 +38,7 @@ class EditCommentForm extends Component {
 
   handleClose = () => {
     this.setState({ modalOpen: false })
-    this.props.reset('editComment')
+    this.props.reset(EDIT_COMMENT_FORM)
   }
 
   render() {
@@ -96,7 +97,7 @@ class EditCommentForm extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  submitErrors: getFormSubmitErrors('editPost')(state)
+  submitErrors: getFormSubmitErrors(EDIT_COMMENT_FORM)(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -109,6 +110,6 @@ EditCommentForm = connect(
 )(EditCommentForm)
 
 export default reduxForm({
-  form: 'editComment',
+  form: EDIT_COMMENT_FORM,
   enableReinitialize: true
 })(EditCommentForm)

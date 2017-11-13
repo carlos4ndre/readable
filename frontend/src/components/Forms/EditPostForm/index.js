@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Field, SubmissionError, reduxForm, getFormSubmitErrors } from 'redux-form'
 import { Modal, Button, Form, Divider, Header } from 'semantic-ui-react'
+import { updatePost } from 'actions/posts'
 import { InputTextField, TextAreaField } from 'components/Forms/Fields'
 import { required, maxLength50, maxLength250 } from 'components/Forms/Fields/validators'
-import { updatePost } from 'actions/posts'
+import { EDIT_POST_FORM } from 'components/Forms/names'
 import SubmitErrorMessage from 'components/Forms/SubmitErrorMessage'
 
 class EditPostForm extends Component {
@@ -36,7 +37,7 @@ class EditPostForm extends Component {
   handleOpen = () => this.setState({ modalOpen: true })
   handleClose = () => {
     this.setState({ modalOpen: false })
-    this.props.reset('editPost')
+    this.props.reset(EDIT_POST_FORM)
   }
 
   render() {
@@ -102,7 +103,7 @@ class EditPostForm extends Component {
 
 
 const mapStateToProps = (state, ownProps) => ({
-  submitErrors: getFormSubmitErrors('editPost')(state)
+  submitErrors: getFormSubmitErrors(EDIT_POST_FORM)(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -118,6 +119,6 @@ EditPostForm.PropTypes = {
   post: PropTypes.object.required
 }
 export default reduxForm({
-  form: 'editPost',
+  form: EDIT_POST_FORM,
   enableReinitialize: true
 })(EditPostForm)
