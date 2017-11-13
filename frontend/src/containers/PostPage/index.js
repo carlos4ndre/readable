@@ -7,6 +7,7 @@ import { getPost } from 'actions/posts'
 import { getComments } from 'actions/comments'
 import LoadingIcon from 'components/LoadingIcon'
 import PostProfile from 'components/PostProfile'
+import NotFound from 'components/NotFound'
 
 class PostPage extends Component {
 
@@ -33,7 +34,10 @@ class PostPage extends Component {
         {isFetchingPost ?
           <LoadingIcon />
         :
-          post && <PostProfile post={post} comments={comments} />
+          post && post.id ?
+            <PostProfile post={post} comments={comments} />
+          :
+            <NotFound />
         }
       </Container>
     )

@@ -6,6 +6,7 @@ import { Divider } from 'semantic-ui-react'
 import * as selectors from 'selectors'
 import { getCategories } from 'actions/categories'
 import Header from 'components/Header'
+import NotFound from 'components/NotFound'
 import HomePage from 'containers/HomePage'
 import PostPage from 'containers/PostPage'
 import CategoryPage from 'containers/CategoryPage'
@@ -27,6 +28,7 @@ class App extends Component {
             <Route exact path='/' component={HomePage}/>
             <Route path='/categories/:categoryId' component={CategoryPage}/>
             <Route path='/posts/:postId' component={PostPage}/>
+            <Route component={NotFound}/>
           </Switch>
         </div>
       </BrowserRouter>
