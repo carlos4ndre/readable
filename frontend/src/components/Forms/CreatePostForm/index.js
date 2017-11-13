@@ -21,7 +21,8 @@ class CreatePostForm extends Component {
       id: uuidv4(),
       timestamp: getUnixTimeNow(),
       author: values.author || 'Anonymous',
-      voteScore: 1
+      voteScore: 1,
+      commentCount: 0
     }
     const callbacks = { resolve, reject }
 
