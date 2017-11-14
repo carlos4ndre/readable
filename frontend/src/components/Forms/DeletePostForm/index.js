@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { Button, Header, Modal } from 'semantic-ui-react'
-import { deletePost } from 'actions/posts'
+import { deletePost } from 'actions'
 
 class DeletePostForm extends Component {
   state = {

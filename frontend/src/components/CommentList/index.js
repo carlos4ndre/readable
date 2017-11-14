@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Feed } from 'semantic-ui-react'
 import { sortByScore } from 'utils/sorting'
-import { voteComment, deleteComment } from 'actions/comments'
+import { voteComment, deleteComment } from 'actions'
 import Comment from 'components/Comment'
 
 const CommentList = ({comments, voteComment, deleteComment}) => (
