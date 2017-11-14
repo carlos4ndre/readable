@@ -119,10 +119,14 @@ PostProfile.PropTypes = {
   author: PropTypes.string.required
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  isFetchingComments: selectors.isFetchingComments(state),
-  comments: selectors.getPostComments(state, ownProps.post.id)
-})
+const mapStateToProps = (originalState, originalOwnProps) => {
+  return (state, ownProps) => {
+    return {
+      isFetchingComments: selectors.isFetchingComments(state),
+      comments: selectors.getPostComments(state, ownProps.post.id)
+    }
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   getComments: (postId) => dispatch(getComments(postId)),

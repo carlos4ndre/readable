@@ -77,6 +77,10 @@ class CreateCommentForm extends Component {
   }
 }
 
+CreateCommentForm.PropTypes = {
+  post: PropTypes.object.required
+}
+
 const mapStateToProps = (state) => ({
   submitErrors: getFormSubmitErrors(CREATE_COMMENT_FORM)(state)
 })
@@ -84,10 +88,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   createComment: (comment, callbacks) => dispatch(createComment(comment, callbacks))
 })
-
-CreateCommentForm.PropTypes = {
-  post: PropTypes.object.required
-}
 
 CreateCommentForm = connect(
   mapStateToProps,

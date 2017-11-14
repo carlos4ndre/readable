@@ -40,9 +40,13 @@ App.PropTypes = {
   categories: PropTypes.array.required
 }
 
-const mapStateToProps = (state) => ({
-  categories: selectors.getCategories(state)
-})
+const mapStateToProps = (originalState, originalOwnProps) => {
+  return (state, ownProps) => {
+    return {
+      categories: selectors.getCategories(state)
+    }
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   getCategories: (data) => dispatch(getCategories(data))

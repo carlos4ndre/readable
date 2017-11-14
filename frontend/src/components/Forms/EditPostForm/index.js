@@ -101,6 +101,9 @@ class EditPostForm extends Component {
   }
 }
 
+EditPostForm.PropTypes = {
+  post: PropTypes.object.required
+}
 
 const mapStateToProps = (state, ownProps) => ({
   submitErrors: getFormSubmitErrors(EDIT_POST_FORM)(state)
@@ -115,9 +118,6 @@ EditPostForm = connect(
   mapDispatchToProps
 )(EditPostForm)
 
-EditPostForm.PropTypes = {
-  post: PropTypes.object.required
-}
 export default reduxForm({
   form: EDIT_POST_FORM,
   enableReinitialize: true

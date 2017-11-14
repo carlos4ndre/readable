@@ -48,11 +48,15 @@ HomePage.PropTypes = {
   isFetching: PropTypes.bool.required
 }
 
-const mapStateToProps = (state) => ({
-  posts: selectors.getPosts(state),
-  categories: selectors.getCategories(state),
-  isFetchingPosts: selectors.isFetchingPosts(state)
-})
+const mapStateToProps = (originalState, originalOwnProps) => {
+  return (state, ownProps) => {
+    return {
+      posts: selectors.getPosts(state),
+      categories: selectors.getCategories(state),
+      isFetchingPosts: selectors.isFetchingPosts(state)
+    }
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   getPosts: (data) => dispatch(getPosts(data))

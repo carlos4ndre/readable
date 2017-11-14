@@ -67,11 +67,17 @@ CategoryPage.PropTypes = {
   isFetchingPosts: PropTypes.bool.required
 }
 
-const mapStateToProps = (state, props) => ({
-  categories: selectors.getCategories(state),
-  categoryPosts: selectors.getPostsByCategoryId(state, props.match.params.categoryId),
-  isFetchingPosts: selectors.isFetchingPosts(state)
-})
+const mapStateToProps = (originalState, originalOwnProps) => {
+  return (state, ownProps) => {
+    const categoryId = ownProps.match.params.categoryId
+
+    return {
+      categories: selectors.getCategories(state),
+      categoryPosts: selectors.getCategoryPosts(state, categoryId),
+      isFetchingPosts: selectors.isFetchingPosts(state)
+    }
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   getCategoryPosts: (data) => dispatch(getCategoryPosts(data))

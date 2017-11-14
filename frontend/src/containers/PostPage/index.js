@@ -39,12 +39,14 @@ PostPage.PropTypes = {
   post: PropTypes.object.required
 }
 
-const mapStateToProps = (state, props) => {
-  const postId = props.match.params.postId
+const mapStateToProps = (originalState, originalOwnProps) => {
+  return (state, ownProps) => {
+    const postId = ownProps.match.params.postId
 
-  return {
-    post: selectors.getPostById(state, postId),
-    isFetchingPost: selectors.isFetchingPost(state, postId)
+    return {
+      post: selectors.getPost(state, postId),
+      isFetchingPost: selectors.isFetchingPost(state)
+    }
   }
 }
 

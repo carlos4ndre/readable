@@ -1,9 +1,25 @@
-export const getCategories = state => Object.values(state.categories.byId)
+import { createSelector } from 'reselect'
+import { posts } from 'selectors/posts'
 
-export const getPostsByCategoryId = (state, categoryId) => {
-  const category = state.categories.byId[categoryId]
-  const postIds = category && category.postIds ? category.postIds : []
-  const categoryPosts = postIds.map(postId => state.posts.byId[postId])
+export const categories = state => state.categories
+export const categoryId = (state, id) => id
 
-  return categoryPosts
-}
+export const getCategories = createSelector(
+  [ categories ],
+  (categories) => Object.values(categories.byId)
+)
+
+export const getCategory = createSelector(
+  [ categories, categoryId ],
+  (categories, id) => categories.byId[id]
+)
+
+export const getCategoryPosts = createSelector(
+  [ getCategory, posts ],
+  (category, posts) => {
+    if (category && category.postIds) {
+      return category.postIds.map(id => posts.byId[id])
+    }
+    return []
+  }
+)
