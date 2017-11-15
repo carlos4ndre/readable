@@ -1,6 +1,5 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-
 import Text from 'components/Text'
 
 const text = 'yo! this is a test'
