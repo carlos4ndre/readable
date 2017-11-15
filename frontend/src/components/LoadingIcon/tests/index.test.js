@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import { Loader } from 'semantic-ui-react'
 import LoadingIcon from 'components/LoadingIcon'
 
@@ -20,7 +20,7 @@ describe('<LoadingIcon />', () => {
   })
 
   it('should have a text', () => {
-    const renderedComponent = mount(<LoadingIcon />)
-    expect(renderedComponent.text()).toEqual('Loading...')
+    const renderedComponent = shallow(<LoadingIcon />)
+    expect(renderedComponent.children().text()).toEqual('Loading...')
   })
 })
