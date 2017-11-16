@@ -1,10 +1,9 @@
 import React from 'react'
 import sinon from 'sinon'
-import configureStore from 'redux-mock-store'
-import { shallow } from 'enzyme'
 import { Feed, Icon, Label } from 'semantic-ui-react'
-import Comment from 'components/Comment'
+import { shallowWithStore } from 'utils/tests'
 import { EditCommentForm, DeleteCommentForm } from 'components/Forms'
+import Comment from 'components/Comment'
 
 describe('<Comment />', () => {
   const comment = {
@@ -20,13 +19,10 @@ describe('<Comment />', () => {
     voteScore: -5
   }
   const voteComment = sinon.spy()
-  const initialState = {}
-  const mockStore = configureStore()
-  let store, container
+  let container
 
   beforeEach(() => {
-    store = mockStore(initialState)
-    container = shallow(<Comment store={store} comment={comment} voteComment={voteComment}/>)
+    container = shallowWithStore(<Comment comment={comment} voteComment={voteComment}/>)
   })
 
   afterEach(() => {
