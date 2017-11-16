@@ -5,16 +5,16 @@ import CreateButton from 'components/Button/CreateButton'
 
 describe('<CreateButton />', () => {
   it('should render a button', () => {
-    const renderedComponent = shallow(<CreateButton />)
-    expect(renderedComponent.type()).toEqual(Button)
-    expect(renderedComponent.prop('circular')).toEqual(true)
-    expect(renderedComponent.prop('color')).toEqual('blue')
-    expect(renderedComponent.prop('content')).toEqual('Create')
+    const container = shallow(<CreateButton />)
+    expect(container.type()).toEqual(Button)
+    expect(container.prop('circular')).toEqual(true)
+    expect(container.prop('color')).toEqual('blue')
+    expect(container.prop('content')).toEqual('Create')
   })
 
   it('should allow custom button name', () => {
     const buttonName = 'Create Stuff'
-    const renderedComponent = shallow(<CreateButton content={buttonName}/>)
-    expect(renderedComponent.prop('content')).toEqual(buttonName)
+    const container = shallow(<CreateButton content={buttonName}/>)
+    expect(container.prop('content')).toEqual(buttonName)
   })
 })

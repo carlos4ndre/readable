@@ -1,17 +1,17 @@
 import React from 'react'
 import sinon from 'sinon'
 import { Feed, Icon, Label } from 'semantic-ui-react'
-import { shallowWithStore } from 'utils/tests'
+import { mountWithStore } from 'utils/tests'
 import { EditCommentForm, DeleteCommentForm } from 'components/Forms'
 import Comment from 'components/Comment'
 
 describe('<Comment />', () => {
   const comment = {
     id: 1,
-    title: 'Greatest of all',
+    parendId: 1000,
+    timestamp: 1510788064,
     body: 'trust me, this is great comment!',
     author: 'gandalf',
-    timestamp: 1510788064,
     voteScore: 5
   }
   const badComment = {
@@ -22,7 +22,12 @@ describe('<Comment />', () => {
   let container
 
   beforeEach(() => {
-    container = shallowWithStore(<Comment comment={comment} voteComment={voteComment}/>)
+    container = mountWithStore(
+      <Comment
+        comment={comment}
+        voteComment={voteComment}
+      />
+    )
   })
 
   afterEach(() => {
@@ -51,7 +56,15 @@ describe('<Comment />', () => {
   })
 
   it('should change the comment score when negative', () => {
-    container.setProps({ comment: badComment })
+    // FIXME: setProps() + update() not working for mount
+    // https://github.com/airbnb/enzyme/issues/1229
+    // forcing rerender with new instance for now!
+    container = mountWithStore(
+      <Comment
+        comment={badComment}
+        voteComment={voteComment}
+      />
+    )
     const meta = container.find(Feed.Meta)
     const scoreLabel = meta.find(Label)
 
@@ -69,11 +82,11 @@ describe('<Comment />', () => {
   it('should handle up/down voteComment events', () => {
     const meta = container.find(Feed.Meta)
 
-    const upVoteButton = meta.find(Icon).at(0)
+    const upVoteButton = meta.find(Icon).at(1)
     upVoteButton.simulate('click')
     expect(voteComment.calledWith(comment.id, 'upVote')).toEqual(true)
 
-    const downVoteButton = container.find(Icon).at(1)
+    const downVoteButton = meta.find(Icon).at(2)
     downVoteButton.simulate('click')
     expect(voteComment.calledWith(comment.id, 'downVote')).toEqual(true)
 

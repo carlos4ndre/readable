@@ -9,26 +9,26 @@ describe('<CommentList />', () => {
   const comments = [
     {
       id: 1,
-      title: 'Greatest of all',
+      parendId: 1000,
+      timestamp: 1510788064,
       body: 'trust me, this is great comment!',
       author: 'gandalf',
-      timestamp: 1510788064,
       voteScore: 10
     },
     {
       id: 2,
-      title: 'Greatest of all! Once again!',
+      parendId: 2000,
+      timestamp: 1510788080,
       body: 'this is great comment, I promise!',
       author: 'gandalf',
-      timestamp: 1510788080,
       voteScore: -10
     },
     {
       id: 3,
-      title: 'The comment of the century!',
+      parendId: 3000,
+      timestamp: 1510788090,
       body: 'The ultimate comment!',
       author: 'gandalf',
-      timestamp: 1510788090,
       voteScore: 100
     }
   ]
