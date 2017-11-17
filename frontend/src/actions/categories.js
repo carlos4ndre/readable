@@ -10,6 +10,6 @@ export const getCategoriesSuccess = (categories) => ({
 })
 
 export const getCategoriesFailure = (error) => ({
-  type: types.GET_CATEGORIES_SUCCESS,
+  type: types.GET_CATEGORIES_FAILURE,
   error
 })
