@@ -1,6 +1,7 @@
 import { all, takeLatest, takeEvery, call, put } from 'redux-saga/effects'
 import * as api from 'utils/api'
 import * as actions from 'actions'
+import * as types from 'actionTypes'
 
 const getPosts = function*(action) {
   const response = yield call(api.getPosts)
@@ -8,9 +9,9 @@ const getPosts = function*(action) {
   const error = result.error
 
   if (error) {
-    yield put(action.getPostsFailure(error))
+    yield put(actions.getPostsFailure(error))
   } else {
-    yield put(action.getPostsSuccess(result))
+    yield put(actions.getPostsSuccess(result))
   }
 }
 
@@ -44,7 +45,7 @@ const getCategoryPosts = function*(action) {
     if (error) {
       yield put(actions.getCategoryPostsFailure(error))
     } else {
-      yield put(actions.getCategoryPostsSuccess(result, categoryId))
+      yield put(actions.getCategoryPostsSuccess(categoryId, result))
     }
   } catch(e) {
     yield put(actions.getCategoryPostsFailure(e.message))
@@ -131,13 +132,13 @@ const deletePost = function*(action) {
 
 function* postsSagas() {
   yield all([
-    yield takeLatest(GET_POSTS_REQUEST, getPosts),
-    yield takeLatest(GET_POST_REQUEST, getPost),
-    yield takeLatest(GET_CATEGORY_POSTS_REQUEST, getCategoryPosts),
-    yield takeEvery(CREATE_POST_REQUEST, createPost),
-    yield takeEvery(VOTE_POST_REQUEST, votePost),
-    yield takeEvery(UPDATE_POST_REQUEST, updatePost),
-    yield takeEvery(DELETE_POST_REQUEST, deletePost)
+    yield takeLatest(types.GET_POSTS_REQUEST, getPosts),
+    yield takeLatest(types.GET_POST_REQUEST, getPost),
+    yield takeLatest(types.GET_CATEGORY_POSTS_REQUEST, getCategoryPosts),
+    yield takeEvery(types.CREATE_POST_REQUEST, createPost),
+    yield takeEvery(types.VOTE_POST_REQUEST, votePost),
+    yield takeEvery(types.UPDATE_POST_REQUEST, updatePost),
+    yield takeEvery(types.DELETE_POST_REQUEST, deletePost)
   ])
 }
 

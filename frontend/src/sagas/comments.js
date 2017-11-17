@@ -1,6 +1,7 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects'
 import * as api from 'utils/api'
 import * as actions from 'actions'
+import * as types from 'actionTypes'
 
 const getComments = function*(action) {
   try {
@@ -99,11 +100,11 @@ const deleteComment = function*(action) {
 
 function* commentsSagas() {
   yield all([
-    yield takeLatest(GET_COMMENTS_REQUEST, getComments),
-    yield takeLatest(CREATE_COMMENT_REQUEST, createComment),
-    yield takeLatest(VOTE_COMMENT_REQUEST, voteComment),
-    yield takeLatest(UPDATE_COMMENT_REQUEST, updateComment),
-    yield takeLatest(DELETE_COMMENT_REQUEST, deleteComment)
+    yield takeLatest(types.GET_COMMENTS_REQUEST, getComments),
+    yield takeLatest(types.CREATE_COMMENT_REQUEST, createComment),
+    yield takeLatest(types.VOTE_COMMENT_REQUEST, voteComment),
+    yield takeLatest(types.UPDATE_COMMENT_REQUEST, updateComment),
+    yield takeLatest(types.DELETE_COMMENT_REQUEST, deleteComment)
   ])
 }
 
