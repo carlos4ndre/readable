@@ -1,35 +1,15 @@
 import { all, takeLatest, takeEvery, call, put } from 'redux-saga/effects'
 import * as api from 'utils/api'
-import {
-  GET_POSTS_REQUEST,
-  GET_POSTS_SUCCESS,
-  GET_POSTS_FAILURE,
-  GET_POST_REQUEST,
-  GET_POST_SUCCESS,
-  GET_POST_FAILURE,
-  GET_CATEGORY_POSTS_REQUEST,
-  GET_CATEGORY_POSTS_SUCCESS,
-  GET_CATEGORY_POSTS_FAILURE,
-  CREATE_POST_REQUEST,
-  CREATE_POST_SUCCESS,
-  VOTE_POST_REQUEST,
-  VOTE_POST_SUCCESS,
-  VOTE_POST_FAILURE,
-  UPDATE_POST_REQUEST,
-  UPDATE_POST_SUCCESS,
-  DELETE_POST_REQUEST,
-  DELETE_POST_SUCCESS,
-  DELETE_POST_FAILURE
-} from 'actionTypes'
+import * as actions from 'actions'
 
 const getPosts = function*(action) {
   const response = yield call(api.getPosts)
   const result = yield response.json()
 
   if (result.error) {
-    yield put({ type: GET_POSTS_FAILURE, error: result.error })
+    yield put(action.getPostsFailure(result.error))
   } else {
-    yield put({ type: GET_POSTS_SUCCESS, posts: result })
+    yield put(action.getPostsSuccess(result))
   }
 }
 
@@ -40,15 +20,15 @@ const getPost = function*(action) {
     const result = yield response.json()
 
     if (result.error) {
-      yield put({ type: GET_POST_FAILURE, error: result.error })
+      yield put(actions.getPostFailure(result.error))
     }
     else if (!result.id) {
-      yield put({ type: GET_POST_FAILURE, error: 'Post was deleted' })
+      yield put(actions.getPostFailure('Post was deleted'))
     } else {
-      yield put({ type: GET_POST_SUCCESS, post: result })
+      yield put(actions.getPostSuccess(result))
     }
   } catch(e) {
-    yield put({ type: GET_POST_FAILURE, error: e.message })
+    yield put(actions.getPostFailure(e.message))
   }
 }
 
@@ -59,12 +39,12 @@ const getCategoryPosts = function*(action) {
     const result = yield response.json()
 
     if (result.error) {
-      yield put({ type: GET_CATEGORY_POSTS_FAILURE, error: result.error })
+      yield put(actions.getCategoryPostsFailure(result.error))
     } else {
-      yield put({ type: GET_CATEGORY_POSTS_SUCCESS, posts: result, categoryId })
+      yield put(actions.getCategoryPostsSuccess(result, categoryId))
     }
   } catch(e) {
-    yield put({ type: GET_CATEGORY_POSTS_FAILURE, error: e.message })
+    yield put(actions.getCategoryPostsFailure(e.message))
   }
 }
 
@@ -77,12 +57,14 @@ const createPost = function*(action) {
 
     if (result.error) {
       yield callbacks.reject({ error: result.error })
+      yield put(actions.createPostFailure(result.error))
     } else {
       yield callbacks.resolve()
-      yield put({ type: CREATE_POST_SUCCESS, post })
+      yield put(actions.createPostSuccess(post))
     }
   } catch(e) {
     yield callbacks.reject({ error: e.message })
+    yield put(actions.createPostFailure(result.error))
   }
 }
 
@@ -93,12 +75,12 @@ const votePost = function*(action) {
     const result = yield response.json()
 
     if (result.error) {
-      yield put({ type: VOTE_POST_FAILURE, error: result.error })
+      yield put(actions.votePostFailure(result.error))
     } else {
-      yield put({ type: VOTE_POST_SUCCESS, postId, value })
+      yield put(actions.votePostSuccess(postId, value))
     }
   } catch(e) {
-    yield put({ type: VOTE_POST_FAILURE, error: e.message })
+    yield put(actions.votePostFailure(e.message))
   }
 }
 
@@ -111,12 +93,14 @@ const updatePost = function*(action) {
 
     if (result.error) {
       yield callbacks.reject({ error: result.error })
+      yield put(actions.updatePostFailure(result.error))
     } else {
       yield callbacks.resolve()
-      yield put({ type: UPDATE_POST_SUCCESS, post })
+      yield put(actions.updatePostSuccess(post))
     }
   } catch(e) {
     yield callbacks.reject({ error: e.message })
+    yield put(actions.updatePostFailure(e.message))
   }
 }
 
@@ -127,12 +111,12 @@ const deletePost = function*(action) {
     const result = yield response.json()
 
     if (result.error) {
-      yield put({ type: DELETE_POST_FAILURE, error: result.error })
+      yield put(actions.deletePostFailure(result.error))
     } else {
-      yield put({ type: DELETE_POST_SUCCESS, post })
+      yield put(actions.deletePostSuccess(post))
     }
   } catch(e) {
-    yield put({ type: DELETE_POST_FAILURE, error: e.message })
+    yield put(actions.deletePostFailure(e.message))
   }
 }
 
