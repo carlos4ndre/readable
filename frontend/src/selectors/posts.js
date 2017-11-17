@@ -25,13 +25,3 @@ export const getPostComments = createSelector(
     return []
   }
 )
-
-export const getCategoryPosts = createSelector(
-  [ getPost, posts ],
-  (post, categories) => {
-    if (post && post.commentIds) {
-      return post.commentIds.map(id => comments.byId[id])
-    }
-    return []
-  }
-)
