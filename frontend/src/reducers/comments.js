@@ -1,12 +1,4 @@
-import {
-  GET_COMMENTS_REQUEST,
-  GET_COMMENTS_SUCCESS,
-  GET_COMMENTS_FAILURE,
-  CREATE_COMMENT_SUCCESS,
-  VOTE_COMMENT_SUCCESS,
-  UPDATE_COMMENT_SUCCESS,
-  DELETE_COMMENT_SUCCESS
-} from 'actionTypes'
+import * as types from 'actionTypes'
 import { UP_VOTE } from 'utils/vote'
 
 const initialState = {
@@ -17,22 +9,22 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_COMMENTS_REQUEST:
+    case types.GET_COMMENTS_REQUEST:
       return { ...state, isFetchingComments: true }
-    case GET_COMMENTS_SUCCESS:
+    case types.GET_COMMENTS_SUCCESS:
       return {
         ...addComments(state, action.comments),
         isFetchingComments: false
       }
-    case GET_COMMENTS_FAILURE:
+    case types.GET_COMMENTS_FAILURE:
       return { ...state, isFetchingComments: false }
-    case CREATE_COMMENT_SUCCESS:
+    case types.CREATE_COMMENT_SUCCESS:
       return addComment(state, action.comment)
-    case VOTE_COMMENT_SUCCESS:
+    case types.VOTE_COMMENT_SUCCESS:
       return updateCommentScore(state, action.commentId, action.value)
-    case UPDATE_COMMENT_SUCCESS:
+    case types.UPDATE_COMMENT_SUCCESS:
       return updateComment(state, action.comment)
-    case DELETE_COMMENT_SUCCESS:
+    case types.DELETE_COMMENT_SUCCESS:
       return deleteComment(state, action.comment)
     default:
       return state

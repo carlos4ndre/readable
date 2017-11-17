@@ -1,9 +1,4 @@
-import {
-  GET_CATEGORIES_SUCCESS,
-  GET_CATEGORY_POSTS_SUCCESS,
-  CREATE_POST_SUCCESS,
-  DELETE_POST_SUCCESS
-} from 'actionTypes'
+import * as types from 'actionTypes'
 
 const initialState = {
   byId: {},
@@ -12,13 +7,13 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_CATEGORIES_SUCCESS:
+    case types.GET_CATEGORIES_SUCCESS:
       return addCategories(state, action.categories)
-    case GET_CATEGORY_POSTS_SUCCESS:
+    case types.GET_CATEGORY_POSTS_SUCCESS:
       return addCategoryPostIds(state, action.categoryId, action.posts)
-    case CREATE_POST_SUCCESS:
+    case types.CREATE_POST_SUCCESS:
       return addCategoryPostId(state, action.post.category, action.post.id)
-    case DELETE_POST_SUCCESS:
+    case types.DELETE_POST_SUCCESS:
       return deleteCategoryPostIds(state, action.post)
     default:
       return state

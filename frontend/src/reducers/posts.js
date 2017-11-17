@@ -1,22 +1,5 @@
+import * as types from 'actionTypes'
 import { UP_VOTE } from 'utils/vote'
-import {
-  GET_POSTS_REQUEST,
-  GET_POSTS_SUCCESS,
-  GET_POSTS_FAILURE,
-  GET_POST_REQUEST,
-  GET_POST_SUCCESS,
-  GET_POST_FAILURE,
-  GET_CATEGORY_POSTS_REQUEST,
-  GET_CATEGORY_POSTS_SUCCESS,
-  GET_CATEGORY_POSTS_FAILURE,
-  CREATE_POST_SUCCESS,
-  VOTE_POST_SUCCESS,
-  UPDATE_POST_SUCCESS,
-  DELETE_POST_SUCCESS,
-  GET_COMMENTS_SUCCESS,
-  CREATE_COMMENT_SUCCESS,
-  DELETE_COMMENT_SUCCESS
-} from 'actionTypes'
 
 const initialState = {
   byId: {},
@@ -28,42 +11,42 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     // manage posts and category posts
-    case GET_POSTS_REQUEST:
-    case GET_CATEGORY_POSTS_REQUEST:
+    case types.GET_POSTS_REQUEST:
+    case types.GET_CATEGORY_POSTS_REQUEST:
       return { ...state, isFetchingPosts: true }
-    case GET_POSTS_SUCCESS:
-    case GET_CATEGORY_POSTS_SUCCESS:
+    case types.GET_POSTS_SUCCESS:
+    case types.GET_CATEGORY_POSTS_SUCCESS:
       return {
         ...addPosts(state, action.posts),
         isFetchingPosts: false
       }
-    case GET_POSTS_FAILURE:
-    case GET_CATEGORY_POSTS_FAILURE:
+    case types.GET_POSTS_FAILURE:
+    case types.GET_CATEGORY_POSTS_FAILURE:
       return { ...state, isFetchingPosts: false }
 
     // manage single post
-    case GET_POST_REQUEST:
+    case types.GET_POST_REQUEST:
       return { ...state, isFetchingPost: true }
-    case GET_POST_SUCCESS:
+    case types.GET_POST_SUCCESS:
       return {
         ...addPost(state, action.post),
         isFetchingPost: false
       }
-    case GET_POST_FAILURE:
+    case types.GET_POST_FAILURE:
       return { ...state, isFetchingPost: false }
-    case CREATE_POST_SUCCESS:
+    case types.CREATE_POST_SUCCESS:
       return addPost(state, action.post)
-    case VOTE_POST_SUCCESS:
+    case types.VOTE_POST_SUCCESS:
       return updatePostScore(state, action.postId, action.value)
-    case UPDATE_POST_SUCCESS:
+    case types.UPDATE_POST_SUCCESS:
       return updatePost(state, action.post)
-    case DELETE_POST_SUCCESS:
+    case types.DELETE_POST_SUCCESS:
       return deletePost(state, action.post)
-    case GET_COMMENTS_SUCCESS:
+    case types.GET_COMMENTS_SUCCESS:
       return addPostComments(state, action.postId, action.comments)
-    case CREATE_COMMENT_SUCCESS:
+    case types.CREATE_COMMENT_SUCCESS:
       return addPostComment(state, action.comment.parentId, action.comment)
-    case DELETE_COMMENT_SUCCESS:
+    case types.DELETE_COMMENT_SUCCESS:
       return deletePostCommentIds(state, action.comment)
     default:
       return state
