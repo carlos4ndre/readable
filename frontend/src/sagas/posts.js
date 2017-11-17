@@ -5,9 +5,10 @@ import * as actions from 'actions'
 const getPosts = function*(action) {
   const response = yield call(api.getPosts)
   const result = yield response.json()
+  const error = result.error
 
-  if (result.error) {
-    yield put(action.getPostsFailure(result.error))
+  if (error) {
+    yield put(action.getPostsFailure(error))
   } else {
     yield put(action.getPostsSuccess(result))
   }
@@ -18,9 +19,10 @@ const getPost = function*(action) {
     const postId = action.postId
     const response = yield call(api.getPost, postId)
     const result = yield response.json()
+    const error = result.error
 
-    if (result.error) {
-      yield put(actions.getPostFailure(result.error))
+    if (error) {
+      yield put(actions.getPostFailure(error))
     }
     else if (!result.id) {
       yield put(actions.getPostFailure('Post was deleted'))
@@ -37,9 +39,10 @@ const getCategoryPosts = function*(action) {
     const categoryId = action.categoryId
     const response = yield call(api.getCategoryPosts, categoryId)
     const result = yield response.json()
+    const error = result.error
 
-    if (result.error) {
-      yield put(actions.getCategoryPostsFailure(result.error))
+    if (error) {
+      yield put(actions.getCategoryPostsFailure(error))
     } else {
       yield put(actions.getCategoryPostsSuccess(result, categoryId))
     }
@@ -54,17 +57,19 @@ const createPost = function*(action) {
   try {
     const response = yield call(api.createPost, post)
     const result = yield response.json()
+    let error = result.error
 
-    if (result.error) {
-      yield callbacks.reject({ error: result.error })
-      yield put(actions.createPostFailure(result.error))
+    if (error) {
+      yield callbacks.reject({ error })
+      yield put(actions.createPostFailure(error))
     } else {
       yield callbacks.resolve()
       yield put(actions.createPostSuccess(post))
     }
   } catch(e) {
-    yield callbacks.reject({ error: e.message })
-    yield put(actions.createPostFailure(result.error))
+    let error = e.message
+    yield callbacks.reject({ error })
+    yield put(actions.createPostFailure(error))
   }
 }
 
@@ -73,9 +78,10 @@ const votePost = function*(action) {
     const { postId, value } = action
     const response = yield call(api.votePost, postId, value)
     const result = yield response.json()
+    const error = result.error
 
-    if (result.error) {
-      yield put(actions.votePostFailure(result.error))
+    if (error) {
+      yield put(actions.votePostFailure(error))
     } else {
       yield put(actions.votePostSuccess(postId, value))
     }
@@ -90,17 +96,19 @@ const updatePost = function*(action) {
   try {
     const response = yield call(api.updatePost, post)
     const result = yield response.json()
+    let error = result.error
 
-    if (result.error) {
-      yield callbacks.reject({ error: result.error })
-      yield put(actions.updatePostFailure(result.error))
+    if (error) {
+      yield callbacks.reject({ error })
+      yield put(actions.updatePostFailure(error))
     } else {
       yield callbacks.resolve()
       yield put(actions.updatePostSuccess(post))
     }
   } catch(e) {
-    yield callbacks.reject({ error: e.message })
-    yield put(actions.updatePostFailure(e.message))
+    let error = e.message
+    yield callbacks.reject({ error })
+    yield put(actions.updatePostFailure(error))
   }
 }
 
@@ -109,9 +117,10 @@ const deletePost = function*(action) {
     const post = action.post
     const response = yield call(api.deletePost, post.id)
     const result = yield response.json()
+    const error = result.error
 
-    if (result.error) {
-      yield put(actions.deletePostFailure(result.error))
+    if (error) {
+      yield put(actions.deletePostFailure(error))
     } else {
       yield put(actions.deletePostSuccess(post))
     }

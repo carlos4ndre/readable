@@ -7,9 +7,10 @@ const getComments = function*(action) {
     const postId = action.postId
     const response = yield call(api.getComments, postId)
     const result = yield response.json()
+    const error = result.error
 
-    if (result.error) {
-      yield put(actions.getCommentsFailure(result.error))
+    if (error) {
+      yield put(actions.getCommentsFailure(error))
     } else {
       yield put(actions.getCommentsSuccess(postId, result))
     }
@@ -24,17 +25,19 @@ const createComment = function*(action) {
   try {
     const response = yield call(api.createComment, comment)
     const result = yield response.json()
+    let error = result.error
 
-    if (result.error) {
-      yield callbacks.reject({ error: result.error })
-      yield put(actions.createCommentFailure(result.error))
+    if (error) {
+      yield callbacks.reject({ error })
+      yield put(actions.createCommentFailure(error))
     } else {
       yield callbacks.resolve()
       yield put(actions.createCommentSuccess(comment))
     }
   } catch(e) {
-    yield callbacks.reject({ error: e.message })
-    yield put(actions.createCommentFailure(e.message))
+    let error = e.message
+    yield callbacks.reject({ error })
+    yield put(actions.createCommentFailure(error))
   }
 }
 
@@ -43,9 +46,10 @@ const voteComment = function*(action) {
     const { commentId, value } = action
     const response = yield call(api.voteComment, commentId, value)
     const result = yield response.json()
+    const error = result.error
 
-    if (result.error) {
-      yield put(actions.voteCommentFailure(result.error))
+    if (error) {
+      yield put(actions.voteCommentFailure(error))
     } else {
       yield put(actions.voteCommentSuccess(commentId, value))
     }
@@ -60,17 +64,19 @@ const updateComment = function*(action) {
   try {
     const response = yield call(api.updateComment, comment)
     const result = yield response.json()
+    const error = result.error
 
-    if (result.error) {
-      yield callbacks.reject({ error: result.error })
-      yield put(actions.updateCommentFailure(result.error))
+    if (error) {
+      yield callbacks.reject({ error })
+      yield put(actions.updateCommentFailure(error))
     } else {
       yield callbacks.resolve()
       yield put(actions.updateCommentSuccess(comment))
     }
   } catch(e) {
-    yield callbacks.reject({ error: e.message })
-    yield put(actions.updateCommentFailure(e.message))
+    let error = e.message
+    yield callbacks.reject({ error })
+    yield put(actions.updateCommentFailure(error))
   }
 }
 
@@ -79,9 +85,10 @@ const deleteComment = function*(action) {
     const comment = action.comment
     const response = yield call(api.deleteComment, comment.id)
     const result = yield response.json()
+    const error = result.error
 
-    if (result.error) {
-      yield put(actions.deleteCommentFailure(result.error))
+    if (error) {
+      yield put(actions.deleteCommentFailure(error))
     } else {
       yield put(actions.deleteCommentSuccess(comment))
     }

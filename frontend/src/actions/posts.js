@@ -10,7 +10,7 @@ export const getPostsSuccess = (posts) => ({
 })
 
 export const getPostsFailure = (error) => ({
-  type: types.GET_POST_FAILURE,
+  type: types.GET_POSTS_FAILURE,
   error
 })
 
@@ -34,9 +34,9 @@ export const getCategoryPosts = (categoryId) => ({
   categoryId
 })
 
-export const getCategoryPostsSuccess = (posts, categoryId) => ({
+export const getCategoryPostsSuccess = (categoryId, posts) => ({
   type: types.GET_CATEGORY_POSTS_SUCCESS,
-  categortyId,
+  categoryId,
   posts
 })
 
@@ -67,7 +67,7 @@ export const votePost = (postId, value) => ({
   value
 })
 
-export const votePostSucess = (postId, value) => ({
+export const votePostSuccess = (postId, value) => ({
   type: types.VOTE_POST_SUCCESS,
   postId,
   value
