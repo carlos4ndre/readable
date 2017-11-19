@@ -1,21 +1,9 @@
 import * as actions from 'actions'
 import * as types from 'actionTypes'
+import * as data from 'data/tests'
 
 describe('actions', () => {
-  const categories = [
-    {
-      name: 'react',
-      path: 'react'
-    },
-    {
-      name: 'redux',
-      path: 'redux'
-    },
-    {
-      name: 'udacity',
-      path: 'udacity'
-    }
-  ]
+  const categories = data.categories
   const error = 'ups, something when wrong!'
 
   it('should create an action to get categories [REQUEST]', () => {

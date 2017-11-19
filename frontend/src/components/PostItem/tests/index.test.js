@@ -51,7 +51,7 @@ describe('<PostItem />', () => {
   it('should render the posted date and author', () => {
     const column = container.find(Grid.Column).at(2)
     const item = column.find(List.Item).at(1)
-    expect(item.text()).toEqual('Posted on 17/11/2017 by Mr. Robot')
+    expect(item.text()).toEqual('Posted on 19/11/2017 by Mr. Robot')
   })
 
   it('should render the total number of comments', () => {

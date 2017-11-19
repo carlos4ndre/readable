@@ -1,19 +1,11 @@
 import * as actions from 'actions'
 import * as types from 'actionTypes'
+import * as data from 'data/tests'
 
 describe('actions', () => {
-  const postId = 'f2972514-6d01-45fe-a76c-c5b544766b89'
-  const categoryId = 'music'
-  const post = {
-    id: postId,
-    timestamp: 1467166872634,
-    title: 'Buckethead Tour',
-    body: 'Buckethead is back with great style!',
-    author: 'Mr. Robot',
-    category: categoryId,
-    voteScore: 100,
-    commentCount: 20
-  }
+  const postId = data.post.id
+  const categoryId = data.post.category
+  const post = data.post
   const posts = [ post ]
   const callbacks = {
     resolve: () => 'good stuff',

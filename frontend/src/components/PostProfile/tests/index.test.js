@@ -101,7 +101,7 @@ describe('<PostProfile />', () => {
     const bottomSection = infoBox.find(Segment.Group).at(1)
     const text = bottomSection.find('span').text()
 
-    expect(text).toEqual('Posted on 17/11/2017 by Mr. Robot')
+    expect(text).toEqual('Posted on 19/11/2017 by Mr. Robot')
   })
 
 
