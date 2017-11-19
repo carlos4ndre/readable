@@ -12,13 +12,13 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_COMMENTS_REQUEST:
       return { ...state, isFetchingComments: true }
+    case types.GET_COMMENTS_FAILURE:
+      return { ...state, isFetchingComments: false }
     case types.GET_COMMENTS_SUCCESS:
       return {
         ...addComments(state, action.comments),
         isFetchingComments: false
       }
-    case types.GET_COMMENTS_FAILURE:
-      return { ...state, isFetchingComments: false }
     case types.CREATE_COMMENT_SUCCESS:
       return addComment(state, action.comment)
     case types.VOTE_COMMENT_SUCCESS:

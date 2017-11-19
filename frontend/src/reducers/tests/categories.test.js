@@ -11,28 +11,28 @@ describe('categories reducer', () => {
 
   const stateWithCategory = {
     ...initialState,
-    'categories': {
-      'allIds': ['music'],
-      'byId': {
-        'music': {'name': 'music', 'path': 'music', 'postIds': []}
+    categories: {
+      allIds: ['music'],
+      byId: {
+        music: {name: 'music', path: 'music', postIds: []}
       }
     }
   }
 
   const stateWithCategoryPostId = {
     ...initialState,
-    'categories': {
-      'allIds': ['music'],
-      'byId': {
-        'music': {'name': 'music', 'path': 'music', 'postIds': [post.id]}
+    categories: {
+      allIds: ['music'],
+      byId: {
+        music: {name: 'music', path: 'music', postIds: [post.id]}
       }
     },
-    'posts': {
+    posts: {
       ...initialState.posts,
-      'byId': {
+      byId: {
         [post.id]: { ...post }
       },
-      'allIds': [post.id]
+      allIds: [post.id]
     }
   }
 
