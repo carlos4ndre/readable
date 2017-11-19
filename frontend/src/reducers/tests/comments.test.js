@@ -4,11 +4,11 @@ import * as data from 'data/tests'
 
 describe('categories reducer', () => {
   const initialState = data.initialState
-  const postId = data.post.id
   const post = data.post
-  const commentId = data.comment.id
+  const postId = post.id
   const comment = data.comment
   const comments = [ comment ]
+  const commentId = comment.id
 
   const stateWithoutComment = {
     ...initialState,

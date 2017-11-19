@@ -3,10 +3,10 @@ import * as types from 'actionTypes'
 import * as data from 'data/tests'
 
 describe('actions', () => {
-  const postId = data.post.id
-  const categoryId = data.post.category
   const post = data.post
   const posts = [ post ]
+  const categoryId = post.category
+  const postId = post.id
   const callbacks = {
     resolve: () => 'good stuff',
     reject: () => 'ups, an error'

@@ -5,8 +5,9 @@ import * as data from 'data/tests'
 describe('categories reducer', () => {
   const post = data.post
   const posts = [ post ]
-  const categoryId = data.category.name
-  const categories = [ data.category ]
+  const category = data.category
+  const categories = [ category ]
+  const categoryId = category.name
   const initialState = data.initialState
 
   const stateWithCategory = {

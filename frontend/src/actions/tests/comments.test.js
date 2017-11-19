@@ -1,17 +1,11 @@
 import * as actions from 'actions'
 import * as types from 'actionTypes'
+import * as data from 'data/tests'
 
 describe('actions', () => {
-  const postId = 1000
-  const commentId = 1
-  const comment = {
-    id: commentId,
-    parendId: postId,
-    timestamp: 1510788064,
-    body: 'trust me, this is great comment!',
-    author: 'gandalf',
-    voteScore: 5
-  }
+  const postId = data.post.id
+  const comment = data.comment
+  const commentId = comment.id
   const comments = [ comment ]
   const callbacks = {
     resolve: () => 'good stuff',
