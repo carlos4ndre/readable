@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import * as types from 'actionTypes'
 import { UP_VOTE } from 'utils/vote'
 
@@ -41,7 +42,7 @@ const addComment = (state, comment) => ({
     ...state.byId,
     [comment.id]: comment
   },
-  allIds: state.allIds.concat(comment.id)
+  allIds: _.uniq(state.allIds.concat(comment.id))
 })
 
 const updateCommentScore = (state, commentId, value) => {

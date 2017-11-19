@@ -1,4 +1,5 @@
 import * as types from 'actionTypes'
+import _ from 'lodash'
 
 const initialState = {
   byId: {},
@@ -30,7 +31,7 @@ const addCategories = (state, categories) => (
         postIds: state.postIds || []
       }
     },
-    allIds: obj.allIds.concat(category.name)
+    allIds: _.uniq(obj.allIds.concat(category.name))
   }), state)
 )
 
@@ -47,7 +48,7 @@ const addCategoryPostIds = (state, categoryId, posts) => {
         postIds
       }
     },
-    allIds: state.allIds.concat(categoryId)
+    allIds: _.uniq(state.allIds.concat(categoryId))
   }
 }
 
@@ -60,7 +61,7 @@ const addCategoryPostId = (state, categoryId, postId) => {
       ...state.byId,
       [categoryId]: {
         ...category,
-        postIds: category.postIds.concat(postId)
+        postIds: _.uniq(category.postIds.concat(postId))
       }
     }
   }
