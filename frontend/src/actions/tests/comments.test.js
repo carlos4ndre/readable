@@ -6,7 +6,7 @@ describe('actions', () => {
   const postId = data.post.id
   const comment = data.comment
   const commentId = comment.id
-  const comments = [ comment ]
+  const comments = [comment]
   const callbacks = {
     resolve: () => 'good stuff',
     reject: () => 'ups, an error'
@@ -15,7 +15,7 @@ describe('actions', () => {
 
   it('should create an action to get comments [REQUEST]', () => {
     const expectedAction = {
-      type: types.GET_COMMENTS_REQUEST,
+      type: types.GET_COMMENTS_REQUEST
     }
     expect(actions.getComments()).toEqual(expectedAction)
   })
@@ -88,7 +88,6 @@ it('should create an action to vote a comment [SUCCESS]', () => {
   })
 
   it('should create an action to vote a comment [FAILURE]', () => {
-    const value = 1
     const expectedAction = {
       type: types.VOTE_COMMENT_FAILURE,
       error

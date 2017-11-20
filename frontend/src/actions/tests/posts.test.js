@@ -4,9 +4,9 @@ import * as data from 'data/tests'
 
 describe('actions', () => {
   const post = data.post
-  const posts = [ post ]
-  const categoryId = post.category
+  const posts = [post]
   const postId = post.id
+  const categoryId = post.category
   const callbacks = {
     resolve: () => 'good stuff',
     reject: () => 'ups, an error'
@@ -15,7 +15,7 @@ describe('actions', () => {
 
   it('should create an action to get posts [REQUEST]', () => {
     const expectedAction = {
-      type: types.GET_POSTS_REQUEST,
+      type: types.GET_POSTS_REQUEST
     }
     expect(actions.getPosts()).toEqual(expectedAction)
   })

@@ -4,7 +4,7 @@ import * as data from 'data/tests'
 describe('categories selector', () => {
   const initialState = data.initialState
   const category = data.category
-  const categories = [ category ]
+  const categories = [category]
   const categoryId = category.name
 
   const stateWithCategory = {

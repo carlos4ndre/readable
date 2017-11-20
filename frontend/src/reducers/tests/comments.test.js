@@ -7,7 +7,7 @@ describe('categories reducer', () => {
   const post = data.post
   const postId = post.id
   const comment = data.comment
-  const comments = [ comment ]
+  const comments = [comment]
   const commentId = comment.id
 
   const stateWithoutComment = {

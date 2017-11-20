@@ -6,7 +6,7 @@ describe('posts reducer', () => {
   const initialState = data.initialState
   const categoryId = data.category.name
   const post = data.post
-  const posts = [ post ]
+  const posts = [post]
   const postId = post.id
 
   const stateWithoutPost = {
